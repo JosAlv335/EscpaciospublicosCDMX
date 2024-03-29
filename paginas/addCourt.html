@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar elemento</title>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/css/agregar.css">
+</head>
+<body>
+    <header>
+        <h1>Agregar cancha</h1>
+    </header>
+    <main>
+        <div id="mensaje"></div> <!-- Para mostrar mensajes de éxito o error -->
+
+        <form id="courtForm">
+            <div class="form-group">
+                <label for="id" name="id">ID del espacio público al cual añadirle la cancha:</label>
+                <input type="text" id="id" name="id" placeholder="ID..." required>
+            </div>
+            <div class="form-group" id="Tipo-ActividadPrincipal">
+                <!--SECCIÓN DE TIPO DE INSTALACIÓN-->
+                <div class="_Tipo">
+                    <label for="tipoInstalacion">Tipo de Instalación:</label>
+                    <input type="text" id="tipoInstalacion" name="tipoInstalacion" required>
+                </div>
+                <!--SECCIÓN DE ACTIVIDAD PRINCIPAL-->
+                <div class="deporte-principal">
+                    <label for="deporte-principal">Deporte principal:</label>
+                    <select id="deporte-principal" name="deporte-principal" required>
+                        <option value="" selected disabled>Selecciona un tipo de espacio...</option>
+                        <option value="Parque">Parque</option>
+                        <option value="Deportivo">Deportivo</option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <!--SECCIÓN DE TIPOS DE ACTIVIDAD-->
+            <div class="form-group" id="tipos-actividad">
+                <label for="act-clases">Clases:</label>
+                <input type="checkbox" id="act-clases" name="act-clases">
+                <label for="act-entrenamiento">Entrenamiento:</label>
+                <input type="checkbox" id="act-entrenamiento" name="act-entrenamiento">
+                <label for="act-libre">Libre:</label>
+                <input type="checkbox" id="act-libre" name="act-libre">
+            </div>
+            <!--SECCIÓN DIMENSIONES-->
+            <div class="dimensiones">
+                <label for="dim-ancho">Ancho:</label>
+                <input type="number" id="dim-ancho" name="dim-ancho" required>
+                <label for="dim-largo">Largo:</label>
+                <input type="number" id="dim-largo" name="dim-largo" required>
+                <label for="dim-profundidad">Profundidad:</label>
+                <input type="number" id="dim-profundidad" name="dim-profundidad" required>
+            </div>
+            <!--SECCIÓN DE TECHO Y PISO-->
+            <div class="form-group" id = "techo-piso">
+                
+                <div class = "techo">
+                    <label for="techo">Techo (Descripción breve del techo):</label>
+                    <input type="text" id="techo" name="techo" placeholder="Cerrado Total | No tiene | etc...">
+                    <label for="techo">Altura del techo:</label>
+                    <input type="number" id="altura_techo" name="altura_techo">
+                </div>
+                <div class = "piso">
+                    <label for="piso">Piso (Material):</label>
+                    <input type="text" id="piso" name="piso" placeholder="Concreto | Pasto Sintético | etc...">
+                </div>
+
+            </div>
+            <!--SECCIÓN ILUMINACIÓN, TRIBUNAS Y VESTIDORES-->
+            <div class="form-group" id = "ilum-trib-vest">
+
+                <div class="iluminacion">
+                    <label for="iluminacion">Iluminación:</label>
+                    <input type="text" id="iluminacion" name="iluminacion">
+                </div>
+                <div class="tribunas">
+                    <label for="tribunas">Tribunas:</label>
+                    <input type="text" id="tribunas" name="tribunas">
+                </div>
+                <div class="vestidores">
+                    <label for="vestidores">vestidores:</label>
+                    <input type="text" id="vestidores" name="vestidores">
+                </div>
+
+            </div>
+
+            <!--SECCIÓN DE BAÑO-->
+            <diV class="form-group" id = "baños">
+
+                <div class="WC">
+                    <label for="wc">WC:</label>
+                    <input type="checkbox" id="wc" name="wc">
+                </div>
+                <div class="regaderas">
+                    <label for="regaderas">Regaderas:</label>
+                    <input type="checkbox" id="regaderas" name="regaderas">
+                </div>
+                <div class="sauna">
+                    <label for="sauna">Sauna:</label>
+                    <input type="checkbox" id="sauna" name="sauna">
+                </div>
+                <div class="hidromasaja">
+                    <label for="hidromasaja">Hidromasaja:</label>
+                    <input type="checkbox" id="hidromasaja" name="hidromasaja">
+                </div>
+
+            </diV>
+
+            <!--BOTONES DE CONTROL-->
+            <div class="form-group" id ="control-buttons">
+                <button type="button" id="regresarTabla" class="cancel-button">Regresar</button>
+                <button type="button" id="show-popup" class="register-button">Añadir</button>
+            </div>
+            <!--SECCIÓN EMERGENTE-->
+            <div class ="cuadro-emergente" id="popup-box">
+                <div class="contenido-emergente">
+                    <h2>Confirmacion</h2>
+                    <p>¿Está seguro de querer agregar el registro?</p>
+                    <button type="button" id="close-popup" class="cancel-button">Cancelar</button>
+                    <button type="submit" id="confirm-action" class="add-button" name="agregar">Agregar</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+    <!-- Para mostrar u ocultar el cuadro emergente -->
+    <script src="../assets/js/popUpBox.js"></script>
+    <!-- Para cargar los datos en la base -->
+    <script>
+        document.getElementById("addForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            var formData = new FormData(this); // Obtener los datos del formulario
+
+            var xhr = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
+            xhr.open("POST", "../assets/php/procesar_agregar.php", true); // Establecer la solicitud POST a procesar_agregar.php
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("mensaje").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
+                }
+            };
+
+            xhr.send(formData); // Enviar los datos del formulario al servidor
+        });
+
+        document.getElementById("regresarTabla").addEventListener("click", function() {
+            window.location.href = "tabla.html"; // Redirigir a tabla.html
+        });
+    </script>
+    <script src="../assets/js/addSpace.js"></script>
+</body>
+</html>
