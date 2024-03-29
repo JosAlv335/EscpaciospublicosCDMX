@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'header' => "Content-Type: application/json\r\n" .
                         "apikey: $supabaseKey\r\n" .
                         "Prefer: resolution=merge-duplicates\r\n", // Header para que Supabase devuelva los datos de la fila insertada
-            'method' => 'POST',
+            'method' => 'PATCH',
             'content' => $data_json, // Datos a insertar
         ),
     );
