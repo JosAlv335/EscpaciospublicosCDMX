@@ -1,7 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST["id"];
     // URL de la API de Supabase para insertar en espacios_publicos
-    $supabaseUrl = $_ENV["REST_URL"] . "/rest/v1/espacios_publicos?id=eq." . $_POST["id"];
+    $supabaseUrl = $_ENV["REST_URL"] . "/rest/v1/espacios_publicos?id=eq." . $id;
 
     // Clave pública de la API de Supabase
     $supabaseKey = getenv("REST_PUBLIC_KEY");
@@ -27,11 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data_json = json_encode($datos);
 
     // Inicializar cURL
-    $ch = curl_init();
+    $ch = curl_init($supabaseUrl);
 
-    // Configurar la URL y otras opciones
-    curl_setopt($ch, CURLOPT_URL, $supabaseUrl); // URL de la fila específica en Supabase con el parámetro
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH'); // Método de solicitud PUT para actualizar
+    //Configurar la solicitud
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH'); // Método de solicitud PATCH para actualizar
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_json); // Datos a actualizar
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Devolver el resultado como cadena
 
@@ -51,6 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Manejar el error de solicitud HTTP
         echo "Error en la solicitud HTTP: " . $httpCode;
         echo "Error CURL: " . curl_error($ch);
+    } else {
+        // Verificar el código de respuesta HTTP
+        if ($httpCode >= 200 && $httpCode < 300) {
+            // Procesar la respuesta recibida en caso de éxito
+            echo "Actualización exitosa";
+        } else {
+            // Manejar respuestas HTTP que indican error
+            echo "Error en la solicitud HTTP: " . $httpCode;
+        }
     }
 
     // Cerrar la sesión cURL
