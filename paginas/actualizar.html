@@ -191,16 +191,18 @@
                 }
             };
 
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    console.log(this.response);
+                } else {
+                    console.error("Error en la petición: " + this.status);
+                }
+            };
+
             xhr.send(formData); // Enviar los datos del formulario al servidor
         });
 
-        xhr.onload = function () {
-            if (this.status == 200) {
-                console.log(this.response);
-            } else {
-                console.error("Error en la petición: " + this.status);
-            }
-        };
+        
 
         document.getElementById("regresarTabla").addEventListener("click", function() {
             window.location.href = "tabla.html"; // Redirigir a tabla.html
