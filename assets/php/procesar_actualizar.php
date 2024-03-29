@@ -8,21 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $supabaseKey = getenv("REST_PUBLIC_KEY");
 
     // Recoger los datos enviados desde el formulario
-    $datos = [
-        "nombre" => $_POST["nombre"] ?? "",
-        "estado" => $_POST["estado"] ?? "",
-        "municipio_delegacion" => $_POST["ciudad_municipio"] ?? "",
-        "asentamiento" => $_POST["asentamiento"] ?? "",
-        "calle" => $_POST["calle"] ?? "",
-        "entre_calles" => $_POST["entCalles"] ?? "",
-        "num_ext" => $_POST["numExt"] ?? "",
-        "num_int" => $_POST["numInt"] ?? "",
-        "codigo_postal" => $_POST["codigoPostal"] ?? "",
-        "horario_inicio" => $_POST["horario-inicio"] ?? "",
-        "horario_fin" => $_POST["horario-fin"] ?? NULL,
-
-        "tipo_espacio" => $_POST["tipo-espacio"] ?? ""
-    ];
+    $datos = [];
+    foreach ($_POST as $key => $value) {
+        // Verificar si el valor no está vacío o es NULL y si la clave no es el ID
+        if ($value !== "" && $value !== null && $key !== "id") {
+            // Guardar el par clave-valor en el arreglo $datos
+            $datos[$key] = $value;
+        }
+    }
 
     // Convertir los datos a JSON
     $data_json = json_encode($datos);
