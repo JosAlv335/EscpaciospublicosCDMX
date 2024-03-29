@@ -197,7 +197,13 @@
                 if (this.status == 200) {
                     console.log(this.response);
                 } else {
-                    console.log(formData.values());
+                    var formulario = document.getElementById("updateForm");
+                    var elementosFormulario = formulario.elements;
+
+                    for (var i = 0; i < elementosFormulario.length; i++) {
+                        var elemento = elementosFormulario[i];
+                        console.log(elemento.name + ": " + elemento.value);
+                    }
                     console.error("Error en la petición: " + this.status + this.responseXML);
                 }
             };
