@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // URL de la API de Supabase para insertar en espacios_publicos
-    $supabaseUrl = $_ENV["REST_URL"] . "/rest/v1/espacios_publicos";
+    $supabaseUrl = $_ENV["REST_URL"] . "/rest/v1/espacios_publicos?id=eq." . $_POST["id"];
 
     // Clave pública de la API de Supabase
     $supabaseKey = getenv("REST_PUBLIC_KEY");
