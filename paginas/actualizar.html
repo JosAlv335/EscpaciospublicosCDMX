@@ -26,7 +26,7 @@
                 <div class="_CP">
                     <label for="codigoPostal">Código Postal:</label>
                     <input type="text" id="codigoPostal" name="codigoPostal" maxlength="5">
-                    <button type="srchCP" id="srchCP" name="srchCP"><i class="gg-search"></i>Buscar código postal</button>
+                    <button type="button" id="srchCP" name="srchCP"><i class="gg-search"></i>Buscar código postal</button>
                 </div>
                 <div class="tipo-espacio">
                     <label for="tipo-espacio">Tipo de espacio:</label>
@@ -186,9 +186,9 @@
             xhr.open("POST", "../assets/php/procesar_actualizar.php", true); // Establecer la solicitud POST a procesar_actualizar.php
 
             xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
+                
                     document.getElementById("mensaje").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
-                }
+                
             };
 
             xhr.send(formData); // Enviar los datos del formulario al servidor
