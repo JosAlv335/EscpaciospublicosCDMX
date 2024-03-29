@@ -14,12 +14,14 @@
     <main>
         <div id="mensaje"></div> <!-- Para mostrar mensajes de éxito o erro r -->
 
-        <div class="form-group">
-            <label for="id">ID:</label>
-            <input type="text" id="id" name="id" required>
-        </div>
+        
 
-        <form id="addForm">
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            
             <div class="form-group" id="CP-Tipo">
                 <div class="_CP">
                     <label for="codigoPostal">Código Postal:</label>
@@ -146,6 +148,7 @@
             window.location.href = "tabla.html"; // Redirigir a tabla.html
         });
     </script>
+    <script src="../assets/js/addSpace.js"></script>
 
 </body>
 </html>
