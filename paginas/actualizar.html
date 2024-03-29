@@ -197,6 +197,7 @@
                 if (this.status == 200) {
                     console.log(this.response);
                 } else {
+                    console.log(formData.values());
                     console.error("Error en la petición: " + this.status + this.responseXML);
                 }
             };
