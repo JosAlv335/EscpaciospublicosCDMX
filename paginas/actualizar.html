@@ -183,10 +183,7 @@
             var formData = new FormData(this); // Obtener los datos del formulario
 
             var xhr = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            console.log(xhr.OPENED);
-            console.log(xhr.status + xhr.statusText);
             xhr.open("POST", "../assets/php/procesar_actualizar.php", true); // Establecer la solicitud POST a procesar_actualizar.php
-            console.log(xhr.OPENED);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("mensaje").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
@@ -197,13 +194,6 @@
                 if (this.status == 200) {
                     console.log(this.response);
                 } else {
-                    var formulario = document.getElementById("updateForm");
-                    var elementosFormulario = formulario.elements;
-
-                    for (var i = 0; i < elementosFormulario.length; i++) {
-                        var elemento = elementosFormulario[i];
-                        console.log(elemento.name + ": " + elemento.value);
-                    }
                     console.error("Error en la petición: " + this.status + this.responseXML);
                 }
             };
