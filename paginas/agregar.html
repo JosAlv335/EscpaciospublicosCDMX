@@ -101,71 +101,25 @@
                 <input type="text" id="nombre" name="nombre" required>
             </div>
 
+            <!--BOTONES DE CONTROL-->
             <div class="form-group" id ="control-buttons">
                 <button type="button" id="regresarTabla" class="cancel-button">Regresar</button>
-                <button type="button" id="subirDatos" class="register-button">Añadir</button>
+                <button type="button" id="show-popup" class="register-button">Añadir</button>
             </div>
-            
-            <div class ="cuadro-emergente" id="confirmacion">
+            <!--SECCIÓN EMERGENTE-->
+            <div class ="cuadro-emergente" id="popup-box">
                 <div class="contenido-emergente">
                     <h2>Confirmacion</h2>
                     <p>¿Está seguro de querer agregar el registro?</p>
-                    <button type="button" id="regresarForm" class="cancel-button">Cancelar</button>
-                    <button type="submit" id="confirm-add" class="add-button" name="agregar">Agregar</button>
+                    <button type="button" id="close-popup" class="cancel-button">Cancelar</button>
+                    <button type="submit" id="confirm-action" class="add-button" name="agregar">Agregar</button>
                 </div>
             </div>
 
         </form>
     </main>
     <!-- Para mostrar u ocultar el cuadro emergente -->
-    <script>
-        // Obtener el cuadro emergente
-        var cuadroEmergente = document.getElementById("confirmacion");
-
-        // Obtener el botón que abre el cuadro emergente
-        var btnMostrar = document.getElementById("subirDatos");
-
-        // Obtener el botón que cierra el cuadro emergente
-        var btnCancelar = document.getElementById("regresarForm");
-
-        // Obtener el botón que simula la acción de aceptar
-        var btnAceptar = document.getElementById("confirm-add");
-
-        // Cuando el usuario hace clic en el botón, abrir el cuadro emergente
-        btnMostrar.onclick = function() {
-            cuadroEmergente.style.display = "block";
-            setTimeout(() => { // Esto permite que la transición CSS se aplique correctamente
-                cuadroEmergente.style.opacity = "1";
-                cuadroEmergente.querySelector('.contenido-emergente').style.transform = "scale(1)";
-            }, 10);
-        }
-
-        // Cuando el usuario hace clic en "Cancelar", cierra el cuadro emergente
-        btnCancelar.onclick = function() {
-            cuadroEmergente.style.opacity = "0";
-            cuadroEmergente.querySelector('.contenido-emergente').style.transform = "scale(0.7)";
-            setTimeout(() => {
-                cuadroEmergente.style.display = "none";
-            }, 500); // Espera hasta que la animación termine
-        }
-
-        // Cuando el usuario hace clic en "Aceptar", realiza una acción y cierra el cuadro
-        btnAceptar.onclick = function() {
-            // Aquí puedes agregar la lógica para manejar la "aceptación"
-            cuadroEmergente.style.opacity = "0";
-            cuadroEmergente.querySelector('.contenido-emergente').style.transform = "scale(0.7)";
-            setTimeout(() => {
-                cuadroEmergente.style.display = "none";
-            }, 500); // Espera hasta que la animación termine
-        }
-
-        // También puedes cerrar el cuadro emergente si el usuario hace clic fuera de él
-        window.onclick = function(event) {
-            if (event.target == cuadroEmergente) {
-                cuadroEmergente.style.display = "none";
-            }
-        }
-    </script>
+    <script src="../assets/js/popUpBox.js"></script>
     <!-- Para cargar los datos en la base -->
     <script>
         document.getElementById("addForm").addEventListener("submit", function(event) {
