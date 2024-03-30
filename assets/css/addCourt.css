@@ -138,13 +138,7 @@ option:hover{
     background-color: #32CD32;
 }
 
-/***********************OCULTA POR DEFECTO TODOS LOS HIDDEN CAMPO****************************/
 
-.campo-hidden{
-
-    display: none;
-
-}
 
 /***************************ESTILO PARA EL BOTON DE BUSQUEDA************************/
 .form-group button{
@@ -181,7 +175,13 @@ option:hover{
 }
 
 
+/***********************OCULTA POR DEFECTO TODOS LOS HIDDEN CAMPO****************************/
 
+.campo-hidden{
+
+    display: none;
+
+}
 
 /**********************CUADRO EMERGENTE***********************/
 /* Estilo del fondo oscurecido */
