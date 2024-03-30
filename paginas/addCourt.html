@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar elemento</title>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../assets/css/agregar.css">
+    <link rel="stylesheet" href="../assets/css/addCourt.css">
 </head>
 <body>
     <header>
@@ -19,19 +19,20 @@
                 <label for="id" name="id">ID del espacio público al cual añadirle la cancha:</label>
                 <input type="text" id="id" name="id" placeholder="ID..." required>
             </div>
+            <!--SECCIÓN PARA EL TIPO DE INSTALACIÓN Y EL DEPORTE PRINCIPAL-->
             <div class="form-group" id="Tipo-ActividadPrincipal">
                 <!--SECCIÓN DE TIPO DE INSTALACIÓN-->
                 <div class="_Tipo">
                     <label for="tipoInstalacion">Tipo de Instalación:</label>
-                    <input type="text" id="tipoInstalacion" name="tipoInstalacion" required>
+                    <select id="tipoInstalacion" name="tipoInstalacion" required>
+                        <option value="" selected disabled>Selecciona un tipo de instalacion...</option>
+                    </select>
                 </div>
                 <!--SECCIÓN DE ACTIVIDAD PRINCIPAL-->
                 <div class="deporte-principal">
                     <label for="deporte-principal">Deporte principal:</label>
                     <select id="deporte-principal" name="deporte-principal" required>
-                        <option value="" selected disabled>Selecciona un tipo de espacio...</option>
-                        <option value="Parque">Parque</option>
-                        <option value="Deportivo">Deportivo</option>
+                        <option value="" selected disabled>Selecciona un deporte...</option>
                     </select>
                 </div>
                 
@@ -39,15 +40,93 @@
 
             <!--SECCIÓN DE TIPOS DE ACTIVIDAD-->
             <div class="form-group" id="tipos-actividad">
-                <label for="act-clases">Clases:</label>
-                <input type="checkbox" id="act-clases" name="act-clases">
-                <label for="act-entrenamiento">Entrenamiento:</label>
-                <input type="checkbox" id="act-entrenamiento" name="act-entrenamiento">
-                <label for="act-libre">Libre:</label>
-                <input type="checkbox" id="act-libre" name="act-libre">
+                <!--ACTIVIDAD: CLASES-->
+                <div class="act-ckeck">
+                    <label for="act-clases">Clases:</label>
+                    <input type="checkbox" id="act-clases" name="act-clases">
+
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-clases" class="campo-hidden">
+                        <label for="clases-desc">Detalles:</label>
+                        <input type="text" id="clases-desc" name="clases-desc">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-clases" id ="horarios-clases">
+                            <div class="hor-clase-container">
+                                <!--HORARIO 0-->
+                                <label for="clase-dia-inicio-0">Desde:</label>
+                                <input type="text" id="clase-dia-inicio-0" name="clase-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="clase-dia-fin-0">Hasta:</label>
+                                <input type="text" id="clase-dia-fin-0" name="clase-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="clases-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="clases-hor-inicio-0" name="clases-hor-inicio-0">
+                                <label for="clases-hor-fin-0">Termina:</label>
+                                <input type="time" id="clases-hor-fin-0" name="clases-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="clase-add-horario" class="clase-add-horario">+</button>
+                        <button type="button" id="clase-rem-horario" class="clase-rem-horario">-</button>
+                    </div>
+                </div>
+                <!--ACTIVIDAD: ENTRENAMIENTO-->
+                <div class="act-check">
+                    <label for="act-entrenamiento">Entrenamiento:</label>
+                    <input type="checkbox" id="act-entrenamiento" name="act-entrenamiento">
+
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-train" class="campo-hidden">
+                        <label for="train-desc">Detalles:</label>
+                        <input type="text" id="train-desc" name="train-desc">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-train" id ="horarios-train">
+                            <div class="hor-train-container">
+                                <!--HORARIO 0-->
+                                <label for="train-dia-inicio-0">Desde:</label>
+                                <input type="text" id="train-dia-inicio-0" name="train-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="train-dia-fin-0">Hasta:</label>
+                                <input type="text" id="train-dia-fin-0" name="train-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="train-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="train-hor-inicio-0" name="train-hor-inicio-0">
+                                <label for="train-hor-fin-0">Termina:</label>
+                                <input type="time" id="train-hor-fin-0" name="train-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="train-add-horario" class="train-add-horario">+</button>
+                        <button type="button" id="train-rem-horario" class="train-rem-horario">-</button>
+                    </div>
+                </div>
+                <!--ACTIVIDAD: LIBRE-->
+                <div class="act-ckeck">
+                    <label for="act-libre">Libre:</label>
+                    <input type="checkbox" id="act-libre" name="act-libre">
+
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-libre" class="campo-hidden">
+                        <label for="libre-desc">Detalles:</label>
+                        <input type="text" id="libre-desc" name="libre-desc">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-libre" id ="horarios-libre">
+                            <div class="hor-libre-container">
+                                <!--HORARIO 0-->
+                                <label for="libre-dia-inicio-0">Desde:</label>
+                                <input type="text" id="libre-dia-inicio-0" name="libre-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="libre-dia-fin-0">Hasta:</label>
+                                <input type="text" id="libre-dia-fin-0" name="libre-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="libre-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="libre-hor-inicio-0" name="libre-hor-inicio-0">
+                                <label for="libre-hor-fin-0">Termina:</label>
+                                <input type="time" id="libre-hor-fin-0" name="libre-hor-fin-0">
+                            </div>
+                            <button type="button" id="libre-add-horario" class="libre-add-horario">+</button>
+                            <button type="button" id="libre-rem-horario" class="libre-rem-horario">-</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--SECCIÓN DIMENSIONES-->
-            <div class="dimensiones">
+            <div class="form-group" id="dimensiones">
                 <label for="dim-ancho">Ancho:</label>
                 <input type="number" id="dim-ancho" name="dim-ancho" required>
                 <label for="dim-largo">Largo:</label>
@@ -81,31 +160,174 @@
                     <label for="tribunas">Tribunas:</label>
                     <input type="text" id="tribunas" name="tribunas">
                 </div>
-                <div class="vestidores">
-                    <label for="vestidores">vestidores:</label>
-                    <input type="text" id="vestidores" name="vestidores">
-                </div>
+                
 
             </div>
 
             <!--SECCIÓN DE BAÑO-->
-            <diV class="form-group" id = "baños">
+            <!--SECCIÓN DE VESTIDORES-->
+            <diV class="form-group" id="baños">
+                <div class="vestidores">
+                    <label for="vestidores">Vestidores:</label>
+                    <input type="checkbox" id="vestidores" name="vestidores" onclick="showOptions(this)">
 
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-vest" class="campo-hidden">
+                        <label for="vest-desc">Detalles:</label>
+                        <input type="text" id="vest-desc" name="vest-desc">
+                        <label for="vest-cost">Costo:</label>
+                        <input type="number" id="vest-cost" name="vest-cost">
+                        <label for="vest-capacity">Capacidad:</label>
+                        <input type="number" id="vest-capacity" name="vest-capacity">
+                        <!--HORARIOS-->
+                        <div class="horarios-vest" id ="horarios-vest">
+                            <div class="hor-vest-container">
+                                <!--HORARIO 0-->
+                                <label for="vest-dia-inicio-0">Desde:</label>
+                                <input type="text" id="vest-dia-inicio-0" name="vest-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="vest-dia-fin-0">Hasta:</label>
+                                <input type="text" id="vest-dia-fin-0" name="vest-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="vest-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="vest-hor-inicio-0" name="vest-hor-inicio-0">
+                                <label for="vest-hor-fin-0">Termina:</label>
+                                <input type="time" id="vest-hor-fin-0" name="vest-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="vest-add-horario" class="vest-add-horario">+</button>
+                        <button type="button" id="vest-rem-horario" class="vest-rem-horario">-</button>
+                    </div>
+                    
+                </div>
+                <!--SECCIÓN DE WC-->
                 <div class="WC">
                     <label for="wc">WC:</label>
                     <input type="checkbox" id="wc" name="wc">
+
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-WC" class="campo-hidden">
+                        <label for="wc-desc">Detalles:</label>
+                        <input type="text" id="wc-desc" name="wc-desc">
+                        <label for="wc-cost">Costo:</label>
+                        <input type="number" id="wc-cost" name="wc-cost">
+                        <label for="wc-capacity">Capacidad:</label>
+                        <input type="number" id="wc-capacity" name="wc-capacity">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-wc" id ="horarios-wc">
+                            <div class="hor-wc-container">
+                                <!--HORARIO 0-->
+                                <label for="wc-dia-inicio-0">Desde:</label>
+                                <input type="text" id="wc-dia-inicio-0" name="wc-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="wc-dia-fin-0">Hasta:</label>
+                                <input type="text" id="wc-dia-fin-0" name="wc-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="wc-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="wc-hor-inicio-0" name="wc-hor-inicio-0">
+                                <label for="wc-hor-fin-0">Termina:</label>
+                                <input type="time" id="wc-hor-fin-0" name="wc-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="wc-add-horario" class="wc-add-horario">+</button>
+                        <button type="button" id="wc-rem-horario" class="wc-rem-horario">-</button>
+                    </div>
+
                 </div>
+                <!--SECCIÓN DE REGADERAS-->
                 <div class="regaderas">
                     <label for="regaderas">Regaderas:</label>
                     <input type="checkbox" id="regaderas" name="regaderas">
+                    
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-showers" class="campo-hidden">
+                        <label for="showers-desc">Detalles:</label>
+                        <input type="text" id="showers-desc" name="showers-desc">
+                        <label for="showers-cost">Costo:</label>
+                        <input type="number" id="showers-cost" name="showers-cost">
+                        <label for="showers-capacity">Capacidad:</label>
+                        <input type="number" id="showers-capacity" name="showers-capacity">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-showers" id ="horarios-showers">
+                            <div class="hor-showers-container">
+                                <!--HORARIO 0-->
+                                <label for="showers-dia-inicio-0">Desde:</label>
+                                <input type="text" id="showers-dia-inicio-0" name="showers-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="showers-dia-fin-0">Hasta:</label>
+                                <input type="text" id="showers-dia-fin-0" name="showers-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="showers-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="showers-hor-inicio-0" name="showers-hor-inicio-0">
+                                <label for="showers-hor-fin-0">Termina:</label>
+                                <input type="time" id="showers-hor-fin-0" name="showers-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="showers-add-horario" class="showers-add-horario">+</button>
+                        <button type="button" id="showers-rem-horario" class="showers-rem-horario">-</button>
+                    </div>
+                    
                 </div>
+                <!--SECCIÓN DE SAUNA-->
                 <div class="sauna">
                     <label for="sauna">Sauna:</label>
                     <input type="checkbox" id="sauna" name="sauna">
+
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-sauna" class="campo-hidden">
+                        <label for="sauna-desc">Detalles:</label>
+                        <input type="text" id="sauna-desc" name="sauna-desc">
+                        <label for="sauna-cost">Costo:</label>
+                        <input type="number" id="sauna-cost" name="sauna-cost">
+                        <label for="sauna-capacity">Capacidad:</label>
+                        <input type="number" id="sauna-capacity" name="sauna-capacity">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-sauna" id ="horarios-sauna">
+                            <div class="hor-sauna-container">
+                                <!--HORARIO 0-->
+                                <label for="sauna-dia-inicio-0">Desde:</label>
+                                <input type="text" id="sauna-dia-inicio-0" name="sauna-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="sauna-dia-fin-0">Hasta:</label>
+                                <input type="text" id="sauna-dia-fin-0" name="sauna-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="sauna-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="sauna-hor-inicio-0" name="sauna-hor-inicio-0">
+                                <label for="sauna-hor-fin-0">Termina:</label>
+                                <input type="time" id="sauna-hor-fin-0" name="sauna-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="sauna-add-horario" class="sauna-add-horario">+</button>
+                        <button type="button" id="sauna-rem-horario" class="sauna-rem-horario">-</button>
+                    </div>
+                    
                 </div>
-                <div class="hidromasaja">
-                    <label for="hidromasaja">Hidromasaja:</label>
-                    <input type="checkbox" id="hidromasaja" name="hidromasaja">
+                <!--SECCIÓN DE HIDROMASAJE-->
+                <div class="hidromasaje">
+                    <label for="hidromasaje">Hidromasaje:</label>
+                    <input type="checkbox" id="hidromasaje" name="hidromasaje">
+
+                    <!--CAMPO OCULTO-->
+                    <div id="datos-hidmasaje" class="campo-hidden">
+                        <label for="hidmasaje-desc">Detalles:</label>
+                        <input type="text" id="hidmasaje-desc" name="hidmasaje-desc">
+                        <label for="hidmasaje-cost">Costo:</label>
+                        <input type="number" id="hidmasaje-cost" name="hidmasaje-cost">
+                        <label for="hidmasaje-capacity">Capacidad:</label>
+                        <input type="number" id="hidmasaje-capacity" name="hidmasaje-capacity">
+
+                        <!--HORARIOS-->
+                        <div class="horarios-hidmasaje" id ="horarios-hidmasaje">
+                            <div class="hor-hidmasaje-container">
+                                <!--HORARIO 0-->
+                                <label for="hidmasaje-dia-inicio-0">Desde:</label>
+                                <input type="text" id="hidmasaje-dia-inicio-0" name="hidmasaje-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="hidmasaje-dia-fin-0">Hasta:</label>
+                                <input type="text" id="hidmasaje-dia-fin-0" name="hidmasaje-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
+                                <label for="hidmasaje-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="hidmasaje-hor-inicio-0" name="hidmasaje-hor-inicio-0">
+                                <label for="hidmasaje-hor-fin-0">Termina:</label>
+                                <input type="time" id="hidmasaje-hor-fin-0" name="hidmasaje-hor-fin-0">
+                            </div>
+                        </div>
+                        <button type="button" id="hidmasaje-add-horario" class="hidmasaje-add-horario">+</button>
+                        <button type="button" id="hidmasaje-rem-horario" class="hidmasaje-rem-horario">-</button>
+                    </div>
                 </div>
 
             </diV>
@@ -137,7 +359,7 @@
             var formData = new FormData(this); // Obtener los datos del formulario
 
             var xhr = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            xhr.open("POST", "../assets/php/procesar_agregar.php", true); // Establecer la solicitud POST a procesar_agregar.php
+            xhr.open("POST", "../assets/php/procesar_agregar_cancha.php", true); // Establecer la solicitud POST a procesar_agregar.php
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
@@ -152,6 +374,11 @@
             window.location.href = "tabla.html"; // Redirigir a tabla.html
         });
     </script>
-    <script src="../assets/js/addSpace.js"></script>
+    <!--OCULTAR Y MOSTRAR LOS CAMPOS ADICIONALES DE LAS CHECKBOXES-->
+    <script src="../assets/js/addCourt_ShowOptions.js"></script>
+    <!--AÑADIR Y ELIMINAR INSTANCIAS DE HORARIOS-->
+    <script src="../assets/js/addCourt_addSchedule.js"></script>
+    <script src="../assets/js/courtsData.js"></script>
+    <script src="../assets/js/loadCourtsData.js"></script>
 </body>
 </html>
