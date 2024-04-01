@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verifica si el campo es un checkbox
         if (in_array($value, $checkboxes)) {
             // Verifica si el checkbox está marcado
-            if (isset($_POST[$value])) {
+            if ($_POST[$value] == "on") {
                 $datos[$atributos[$key]] = true;
             } else {
                 $datos[$atributos[$key]] = false;
