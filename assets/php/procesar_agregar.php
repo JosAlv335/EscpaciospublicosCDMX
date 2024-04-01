@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $atributos = array(
         "nombre",
         "estado",
-        "ciudad_municipio",
+        "municipio_delegacion",
         "asentamiento",
         "calle",
         "entre_calles",
