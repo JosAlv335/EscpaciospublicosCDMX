@@ -6,22 +6,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Clave pública de la API de Supabase
     $supabaseKey = getenv("REST_PUBLIC_KEY");
 
-    // Recoger los datos enviados desde el formulario
-    $datos = [
-        "nombre" => $_POST["nombre"] ?? "",
-        "estado" => $_POST["estado"] ?? "",
-        "municipio_delegacion" => $_POST["ciudad_municipio"] ?? "",
-        "asentamiento" => $_POST["asentamiento"] ?? "",
-        "calle" => $_POST["calle"] ?? "",
-        "entre_calles" => $_POST["entCalles"] ?? "",
-        "num_ext" => $_POST["numExt"] ?? "",
-        "num_int" => $_POST["numInt"] ?? "",
-        "codigo_postal" => $_POST["codigoPostal"] ?? "",
-        "horario_inicio" => $_POST["horario-inicio"] ?? "",
-        "horario_fin" => $_POST["horario-fin"] ?? "",
+    $names = array(
+        "nombre",
+        "estado",
+        "ciudad_municipio",
+        "asentamiento",
+        "calle",
+        "entCalles",
+        "numExt",
+        "numInt",
+        "codigoPostal",
+        "horario-inicio",
+        "horario-fin",
+        "tipo-espacio"
+    );
+    
+    $atributos = array(
+        "nombre",
+        "estado",
+        "ciudad_municipio",
+        "asentamiento",
+        "calle",
+        "entre_calles",
+        "num_ext",
+        "num_int",
+        "codigo_postal",
+        "horario_inicio",
+        "horario_fin",
+        "tipo_espacio"
+    );
 
-        "tipo_espacio" => $_POST["tipo-espacio"] ?? ""
-    ];
+    // Recoger los datos enviados desde el formulario
+    $datos = [];
+    foreach ($names as $key => $value) {
+        //Verifica si el valor no está vacío o es NULL y si la clave no es el ID
+        if (isset($_POST[$value]) && $_POST[$value] !== "") {
+            //Guardar el par clave-valor en el arreglo $datos
+            $datos[$atributos[$key]] = $_POST[$value];
+        }
+    }
 
     // Convertir los datos a JSON
     $data_json = json_encode($datos);
