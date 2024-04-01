@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Clave pública de la API de Supabase
     $supabaseKey = getenv("REST_PUBLIC_KEY");
 
+    //Arreglo de nombres de atributos segun el formulario
     $names = array(
         "nombre",
         "estado",
@@ -21,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "tipo-espacio"
     );
     
+    //Arreglo de nombres de atributos segun la tabla de la BD
     $atributos = array(
         "nombre",
         "estado",
