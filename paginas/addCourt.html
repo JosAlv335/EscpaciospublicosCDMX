@@ -360,27 +360,49 @@
     <script src="../assets/js/popUpBox.js"></script>
     <!-- Para cargar los datos en la base -->
     <script>
+        //Envío de solicitud para los datos de la tabla principal
         document.getElementById("courtForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Evitar el envío del formulario por defecto
 
             var formData = new FormData(this); // Obtener los datos del formulario
 
-            var xhr = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            xhr.open("POST", "../assets/php/procesar_Agregar_Cancha_main.php", true); // Establecer la solicitud POST a procesar_agregar.php
+            var mainSol = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
+            mainSol.open("POST", "../assets/php/procesar_Agregar_Cancha_main.php", true); // Establecer la solicitud POST a procesar_agregar.php
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("mensaje").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
-                    console.log(xhr.responseText);
+            mainSol.onreadystatechange = function() {
+                if (mainSol.readyState == 4 && mainSol.status == 200) {
+                    document.getElementById("mensaje").innerHTML = mainSol.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
+                    console.log(mainSol.responseText);
                 }
             };
 
-            xhr.send(formData); // Enviar los datos del formulario al servidor
+            mainSol.send(formData); // Enviar los datos del formulario al servidor
+
+            //Envío de solicitud para los datos de la tabla de actividades
+            var actSol = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
+            actSol.open("POST", "../assets/php/procesar_Agregar_Cancha_Actividades.php", true); // Establecer la solicitud POST a procesar_agregar.php
+
+            actSol.onreadystatechange = function() {
+                if (actSol.readyState == 4 && actSol.status == 200) {
+                    document.getElementById("mensaje").innerHTML = actSol.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
+                    console.log(actSol.responseText);
+                }
+            };
+
+            actSol.send(formData); // Enviar los datos del formulario al servidor
+
         });
+
+        
+
 
         document.getElementById("regresarTabla").addEventListener("click", function() {
             window.location.href = "tabla.html"; // Redirigir a tabla.html
         });
+    </script>
+    <!--ENVIAR DATOS DE LAS ACTIVIDADES EXTRA-->
+    <script>
+
     </script>
     <!--OCULTAR Y MOSTRAR LOS CAMPOS ADICIONALES DE LAS CHECKBOXES-->
     <script src="../assets/js/addCourt_ShowOptions.js"></script>
