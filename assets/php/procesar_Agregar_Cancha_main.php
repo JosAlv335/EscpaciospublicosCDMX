@@ -18,8 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "dim-largo",                //largo
         "dim-profundidad",          //profundidad
         "techo",                    //techo
-        "piso",                     //piso
+        "altura_techo",             //altura_techo
         "iluminacion",              //iluminacion
+        "piso",                     //piso
         "tribunas",                 //tribunas
         "cancha-status"             //status
     );
