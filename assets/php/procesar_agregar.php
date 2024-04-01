@@ -68,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($http_response_header)) {
             echo "Headers de respuesta: \n";
             print_r($http_response_header);
+            echo "Datos: \n";
+            print_r($$datos);
         }
         echo "Error al realizar la solicitud HTTP.";
     } else {
