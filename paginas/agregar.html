@@ -133,6 +133,7 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("mensaje").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
+                    console.log(xhr.responseText);
                 }
             };
 
