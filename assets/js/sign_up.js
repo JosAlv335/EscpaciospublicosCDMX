@@ -13,16 +13,16 @@ document.getElementById('sign-up-form').addEventListener('submit',function(event
     // Aquí puedes agregar tu lógica para iniciar sesión, por ejemplo, usando Supabase, Firebase, etc.
     console.log('Registrando...', email, password);
 
-    
+    signUpNewUser(email, password);
       
 
 })
 
-async function signUpNewUser() {
+async function signUpNewUser(email, password) {
 
     const { data, error } = await supabase.auth.signUp({
-      email: 'example@email.com',
-      password: 'example-password'
+      email: email,
+      password: password
     }).then(response => {
         if(response.error){
             console.log('Error en registro de usuarios:', response.error);
