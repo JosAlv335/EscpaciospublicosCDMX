@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build ./index.html ./paginas/*.html",
-    "start": "npm run build && npx serve dist -s",
-    "dev": "parcel ./index.html ./paginas/*.html"
+    "start": "parcel serve ./index.html ./paginas/*.html --public-url ./",
+    "dev": "parcel ./index.html ./paginas/*.html",
+    "build": "parcel build ./index.html ./paginas/*.html"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
