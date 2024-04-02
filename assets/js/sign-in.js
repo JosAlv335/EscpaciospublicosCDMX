@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient("https://zrwtmvescjmkdenhdaqh.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyd3RtdmVzY2pta2RlbmhkYXFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk2MDA2ODEsImV4cCI6MjAyNTE3NjY4MX0.nWS7r3cCN_xhpTehJk71wQ19C7JsBuhF66MamPHpNWs")
+const supabase = createClient(process.env.REST_URL, process.env.REST_PUBLIC_KEY)
 
 document.getElementById('sign-in-form').addEventListener('submit',function(event){
     event.preventDefault(); // Prevenir el comportamiento por defecto de enviar un formulario
