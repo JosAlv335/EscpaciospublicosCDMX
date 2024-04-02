@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel serve ./index.html ./paginas/*.html",
+    "start": "parcel serve ./index.html ./paginas/*.html --public-url ./",
     "dev": "parcel ./index.html ./paginas/*.html",
     "build": "parcel build ./index.html ./paginas/*.html"
   },
