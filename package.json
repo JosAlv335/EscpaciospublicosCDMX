@@ -2,16 +2,17 @@
   "name": "parques",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts":{
+  "scripts": {
     "start": "parcel serve ./index.html ./paginas/*.html",
     "dev": "parcel ./index.html ./paginas/*.html",
-    "build": "parcel build ./index.html"
+    "build": "parcel build ./index.html ./paginas/*.html"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
     "parcel-bundler": "latest"
   },
   "devDependencies": {
-    "parcel-bundler": "latest"
+    "parcel-bundler": "latest",
+    "serve": "^14.2.1"
   }
 }
