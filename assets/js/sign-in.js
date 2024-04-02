@@ -22,7 +22,7 @@ document.getElementById('sign-in-form').addEventListener('submit',function(event
         } else {
             console.log('Sesión iniciada:', response.user);
             // Redireccionar al usuario o hacer algo tras el inicio de sesión exitoso
-            //window.location.href = './../../paginas/tabla.html';
+            window.location.href = './../../paginas/tabla.html';
         }
     });
 
