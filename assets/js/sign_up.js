@@ -1,58 +1,37 @@
-import { createClient } from '../../node_modules/@supabase/supabase-js/'
+import { createClient } from '@supabase/supabase-js'
 
+// Create a single supabase client for interacting with your database
 const supabase = createClient(process.env.REST_URL, process.env.REST_PUBLIC_KEY)
 
-document.addEventListener('DOMContentLoaded',function(){
-    // Ejemplo de cómo podrías capturar el evento de submit de un formulario
-    document.getElementById('sign-up-form').addEventListener('submit', function(e) {
-        e.preventDefault() // Evita el envío tradicional del formulario
-        console.log("Evento capturado");
+document.getElementById('sign-up-form').addEventListener('submit',function(event){
+    event.preventDefault(); // Prevenir el comportamiento por defecto de enviar un formulario
+
+    // Obtener los valores del formulario
+    const email = document.getElementById('sign-up-mail').value;
+    const password = document.getElementById('sign-up-password').value;
+
+    // Aquí puedes agregar tu lógica para iniciar sesión, por ejemplo, usando Supabase, Firebase, etc.
+    console.log('Registrando...', email, password);
+
     
-        // Obtiene los valores del formulario
-        const email = document.getElementById('sign-up-mail').value
-        const password = document.getElementById('sign-up-password').value
-    
-        // Llama a la función de inicio de sesión
-        signUp(email, password)
-    })
+      
+
 })
 
+async function signUpNewUser() {
 
-  
-
-async function signUp(email, password) {
-    const { user, session, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    })
-  
-    if (error) {
-        console.error('Error en el registro del usuario:', error.message);
-        document.getElementById('mensaje_sign_up').innerText = error.message;
-
-    } else {
-        console.log('Registro exitoso', user, session)
-
-        const { insertError } = await supabase
-        .from('users')
-        .insert({
-            nombre: document.getElementById('sign-up-name').value,
-            apellido1: document.getElementById('sign-up-apellido1').value,
-            apellido2: document.getElementById('sign-up-apellido2').value,
-            correo: email,
-            contrasena: password
-        })
-        if(insertError){
-            console.error('Error en el registro de usuario:', insertError.message);
-            document.getElementById('mensaje_sign_up').innerText = insertError.message;
+    const { data, error } = await supabase.auth.signUp({
+      email: 'example@email.com',
+      password: 'example-password'
+    }).then(response => {
+        if(response.error){
+            console.log('Error en registro de usuarios:', response.error);
         }else{
-            console.log('Insercion de datos exitosa')
+            console.log('Registro exitoso:', response.user);
+            //Indica en la pagina que se registró un usuario
+            document.getElementById('mensaje_sign_up').innerHTML = response.data;
+
         }
+    })
 
-        
-
-        // Aquí puedes redirigir al usuario a otra página o manejar la sesión como prefieras
-        //window.location.href = '../../paginas/tabla.html';
-    }
-  }
-  
+}
