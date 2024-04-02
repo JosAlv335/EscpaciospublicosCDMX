@@ -1,1 +1,1 @@
-web: npm start
+echo 'web: npx serve' > Procfile

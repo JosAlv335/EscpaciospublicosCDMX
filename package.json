@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8",
-    "parcel-bundler": "latest"
+    "parcel-bundler": "latest",
+    "serve": "latest"
   },
   "devDependencies": {
     "parcel-bundler": "latest",
