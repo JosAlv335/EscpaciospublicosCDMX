@@ -5,7 +5,7 @@
   "scripts":{
     "start": "parcel serve ./index.html ./paginas/*.html",
     "dev": "parcel ./index.html ./paginas/*.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build ./index.html"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.8"
