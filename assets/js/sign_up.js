@@ -29,7 +29,7 @@ async function signUpNewUser(email, password) {
         }else{
             console.log('Registro exitoso:', response.user);
             //Indica en la pagina que se registró un usuario
-            document.getElementById('mensaje_sign_up').innerHTML = response.data;
+            document.getElementById('mensaje_sign_up').innerHTML = "Registro exitoso!, por favor, verifique su correo";
 
         }
     })
