@@ -7,7 +7,7 @@ document.getElementById('sign-up-form').addEventListener('submit',function(event
     event.preventDefault(); // Prevenir el comportamiento por defecto de enviar un formulario
 
     // Obtener los valores del formulario
-    const email = document.getElementById('sign-up-mail').value;
+    const email = document.getElementById('sign-up-correo').value;
     const password = document.getElementById('sign-up-password').value;
 
     // Aquí puedes agregar tu lógica para iniciar sesión, por ejemplo, usando Supabase, Firebase, etc.
