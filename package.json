@@ -8,7 +8,8 @@
     "build": "parcel build ./index.html"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.8"
+    "@supabase/supabase-js": "^2.39.8",
+    "parcel-bundler": "latest"
   },
   "devDependencies": {
     "parcel-bundler": "latest"
