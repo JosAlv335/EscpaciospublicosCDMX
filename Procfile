@@ -1,1 +1,1 @@
-echo 'web: npx serve' > Procfile
+web: npx serve
