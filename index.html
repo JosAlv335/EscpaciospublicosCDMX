@@ -117,25 +117,7 @@
             xhr.send(formData); // Enviar los datos del formulario al servidor
         });
     </script>
-    <!--SCRIPT PARA INICIAR SESIÓN-->
-    <script>
-        document.getElementById("sign-in-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
-
-            var formData = new FormData(this); // Obtener los datos del formulario
-
-            var xhr = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            xhr.open("POST", "./assets/php/sign_in.php", true); // Establecer la solicitud POST a procesar_agregar.php
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("mensaje_sign_in").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
-                }
-            };
-
-            xhr.send(formData); // Enviar los datos del formulario al servidor
-        });
-    </script>
+    
     <script src="./assets/js/sign-in.js" type="module"></script>
 </body>
 
