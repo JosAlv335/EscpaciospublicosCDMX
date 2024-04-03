@@ -7,49 +7,60 @@ const inputBusqueda = document.getElementById('campoBusqueda');
 const tablaResultados = document.getElementById('resultado-busqueda');
 
 inputBusqueda.addEventListener('input', async () => {
-  const textoBusqueda = inputBusqueda.value.trim();
+    const textoBusqueda = inputBusqueda.value.trim();
+    
+    // Realizar la consulta a la base de datos utilizando Supabase para obtener la estructura de la tabla
+    const { data: columnsData, error: columnsError } = await supabase
+      .from('information_schema.columns')
+      .select('column_name')
+      .eq('table_name', 'parques');
   
-  // Obtener la estructura de la tabla de parques
-  const { data: schema, error: schemaError } = await supabase
-    .from('parques')
-    .describe();
-
-  if (schemaError) {
-    console.error('Error al obtener la estructura de la tabla:', schemaError.message);
-    return;
-  }
-
-  // Construir dinámicamente la lista de columnas a seleccionar
-  const columnas = schema.map(columna => columna.name);
-
-  // Realizar la consulta a la base de datos utilizando Supabase
-  const { data, error } = await supabase
-    .from('parques')
-    .select(columnas)
-    .filter('*', 'ilike', `%${textoBusqueda}%`); // Buscar coincidencias parciales en todas las columnas
-
-  if (error) {
-    console.error('Error al realizar la consulta:', error.message);
-    return;
-  }
-
-  // Limpiar la tabla de resultados
-  tablaResultados.innerHTML = '';
-
-  // Mostrar los resultados en la tabla
-  if (data && data.length > 0) {
-    data.forEach(registro => {
-      const fila = document.createElement('tr');
-      Object.values(registro).forEach(valor => {
-        const celda = document.createElement('td');
-        celda.textContent = valor;
-        fila.appendChild(celda);
+    if (columnsError) {
+      console.error('Error al obtener la estructura de la tabla:', columnsError.message);
+      return;
+    }
+  
+    // Obtener los nombres de las columnas
+    const columnas = columnsData.map(column => column.column_name);
+  
+    // Realizar la consulta a la base de datos utilizando Supabase para buscar en todas las columnas
+    const { data, error } = await supabase
+      .from('parques')
+      .select('*')
+      .filter('*', 'ilike', `%${textoBusqueda}%`); // Buscar en todas las columnas
+  
+    if (error) {
+      console.error('Error al realizar la consulta:', error.message);
+      return;
+    }
+  
+    // Limpiar la tabla de resultados
+    tablaResultados.innerHTML = '';
+  
+    // Mostrar los resultados en la tabla
+    if (data && data.length > 0) {
+      // Crear la cabecera de la tabla con los nombres de las columnas
+      const cabecera = document.createElement('tr');
+      columnas.forEach(columna => {
+        const th = document.createElement('th');
+        th.textContent = columna;
+        cabecera.appendChild(th);
       });
-      tablaResultados.appendChild(fila);
-    });
-  } else {
-    const mensaje = document.createElement('tr');
-    mensaje.innerHTML = `<td colspan="${columnas.length}">No se encontraron resultados</td>`;
-    tablaResultados.appendChild(mensaje);
-  }
-});
+      tablaResultados.appendChild(cabecera);
+  
+      // Mostrar los resultados en la tabla
+      data.forEach(fila => {
+        const filaTabla = document.createElement('tr');
+        columnas.forEach(columna => {
+          const td = document.createElement('td');
+          td.textContent = fila[columna];
+          filaTabla.appendChild(td);
+        });
+        tablaResultados.appendChild(filaTabla);
+      });
+    } else {
+      const mensaje = document.createElement('tr');
+      mensaje.innerHTML = `<td colspan="${columnas.length}">No se encontraron resultados</td>`;
+      tablaResultados.appendChild(mensaje);
+    }
+  });
