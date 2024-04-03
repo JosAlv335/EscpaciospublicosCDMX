@@ -1,3 +1,8 @@
+import { createClient } from '@supabase/supabase-js'
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient(process.env.REST_URL, process.env.REST_PUBLIC_KEY)
+
 const inputBusqueda = document.getElementById('campoBusqueda');
 const tablaResultados = document.getElementById('resultado-busqueda');
 
