@@ -1,7 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Create a single supabase client for interacting with your database
-const supabase = createClient(process.env.REST_URL, process.env.REST_PUBLIC_KEY)
+const supabase = createClient(
+    "https://zrwtmvescjmkdenhdaqh.supabase.co", 
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpyd3RtdmVzY2pta2RlbmhkYXFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk2MDA2ODEsImV4cCI6MjAyNTE3NjY4MX0.nWS7r3cCN_xhpTehJk71wQ19C7JsBuhF66MamPHpNWs"
+    )
 
 const inputBusqueda = document.getElementById('campoBusqueda');
 const tablaResultados = document.getElementById('resultado-busqueda');
@@ -9,25 +12,10 @@ const tablaResultados = document.getElementById('resultado-busqueda');
 inputBusqueda.addEventListener('input', async () => {
     const textoBusqueda = inputBusqueda.value.trim();
     
-    // Realizar la consulta a la base de datos utilizando Supabase para obtener la estructura de la tabla
-    const { data: columnsData, error: columnsError } = await supabase
-      .from('information_schema.columns')
-      .select('column_name')
-      .eq('table_name', 'parques');
-  
-    if (columnsError) {
-      console.error('Error al obtener la estructura de la tabla:', columnsError.message);
-      return;
-    }
-  
-    // Obtener los nombres de las columnas
-    const columnas = columnsData.map(column => column.column_name);
-  
-    // Realizar la consulta a la base de datos utilizando Supabase para buscar en todas las columnas
+    // Realizar la consulta a la base de datos utilizando Supabase
     const { data, error } = await supabase
-      .from('parques')
-      .select('*')
-      .filter('*', 'ilike', `%${textoBusqueda}%`); // Buscar en todas las columnas
+      .from('espacios_publicos')
+      .select('*'); // Seleccionar todos los atributos de la tabla
   
     if (error) {
       console.error('Error al realizar la consulta:', error.message);
@@ -39,28 +27,27 @@ inputBusqueda.addEventListener('input', async () => {
   
     // Mostrar los resultados en la tabla
     if (data && data.length > 0) {
-      // Crear la cabecera de la tabla con los nombres de las columnas
-      const cabecera = document.createElement('tr');
-      columnas.forEach(columna => {
+      const headers = Object.keys(data[0]); // Obtener los nombres de los atributos
+      const headerRow = document.createElement('tr');
+      headers.forEach(header => {
         const th = document.createElement('th');
-        th.textContent = columna;
-        cabecera.appendChild(th);
+        th.textContent = header;
+        headerRow.appendChild(th);
       });
-      tablaResultados.appendChild(cabecera);
+      tablaResultados.appendChild(headerRow);
   
-      // Mostrar los resultados en la tabla
-      data.forEach(fila => {
-        const filaTabla = document.createElement('tr');
-        columnas.forEach(columna => {
+      data.forEach(row => {
+        const fila = document.createElement('tr');
+        headers.forEach(header => {
           const td = document.createElement('td');
-          td.textContent = fila[columna];
-          filaTabla.appendChild(td);
+          td.textContent = row[header]; // Mostrar el valor del atributo en la celda
+          fila.appendChild(td);
         });
-        tablaResultados.appendChild(filaTabla);
+        tablaResultados.appendChild(fila);
       });
     } else {
       const mensaje = document.createElement('tr');
-      mensaje.innerHTML = `<td colspan="${columnas.length}">No se encontraron resultados</td>`;
+      mensaje.innerHTML = `<td colspan="${headers.length}">No se encontraron resultados</td>`;
       tablaResultados.appendChild(mensaje);
     }
   });
