@@ -104,28 +104,7 @@
     </script>
 
     <!--SCRIPT PARA BUSCAR-->
-    <script>
-
-        document.getElementById('campoBusqueda').addEventListener('input',function(event) {
-
-            event.preventDefault();//Evita que se envie de forma convencional o vacia
-
-            var nombre = document.getElementById('campoBusqueda').value;
-            var xhr = new XMLHttpRequest();
-            console.log('Hola');
-            xhr.open('GET', '/assets/php/buscar.php?nombre=' + encodeURIComponent(nombre),true);
-            xhr.setRequestHeader('Content-Type','application/x-www-formurlencoded');
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState === 4 && xhr.status ===200){
-                    document.getElementById('resultado-busqueda').innerHTML = xhr.responseText;
-                }
-            };
-
-            xhr.send('nombre=' + encodeURIComponent(nombre));
-
-        });
-
-    </script>
+    <script src="./../assets/js/getTable.js"></script>
 
     <!--SCRIPT PARA ELIMINAR-->
     <script>
