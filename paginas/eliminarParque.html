@@ -42,7 +42,7 @@
                 <h2>Confirmacion</h2>
                 <p>¿Está seguro de querer agregar el registro?</p>
                 <button type="button" id="regresarForm" class="cancel-button">Cancelar</button>
-                <button type="submit" id="confirm-del" class="add-button" name="agregar">Eliminar</button>
+                <button type="submit" id="confirm-del" class="add-button" name="agregar" onclick="deletePublicSpace()">Eliminar</button>
             </div>
         </div>
 
@@ -107,26 +107,7 @@
     <script src="./../assets/js/getTable.js"></script>
 
     <!--SCRIPT PARA ELIMINAR-->
-    <script>
-
-        document.getElementById('confirm-del').addEventListener('click',function(event){
-
-            var id_del = document.getElementById('id-to-delete').value;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET','/assets/php/eliminar.php?id=' + encodeURIComponent(id_del),true);
-            xhr.setRequestHeader('Content-Type','application/x-www-formurlencoded');
-            console.log("Eliminar");
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState === 4 && xhr.status === 200){
-                    document.getElementById('del-response-cont').innerHTML = xhr.responseText;
-                }
-            };
-
-            xhr.send('ID = ' + encodeURIComponent(id_del));
-
-        });
-
-    </script>
+    <script src="./../assets/js/delete_PSpace.js"></script>
 
 </body>
 </html>
