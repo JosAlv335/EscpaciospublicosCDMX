@@ -175,39 +175,14 @@
             }
         }
     </script>
-    <!-- Para cargar los datos en la base -->
+    <!--COMPORTAMIENTO DEL BOTÓN PARA REGRESAR-->
     <script>
-        document.getElementById("updateForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
-
-            var formData = new FormData(this); // Obtener los datos del formulario
-
-            var xhr = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            xhr.open("POST", "../assets/php/procesar_actualizar.php", true); // Establecer la solicitud POST a procesar_actualizar.php
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("mensaje").innerHTML = xhr.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
-                }
-            };
-
-            xhr.onload = function () {
-                if (this.status == 200) {
-                    console.log(this.response);
-                } else {
-                    console.error("Error en la petición: " + this.status + this.responseXML);
-                }
-            };
-
-            xhr.send(formData); // Enviar los datos del formulario al servidor
-        });
-
-        
-
         document.getElementById("regresarTabla").addEventListener("click", function() {
             window.location.href = "tabla.html"; // Redirigir a tabla.html
         });
     </script>
-    <script src="../assets/js/addSpace.js"></script>
+    <script src="./../assets/js/updatePSpace.js"></script>
+    <script src="./../assets/js/loadPostalInfo.js"></script>
 
 </body>
 </html>
