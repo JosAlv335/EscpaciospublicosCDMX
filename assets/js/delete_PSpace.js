@@ -35,9 +35,3 @@ document.getElementById('confirm-del').addEventListener('click', async () => {
         }
 
 });
-
-async function deletePublicSpace(){
-
-    
-
-}

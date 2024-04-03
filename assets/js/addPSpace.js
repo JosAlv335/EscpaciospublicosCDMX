@@ -69,9 +69,3 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     }
 
 })
-
-async function addPublicSpce(){
-
-    
-
-}
