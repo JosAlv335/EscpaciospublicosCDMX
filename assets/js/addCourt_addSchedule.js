@@ -9,10 +9,10 @@ SCRIPT DISEÑADO PARA AÑAIDR ENTRADA DE HORARIO EN EL FORMULARIO PARA LAS OPCIO
 var classBtnAdd = document.getElementById("clase-add-horario");
 var classBtnRem = document.getElementById("clase-rem-horario");
 classBtnAdd.onclick = function(){
-    agregarHorario("clase","horarios-clases","hor-clase-container");
+    agregarHorario("clase","horarios-clase","hor-clase-container");
 }
 classBtnRem.onclick = function(){
-    eliminarUltimoHorario("horarios-clases");
+    eliminarUltimoHorario("horarios-clase");
 }
 //
 //SECIÓN DE ENTRENAMIENTO
@@ -116,6 +116,7 @@ function agregarHorario(prefijo, containerID, containerClass) {
 
     const nuevoHorarioDiv = document.createElement('div');
     nuevoHorarioDiv.className = containerClass;
+    nuevoHorarioDiv.id = "hor-" + prefijo + "-container-" + numHorarios;
 
     nuevoHorarioDiv.innerHTML = `
         <label for="${prefijo}-dia-inicio-${numHorarios}">Desde:</label>
@@ -129,4 +130,5 @@ function agregarHorario(prefijo, containerID, containerClass) {
     `;
 
     horariosContainer.appendChild(nuevoHorarioDiv);
+    
 }
