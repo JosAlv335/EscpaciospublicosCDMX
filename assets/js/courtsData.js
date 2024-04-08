@@ -5,7 +5,7 @@ ARCHIVO QUE CONTIENE EL LISTADO DE LOS TIPOS DE INSTALACION/CANCHAS Y DEPORTES P
 INICIALMENTE DISEÑADO PARA SU USO EN:
     -loadCourtsData.js
 */
-const tiposDeInstalacion = [
+export const tiposDeInstalacion = [
     "Seleccione",
     "Aeródromo",
     "Alberca de Competencias",
@@ -188,7 +188,7 @@ const tiposDeInstalacion = [
 ];
 
 
-const deportesPrincipales = [
+export const deportesPrincipales = [
     "Acondinato Fisico",
     "Acti Ritmicas Aero",
     "Activi Subacuaticas",
@@ -268,3 +268,4 @@ const deportesPrincipales = [
     "Kendo",
     "Otro"
 ];
+
