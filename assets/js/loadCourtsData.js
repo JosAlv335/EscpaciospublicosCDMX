@@ -7,6 +7,8 @@ INICIALMENTE DISEÑADO PARA USARSE EN:
     En conjunto con
     -courtsData.js
 */
+//IMPORTACIÓN DE LOS ARREGLOS NECESARIOS
+import { tiposDeInstalacion, deportesPrincipales } from "./courtsData";
 
 /*************************************************************************************************************/
 /*********************************DECLARACIÓN DE LOS USOS EN EL SISTEMA***************************************/
