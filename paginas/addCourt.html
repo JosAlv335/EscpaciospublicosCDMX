@@ -51,17 +51,17 @@
                         <input type="text" id="clases-desc" name="clases-desc">
 
                         <!--HORARIOS-->
-                        <div class="horarios-clases" id ="horarios-clases">
-                            <div class="hor-clase-container">
+                        <div class="horarios-clases" id ="horarios-clase">
+                            <div class="hor-clase-container" id="hor-clase-container-0">
                                 <!--HORARIO 0-->
                                 <label for="clase-dia-inicio-0">Desde:</label>
                                 <input type="text" id="clase-dia-inicio-0" name="clase-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
                                 <label for="clase-dia-fin-0">Hasta:</label>
                                 <input type="text" id="clase-dia-fin-0" name="clase-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="clases-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="clases-hor-inicio-0" name="clases-hor-inicio-0">
-                                <label for="clases-hor-fin-0">Termina:</label>
-                                <input type="time" id="clases-hor-fin-0" name="clases-hor-fin-0">
+                                <label for="clase-hor-inicio-0">Inicia:</label>
+                                <input type="time" id="clase-hor-inicio-0" name="clases-hor-inicio-0">
+                                <label for="clase-hor-fin-0">Termina:</label>
+                                <input type="time" id="clase-hor-fin-0" name="clases-hor-fin-0">
                             </div>
                         </div>
                         <button type="button" id="clase-add-horario" class="clase-add-horario">+</button>
@@ -80,7 +80,7 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-train" id ="horarios-train">
-                            <div class="hor-train-container">
+                            <div class="hor-train-container" id="hor-train-container-0">
                                 <!--HORARIO 0-->
                                 <label for="train-dia-inicio-0">Desde:</label>
                                 <input type="text" id="train-dia-inicio-0" name="train-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -108,7 +108,7 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-libre" id ="horarios-libre">
-                            <div class="hor-libre-container">
+                            <div class="hor-libre-container" id="hor-libre-container-0">
                                 <!--HORARIO 0-->
                                 <label for="libre-dia-inicio-0">Desde:</label>
                                 <input type="text" id="libre-dia-inicio-0" name="libre-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -169,7 +169,7 @@
             <diV class="form-group" id="baños">
                 <div class="vestidores">
                     <label for="vestidores">Vestidores:</label>
-                    <input type="checkbox" id="vestidores" name="vestidores" onclick="showOptions(this)">
+                    <input type="checkbox" id="vestidores" name="vestidores">
 
                     <!--CAMPO OCULTO-->
                     <div id="datos-vest" class="campo-hidden">
@@ -181,7 +181,7 @@
                         <input type="number" id="vest-capacity" name="vest-capacity">
                         <!--HORARIOS-->
                         <div class="horarios-vest" id ="horarios-vest">
-                            <div class="hor-vest-container">
+                            <div class="hor-vest-container" id="hor-vest-container-0">
                                 <!--HORARIO 0-->
                                 <label for="vest-dia-inicio-0">Desde:</label>
                                 <input type="text" id="vest-dia-inicio-0" name="vest-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -214,7 +214,7 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-wc" id ="horarios-wc">
-                            <div class="hor-wc-container">
+                            <div class="hor-wc-container" id="hor-vwc-container-0">
                                 <!--HORARIO 0-->
                                 <label for="wc-dia-inicio-0">Desde:</label>
                                 <input type="text" id="wc-dia-inicio-0" name="wc-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -247,7 +247,7 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-showers" id ="horarios-showers">
-                            <div class="hor-showers-container">
+                            <div class="hor-showers-container" id="hor-showers-container-0">
                                 <!--HORARIO 0-->
                                 <label for="showers-dia-inicio-0">Desde:</label>
                                 <input type="text" id="showers-dia-inicio-0" name="showers-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -280,7 +280,7 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-sauna" id ="horarios-sauna">
-                            <div class="hor-sauna-container">
+                            <div class="hor-sauna-container" id="hor-sauna-container-0">
                                 <!--HORARIO 0-->
                                 <label for="sauna-dia-inicio-0">Desde:</label>
                                 <input type="text" id="sauna-dia-inicio-0" name="sauna-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -313,7 +313,7 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-hidmasaje" id ="horarios-hidmasaje">
-                            <div class="hor-hidmasaje-container">
+                            <div class="hor-hidmasaje-container" id="hor-hidmasaje-container-0">
                                 <!--HORARIO 0-->
                                 <label for="hidmasaje-dia-inicio-0">Desde:</label>
                                 <input type="text" id="hidmasaje-dia-inicio-0" name="hidmasaje-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -332,7 +332,7 @@
                 <!--CAMPO DE STATUS-->
                 <div class="status-container">
                     <div class="status-text">
-                        <label>Estado de la cancha:</label>
+                        <label for="cancha-status">Estado de la cancha:</label>
                         <input type="text" id="cancha-status" name="cancha-status" placeholder="Activa | En Reparación | etc..."></textarea>
                     </div>
                 </div>
@@ -358,52 +358,14 @@
     </main>
     <!-- Para mostrar u ocultar el cuadro emergente -->
     <script src="../assets/js/popUpBox.js"></script>
-    <!-- Para cargar los datos en la base -->
+    <!--COMPORTAMIENTO DEL BOTÓN PARA REGRESAR-->
     <script>
-        //Envío de solicitud para los datos de la tabla principal
-        document.getElementById("courtForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
-
-            var formData = new FormData(this); // Obtener los datos del formulario
-
-            var mainSol = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            mainSol.open("POST", "../assets/php/procesar_Agregar_Cancha_main.php", true); // Establecer la solicitud POST a procesar_agregar.php
-
-            mainSol.onreadystatechange = function() {
-                if (mainSol.readyState == 4 && mainSol.status == 200) {
-                    document.getElementById("mensaje").innerHTML = mainSol.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
-                    console.log(mainSol.responseText);
-                }
-            };
-
-            mainSol.send(formData); // Enviar los datos del formulario al servidor
-
-            //Envío de solicitud para los datos de la tabla de actividades
-            var actSol = new XMLHttpRequest(); // Crear un objeto XMLHttpRequest
-            actSol.open("POST", "../assets/php/procesar_Agregar_Cancha_Actividades.php", true); // Establecer la solicitud POST a procesar_agregar.php
-
-            actSol.onreadystatechange = function() {
-                if (actSol.readyState == 4 && actSol.status == 200) {
-                    document.getElementById("mensaje").innerHTML = actSol.responseText; // Mostrar la respuesta del servidor en el elemento "mensaje"
-                    console.log(actSol.responseText);
-                }
-            };
-
-            actSol.send(formData); // Enviar los datos del formulario al servidor
-
-        });
-
-        
-
-
         document.getElementById("regresarTabla").addEventListener("click", function() {
             window.location.href = "tabla.html"; // Redirigir a tabla.html
         });
     </script>
-    <!--ENVIAR DATOS DE LAS ACTIVIDADES EXTRA-->
-    <script>
-
-    </script>
+    <!--ENVIAR DATOS A LA BASE-->
+    <script src="./../assets/js/addCourt_Main.js"></script>
     <!--OCULTAR Y MOSTRAR LOS CAMPOS ADICIONALES DE LAS CHECKBOXES-->
     <script src="../assets/js/addCourt_ShowOptions.js"></script>
     <!--AÑADIR Y ELIMINAR INSTANCIAS DE HORARIOS-->
