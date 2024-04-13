@@ -6,14 +6,21 @@
 }
 
 header {
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco */
+    color: white; /* Cambia el color del texto a blanco */
+    margin-bottom: 20px; /* Agrega separación entre el header y el contenido */
     text-align: center;
     padding: 20px 0;
 }
 
 main {
+    border-radius: 15px; /* Redondea los bordes del cuadro */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Aumenta la sombra alrededor del cuadro principal */
     width: 80%;
     margin: 0 auto;
+    padding: 20px; /* Aumenta el espacio interior del cuadro */
 }
+
 
 .form-group {
     margin-bottom: 20px;
@@ -21,6 +28,7 @@ main {
 
 .form-group label {
     margin-bottom: 5px;
+    margin-right: 10px; /* Ajusta la cantidad de espacio entre los botones según sea necesario */
 }
 
 .form-group input {
@@ -32,6 +40,7 @@ main {
 
 .button-group {
     display: flex;
+    animation: pulse 1.5s infinite alternate; /* Animación */
     justify-content: space-between;
 }
 
@@ -42,6 +51,7 @@ main {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 20px; /* Ajusta la cantidad de espacio entre los botones según sea necesario */
 }
 
 .add-button {
@@ -53,6 +63,13 @@ main {
     cursor: pointer;
 }
 
+.cancel-button:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+}
+
+.add-button:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+}
 
 /*Estilo para el input de CP*/
 .form-group input[id=codigoPostal]{
@@ -159,6 +176,10 @@ option:hover{
     cursor: pointer;
     width: 200px;
 
+}
+
+.form-group button:hover { /* Aumenta el tamaño al pasar el mouse */
+    transform: scale(1.1);
 }
 
 .form-group button,.form-group input[id=codigoPostal]{
