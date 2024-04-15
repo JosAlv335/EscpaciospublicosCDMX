@@ -274,10 +274,7 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
         };
 
     }
-    //********************************************************************************************** */
-    //********************************************************************************************** */
-    //**********FALTA ARREGLAR LAS SECCIONES RESTANTES PARA HORARIOS DE ENTRENAMIENTO*************** */
-    /**************************Y TAMBIÉN DE LOS SERVICIOS COMO WC VESTIDORES ETC******************** */
+
     //Si hubo inserción de "entrenamiento"
     if(activitiesIDs[1] !== null){
         console.log("Intentando insertar horarios de entrenamiento...");
@@ -337,6 +334,12 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
         console.log(data);
 
     }
+
+    //************************************************************************************************* */
+    //************************************************************************************************* */
+    /**************************FALTAN DATOS DE LOS SERVICIOS COMO WC VESTIDORES ETC******************** */
+    //************************************************************************************************* */
+    //************************************************************************************************* */
 
 
     // Utiliza el objeto datos para enviar los datos a donde necesites
