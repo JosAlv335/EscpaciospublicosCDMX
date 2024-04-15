@@ -165,12 +165,13 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //INSERCIÓN DE DATOS DE ENTRENAMIENTO
     if(document.getElementById('act-entrenamiento').checked){
         let { data, error } = await supabase
-            .from('courts_activities')
-            .insert({
+            .from('court_activities')
+            .insert([{
                 "court_id" : court_id,
                 "activity" : "Entrenamiento",
                 "detalles" : document.getElementById('train-desc').value.trim()
-            });
+            }])
+            .select()
 
         if(error){
             console.log("Error al insertar los datos de entrenamiento en la tabla courts: ");
@@ -179,23 +180,27 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
         }
 
         var train_id = data[0].activity_id;
+        activitiesIDs[1] = train_id;
     }
     //INSERCIÓN DE DATOS DE LIBRE
     if(document.getElementById('act-libre').checked){
-        const { courtsLibreData, courtsLibreError } = await supabase
-            .from('courts_activities')
-            .insert({
+        let { data, error } = await supabase
+            .from('court_activities')
+            .insert([{
                 "court_id" : court_id,
                 "activity" : "Libre",
                 "detalles" : document.getElementById('libre-desc').value.trim()
-            });
+            }])
+            .select()
 
-        if(courtsLibreError){
-            console.log("Error al insertar los datos de libre en la tabla courts: " + courtsLibreError.message);
+        if(error){
+            console.log("Error al insertar los datos de libre en la tabla courts: ");
+            console.log(error)
             return;
         }
 
-        var libre_id = courtsLibreData.activity_id;
+        var libre_id = data[0].activity_id;
+        activitiesIDs[2] = libre_id;
     }
 
     //ALMACENA TODOS LOS HORARIOS DE TODAS LAS ACTIVIDADES QUE INVOLUCRAN HORARIOS (UNICAMENTE PARA ACTIVIDADES )
@@ -244,7 +249,8 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //******************INSERCIÓN EN LA TABLA "horarios_activities"**********************/
 
     //Si hubo inserción de "clase"
-    if(clase_id !== null){
+    if(activitiesIDs[0] !== null){
+        console.log("Intentando insertar horarios de clase...");
         console.log(datosHorarios);
         const datosDeClase = datosHorarios.clase;
         try {
@@ -264,7 +270,7 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
             console.log('Dato insertado con éxito:', data);
             }
         } catch (error) {
-            console.error('Error al insertar datos de clase:', error.message);
+            console.log('Error al insertar datos de clase:', error);
         };
 
     }
@@ -273,26 +279,65 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //**********FALTA ARREGLAR LAS SECCIONES RESTANTES PARA HORARIOS DE ENTRENAMIENTO*************** */
     /**************************Y TAMBIÉN DE LOS SERVICIOS COMO WC VESTIDORES ETC******************** */
     //Si hubo inserción de "entrenamiento"
-    if(train_id !== null){
+    if(activitiesIDs[1] !== null){
+        console.log("Intentando insertar horarios de entrenamiento...");
+        console.log(datosHorarios);
+        let datosTrain = datosHorarios.train;
+        try {
+            // Iterar sobre cada objeto dentro del array 'clase'
+            for (var dato of datosTrain) {
+                console.log(dato);
+                // Realizar la inserción del dato en la base de datos
+                let { data, error } = await supabase
+                    .from('horarios_actividades')
+                    .insert(dato)
+                    .select()
 
-        const { courtsHorTrainData, courtsHorTrainError } = await supabase
-            .from('horarios_activities')
-            .insert([
-                datosHorarios["train"]
-            ]);
+                if (error) {
+                    throw error;
+                }
 
-        if(courtsHorTrainError){
-            console.log("Error al insertar los horarios de entrenamiento en la tabla courts: " + courtsHorTrainError.message);
-            return;
-        }
+                console.log('Dato insertado con éxito:', data);
+            }
+        } catch (error) {
+            console.log('Error al insertar datos de entrenamiento:', error);
+        };
 
-        console.log("Inserción de horario de entrenamiento exitoso, ID retornado: " + courtsHorTrainData.horario_id);
+        console.log("Inserción de horario de entrenamiento exitoso, ID retornado: ");
+        console.log(data);
 
     }
 
+    //Si hubo inserción de "libre"
+    if(activitiesIDs[2] !== null){
+        console.log("Intentando insertar horarios de disponibilidad...");
+        console.log(datosHorarios);
+        let datosLibre = datosHorarios.libre;
+        try {
+            // Iterar sobre cada objeto dentro del array 'clase'
+            for (var dato of datosLibre) {
+                console.log(dato);
+                // Realizar la inserción del dato en la base de datos
+                let { data, error } = await supabase
+                    .from('horarios_actividades')
+                    .insert(dato)
+                    .select()
 
-    //A CONSIDERAR: HACER UN CICLO FOR QUE SE REPITA 3 VECES Y GUARDE DE PUTAZO
-    //LOS HORARIOS PARA CLASES, ENTRENAMIENTO Y LIBRE
+                if (error) {
+                    throw error;
+                }
+
+                console.log('Dato insertado con éxito:', data);
+            }
+        } catch (error) {
+            console.log('Error al insertar datos de disponibilidad:', error);
+        };
+
+        console.log("Inserción de horario de disponibilidad exitoso, ID retornado: ");
+        console.log(data);
+
+    }
+
 
     // Utiliza el objeto datos para enviar los datos a donde necesites
     console.log(datosHorarios);
