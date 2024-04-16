@@ -206,7 +206,7 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //ALMACENA TODOS LOS HORARIOS DE TODAS LAS ACTIVIDADES QUE INVOLUCRAN HORARIOS (UNICAMENTE PARA ACTIVIDADES )
     var datosHorarios = {}
 
-    for(let j = 0;j < 3;j++){
+    for(let j = 0;j < 8;j++){
         
         var prefijo = horariosToGet[j];
 
@@ -341,6 +341,59 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //************************************************************************************************* */
     //************************************************************************************************* */
 
+    //Arreglo para los IDs de servicios
+
+    var servicesIDs = [
+        null,   //Vestidores
+        null,   //WC
+        null,   //Showers
+        null,   //sauna
+        null    //Hidmasaje
+    ]
+
+    var servicesNames = [
+        "Vestidores",
+        "WC",
+        "Regaderas",
+        "Sauna",
+        "Hidromasaje"
+    ]
+
+    //**********************************Inserción a "court_services"**********************//
+    //INSERCIÓN DE DATOS DE VESTIDORES
+
+    for(let i = 0; i < 5;i++){
+        if(document.getElementById(allCheckboxes[i+3]).checked){
+            let { data, error } = await supabase
+                .from('court_services')
+                .insert([{
+                    "court_id" : court_id,
+                    "servicio" : servicesNames[i],
+                    "descripcion" : document.getElementById( horariosToGet[i+3] + '-desc').value.trim(),
+                    "costo"    : document.getElementById( horariosToGet[i+3] + '-cost' ).value.trim(),
+                    "capacidad": document.getElementById( horariosToGet[i+3] + '-capacity' ).value.trim()
+                }])
+                .select();
+    
+            if(error){
+                console.log("Error al insertar los datos de" + servicesNames[i] + " en la tabla courts: ");
+                console.log(error);
+                return;
+            }
+    
+            console.log("Datos de insercion clase:");
+            console.log(data);
+    
+            var obtainedID = data[0].service_id;
+            servicesIDs[i] = obtainedID;
+        }
+    }
+    console.log("Services IDS:");
+    console.log(servicesIDs);
+
+    
+
+    //****************************************************************************** */
 
     // Utiliza el objeto datos para enviar los datos a donde necesites
     console.log(datosHorarios);
