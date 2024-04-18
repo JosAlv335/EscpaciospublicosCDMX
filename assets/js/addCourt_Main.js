@@ -203,7 +203,58 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
         activitiesIDs[2] = libre_id;
     }
 
-    //ALMACENA TODOS LOS HORARIOS DE TODAS LAS ACTIVIDADES QUE INVOLUCRAN HORARIOS (UNICAMENTE PARA ACTIVIDADES )
+    //INSERCION DE DATOS DE SERVICIOS
+    //Arreglo para los IDs de servicios
+
+    var servicesIDs = [
+        null,   //Vestidores
+        null,   //WC
+        null,   //Showers
+        null,   //sauna
+        null    //Hidmasaje
+    ]
+
+    var servicesNames = [
+        "Vestidores",
+        "WC",
+        "Regaderas",
+        "Sauna",
+        "Hidromasaje"
+    ]
+
+    //**********************************Inserción a "court_services"**********************//
+    //INSERCIÓN DE DATOS DE VESTIDORES
+
+    for(let i = 0; i < 5;i++){
+        if(document.getElementById(allCheckboxes[i+3]).checked){
+            let { data, error } = await supabase
+                .from('court_services')
+                .insert([{
+                    "court_id" : court_id,
+                    "servicio" : servicesNames[i],
+                    "descripcion" : document.getElementById( horariosToGet[i+3] + '-desc').value.trim(),
+                    "costo"    : document.getElementById( horariosToGet[i+3] + '-cost' ).value.trim(),
+                    "capacidad": document.getElementById( horariosToGet[i+3] + '-capacity' ).value.trim()
+                }])
+                .select();
+    
+            if(error){
+                console.log("Error al insertar los datos de" + servicesNames[i] + " en la tabla courts: ");
+                console.log(error);
+                return;
+            }
+    
+            console.log("Datos de insercion clase:");
+            console.log(data);
+    
+            var obtainedID = data[0].service_id;
+            servicesIDs[i] = obtainedID;
+        }
+    }
+    console.log("Services IDS:");
+    console.log(servicesIDs);
+
+    //ALMACENA TODOS LOS HORARIOS DE TODAS LAS ACTIVIDADES QUE INVOLUCRAN HORARIOS 
     var datosHorarios = {}
 
     for(let j = 0;j < 8;j++){
@@ -220,8 +271,13 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
             
             
             let newActivitiesInsert ={};
-            console.log("activity_id : " + activitiesIDs[j]);
-            newActivitiesInsert['activity_id'] = activitiesIDs[j];
+            if(j < 3){
+                console.log("activity_id : " + activitiesIDs[j]);
+                newActivitiesInsert['activity_id'] = activitiesIDs[j];
+            }else{
+                newActivitiesInsert['service_id'] = servicesIDs[j-3]
+            }
+            
             
             let diaDesde = prefijo + '-dia-inicio-'+i;
             console.log(diaDesde);
@@ -341,9 +397,11 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //************************************************************************************************* */
     //************************************************************************************************* */
 
-    //Arreglo para los IDs de servicios
+    
 
-    var servicesIDs = [
+    //************************************************************************************************************//
+    //***********************************INSERTAR HORARIOS DE LOS SERVICIOS***************************************//
+    var datosHorServicios = [
         null,   //Vestidores
         null,   //WC
         null,   //Showers
@@ -351,46 +409,62 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
         null    //Hidmasaje
     ]
 
-    var servicesNames = [
-        "Vestidores",
-        "WC",
-        "Regaderas",
-        "Sauna",
-        "Hidromasaje"
-    ]
-
-    //**********************************Inserción a "court_services"**********************//
-    //INSERCIÓN DE DATOS DE VESTIDORES
+    datosHorServicios[0] = datosHorarios.vest;
+    datosHorServicios[1] = datosHorarios.wc;
+    datosHorServicios[2] = datosHorarios.showers;
+    datosHorServicios[3] = datosHorarios.sauna;
+    datosHorServicios[4] = datosHorarios.hidmasaje;
 
     for(let i = 0; i < 5;i++){
         if(document.getElementById(allCheckboxes[i+3]).checked){
-            let { data, error } = await supabase
-                .from('court_services')
-                .insert([{
-                    "court_id" : court_id,
-                    "servicio" : servicesNames[i],
-                    "descripcion" : document.getElementById( horariosToGet[i+3] + '-desc').value.trim(),
-                    "costo"    : document.getElementById( horariosToGet[i+3] + '-cost' ).value.trim(),
-                    "capacidad": document.getElementById( horariosToGet[i+3] + '-capacity' ).value.trim()
-                }])
-                .select();
-    
-            if(error){
-                console.log("Error al insertar los datos de" + servicesNames[i] + " en la tabla courts: ");
-                console.log(error);
-                return;
-            }
-    
-            console.log("Datos de insercion clase:");
-            console.log(data);
-    
-            var obtainedID = data[0].service_id;
-            servicesIDs[i] = obtainedID;
+            console.log("Intentando insertar horarios de clase...");
+            console.log(datosHorServicios[i]);
+            try {
+                // Iterar sobre cada objeto dentro del array 'clase'
+                for (var dato of datosHorServicios[i]) {
+                    console.log(dato);
+                    // Realizar la inserción del dato en la base de datos
+                    let { data, error } = await supabase
+                        .from('horarios_servicios')
+                        .insert(dato)
+                        .select()
+        
+                    if (error) {
+                        throw error;
+                    }
+        
+                    console.log('Dato insertado con éxito:', data);
+                }
+            } catch (error) {
+                console.log('Error al insertar datos de clase:', error);
+            };
         }
     }
-    console.log("Services IDS:");
-    console.log(servicesIDs);
 
+    //Si hubo inserción de "clase"
+    if(activitiesIDs[0] !== null){
+        
+        try {
+            // Iterar sobre cada objeto dentro del array 'clase'
+            for (var dato of datosDeClase) {
+                console.log(dato);
+            // Realizar la inserción del dato en la base de datos
+            let { data, error } = await supabase
+                .from('horarios_actividades')
+                .insert(dato)
+                .select()
+
+            if (error) {
+                throw error;
+            }
+
+            console.log('Dato insertado con éxito:', data);
+            }
+        } catch (error) {
+            console.log('Error al insertar datos de clase:', error);
+        };
+
+    }
     
 
     //****************************************************************************** */
