@@ -8,6 +8,7 @@
     "build": "parcel build ./index.html ./paginas/*.html"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
     "@supabase/supabase-js": "^2.39.8",
     "parcel-bundler": "latest",
     "serve": "latest"
