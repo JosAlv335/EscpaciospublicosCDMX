@@ -18,6 +18,10 @@
             <div class="form-group">
                 <label for="id" name="id">ID del espacio público al cual añadirle la cancha:</label>
                 <input type="text" id="id" name="id" placeholder="ID..." required>
+                <!--COORDENADAS DE LA CANCHA-->
+                <label for="coordsCourt">Coordenadas:</label>
+                <input type="text" id="latitudX" name="coordsCourt" placeholder="Latitud...">
+                <input type="text" id="longitudY" name="coordsCourt" placeholder="Longitud...">
             </div>
             <!--SECCIÓN PARA EL TIPO DE INSTALACIÓN Y EL DEPORTE PRINCIPAL-->
             <div class="form-group" id="Tipo-ActividadPrincipal">
@@ -44,7 +48,7 @@
                 <div class="act-ckeck">
                     <label for="act-clases">Clases:</label>
                     <input type="checkbox" id="act-clases" name="act-clases">
-
+                    
                     <!--CAMPO OCULTO-->
                     <div id="datos-clases" class="campo-hidden">
                         <label for="clases-desc">Detalles:</label>
@@ -179,6 +183,9 @@
                         <input type="number" id="vest-cost" name="vest-cost">
                         <label for="vest-capacity">Capacidad:</label>
                         <input type="number" id="vest-capacity" name="vest-capacity">
+                        <label for="vest-location">Coordenadas:</label>
+                        <input type="number" id="vest-locationY" name="vest-location" placeholder="Latitud...">
+                        <input type="number" id="vest-locationX" name="vest-location" placeholder="Longitud...">
                         <!--HORARIOS-->
                         <div class="horarios-vest" id ="horarios-vest">
                             <div class="hor-vest-container" id="hor-vest-container-0">
