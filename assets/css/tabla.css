@@ -96,3 +96,11 @@ table th {
     height: 300px;
     overflow: auto;
 }
+
+.popup {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 10px;
+}

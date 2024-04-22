@@ -7,7 +7,6 @@ const supabase = createClient(
     )
 
 const inputBusqueda = document.getElementById('campoBusqueda');
-const busq = inputBusqueda.value;
 const tablaContenedor = document.getElementById('resultado-busqueda');
 
 inputBusqueda.addEventListener('input', async () => {
@@ -25,8 +24,8 @@ inputBusqueda.addEventListener('input', async () => {
     const { data, error } = await consulta;
   
     if (error) {
-      console.error('Error al realizar la consulta:', error.message);
-      return;
+        console.error('Error al realizar la consulta:', error.message);
+        return;
     }
   
     // Limpiar el contenido del contenedor
@@ -38,35 +37,37 @@ inputBusqueda.addEventListener('input', async () => {
   
     // Mostrar los resultados en la tabla
     if (data && data.length > 0) {
-      const headers = Object.keys(data[0]); // Obtener los nombres de los atributos
+        const headers = Object.keys(data[0]); // Obtener los nombres de los atributos
   
-      // Crear la fila de encabezado
-      const encabezado = document.createElement('tr');
-      headers.forEach(header => {
-        const celda = document.createElement('th');
-        celda.textContent = header;
-        encabezado.appendChild(celda);
-      });
-      tabla.appendChild(encabezado);
-  
-      // Crear las filas de datos solo para los resultados que coinciden con la búsqueda
-      data.forEach(row => {
-        const fila = document.createElement('tr');
+        // Crear la fila de encabezado
+        const encabezado = document.createElement('tr');
         headers.forEach(header => {
-          const celda = document.createElement('td');
-          celda.textContent = row[header]; // Mostrar el valor del atributo en la celda
-          fila.appendChild(celda);
+            const celda = document.createElement('th');
+            celda.textContent = header;
+            encabezado.appendChild(celda);
         });
-        tabla.appendChild(fila);
-      });
+        tabla.appendChild(encabezado);
+  
+        // Crear las filas de datos solo para los resultados que coinciden con la búsqueda
+        data.forEach((row, rowIndex) => {
+            const fila = document.createElement('tr');
+            headers.forEach((header, index) => {
+                const celda = document.createElement('td');
+                celda.textContent = row[header]; // Mostrar el valor del atributo en la celda
+                celda.classList.add(header.toLowerCase()); // Agregar clase con el nombre de la columna
+                celda.id = `${header.toLowerCase()}-${rowIndex}`; // Asignar un ID único a la celda
+                fila.appendChild(celda);
+            });
+            tabla.appendChild(fila);
+        });
     } else {
-      const mensaje = document.createElement('tr');
-      const celdaMensaje = document.createElement('td');
-      celdaMensaje.textContent = 'No se encontraron resultados';
-      mensaje.appendChild(celdaMensaje);
-      tabla.appendChild(mensaje);
+        const mensaje = document.createElement('tr');
+        const celdaMensaje = document.createElement('td');
+        celdaMensaje.textContent = 'No se encontraron resultados';
+        mensaje.appendChild(celdaMensaje);
+        tabla.appendChild(mensaje);
     }
   
     // Insertar la tabla en el contenedor
     tablaContenedor.appendChild(tabla);
-  });
+});
