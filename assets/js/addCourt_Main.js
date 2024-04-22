@@ -19,7 +19,9 @@ var names = [
     "iluminacion",              //iluminacion
     "piso",                     //piso
     "tribunas",                 //tribunas
-    "cancha-status"             //status
+    "cancha-status",            //status
+    "latitudX",
+    "latitudY"
 ];
 
 //Arreglo de nombres de atributos segun la tabla de la BD
@@ -35,7 +37,8 @@ var atributos = [
     "iluminacion",
     "piso",
     "tribunas",
-    "status"
+    "status",
+    "location"
 ];
 
 var checkboxes = [
@@ -62,7 +65,19 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     
     /**RECOGER DATOS DE CADA ELEMENTO DEL FORMULARIO PARA LA TABLA PRINCIPAL**/
     for(let i = 0; i < atributos.length;i++){
-        datosMain[atributos[i]] = document.getElementById(names[i]).value;
+
+        if (atributos[i] == "location"){
+            // Capturar las coordenadas desde el formulario
+            var latitud = parseFloat(document.getElementById('latitudX').value);
+            var longitud = parseFloat(document.getElementById('longitudY').value);
+
+            // Construir el objeto geography(Point)
+            var coordenadas = `POINT(${longitud} ${latitud})`;
+            datosMain[atributos[i]] = coordenadas;
+        }else{
+            datosMain[atributos[i]] = document.getElementById(names[i]).value;latitudX
+        }
+
     }
 
     /**RECOGE LOS DATOS DE LAS CHECKBOX NECESARIAS PARA LA TABLA MAIN**/
