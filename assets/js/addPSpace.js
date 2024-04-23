@@ -13,13 +13,14 @@ var names = [
     "ciudad_municipio",
     "asentamiento",
     "calle",
-    "entCalles",
+    "entCalles1",
+    "entCalles2",
     "numExt",
     "numInt",
     "codigoPostal",
     "horario-inicio",
     "horario-fin",
-    "tipo-espacio"
+    "tipo-espacio",
 ];
 
 //Arreglo de nombres de atributos segun la tabla de la BD
@@ -29,13 +30,16 @@ var atributos = [
     "municipio_delegacion",
     "asentamiento",
     "calle",
-    "entre_calles",
+    "entre_calles1",
+    "entre_calles2",
     "num_ext",
     "num_int",
     "codigo_postal",
     "horario_inicio",
     "horario_fin",
-    "tipo_espacio"
+    "tipo_espacio",
+    "latitud",
+    "longitud"
 ];
 
 document.getElementById('addForm').addEventListener('submit', async (event) => {
@@ -47,9 +51,42 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     const responseMessage =  document.getElementById('mensaje');
 
     let datos = {};
+    var latitud;
+    var longitud;
+
+    if(document.getElementById('toggleFormat').textContent === 'Cambiar a Grados, Minutos, Segundos'){
+        //Capturar coordenadas del formulario
+        latitud = parseFloat(document.getElementById('PSpace-LatitudX').value);
+        longitud = parseFloat(document.getElementById('PSpace-LongitudY').value);
+        //Construir el objeto geometry(Point)
+        var coordenadas = `POINT(${longitud} ${latitud})`;
+    }else{
+        //Obtiene los datos de Latitud
+        var LatitudGrados = document.getElementById('LatitudGrados').value;
+        var LatitudMinutos = document.getElementById('LatitudGrados').value;
+        var LatitudSegundos = document.getElementById('LatitudGrados').value;
+        //Obtiene los datos de Longtud
+        var LongitudGrados = document.getElementById('LongitudGrados').value;
+        var LongitudMinutos = document.getElementById('LongitudGrados').value;
+        var LongitudSegundos = document.getElementById('LongitudGrados').value;
+
+        latitud = convertirDMSToDecimal(LatitudGrados,LatitudMinutos,LatitudSegundos);
+        longitud = convertirDMSToDecimal(LongitudGrados,LongitudMinutos,LongitudSegundos);
+
+        var coordenadas = `POINT(${longitud} ${latitud})`;
+
+    }
 
     for(let i = 0; i < atributos.length;i++){
-        datos[atributos[i]] = formulario.elements[names[i]].value;
+
+        if(atributos[i] == "latitud"){
+            datos[atributos[i]] = latitud;
+        }else if(atributos[i] == "longitud"){
+            datos[atributos[i]] = longitud;
+        }else{
+            datos[atributos[i]] = formulario.elements[names[i]].value;
+        }
+
     }
 
     const { data, error } = await supabase
@@ -69,3 +106,13 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     }
 
 })
+
+function convertirDMSToDecimal(grados, minutos, segundos) {
+    var decimal = grados + minutos / 60 + segundos / 3600;
+    /*
+    if (direccion == "S" || direccion == "W") {
+        decimal = -decimal;
+    }
+    */
+    return decimal;
+}
