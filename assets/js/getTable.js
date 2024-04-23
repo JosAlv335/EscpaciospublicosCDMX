@@ -56,6 +56,15 @@ inputBusqueda.addEventListener('input', async () => {
                 celda.textContent = row[header]; // Mostrar el valor del atributo en la celda
                 celda.classList.add(header.toLowerCase()); // Agregar clase con el nombre de la columna
                 celda.id = `${header.toLowerCase()}-${rowIndex}`; // Asignar un ID único a la celda
+
+                // Añadir evento de click a las celdas de la columna "nombre"
+                if (header.toLowerCase() === 'nombre') {
+                    celda.addEventListener('click', () => {
+                        // Redirigir a la página "info.html" con el nombre como parámetro
+                        window.location.href = `./../../paginas/pSpaceInfo.html?nombre=${encodeURIComponent(row[header])}`;
+                    });
+                }
+
                 fila.appendChild(celda);
             });
             tabla.appendChild(fila);
