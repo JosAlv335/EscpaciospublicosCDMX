@@ -67,9 +67,12 @@
 
             <diV class="form-group" id = "entreCalles-Nums">
 
-                <div class="entre-calles">
-                    <label for="entCalles">Entre Calles:</label>
-                    <input type="text" id="entCalles" name="entCalles">
+                <label for="campo-entre-calles">Entre Calles:</label>
+                <div class="entre-calles" name="campo-entre-calles">
+                    <label for="entCalles1">Calle 1:</label>
+                    <input type="text" id="entCalles1" name="entCalles1">
+                    <label for="entCalles2">Calle 2:</label>
+                    <input type="text" id="entCalles2" name="entCalles2">
                 </div>
                 <div class="numExt">
                     <label for="numExt">Num. Ext.:</label>
@@ -100,6 +103,31 @@
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
             </div>
+            <label for="coordinates">Coordenadas:</label>
+            <div class="form-group" id="coordinates" name="coordinates">
+                <div id="DecimalLatitud">
+                    <label for="LatitudDecimalInput">Latitud</label>
+                    <input type="text" id="PSpace-LatitudX" name="LatitudDecimalInput" placeholder="Latitud...">
+                </div>
+                <div id="DecimalLongitud">
+                    <label for="LongitudDecimalInput">Longitud</label>
+                    <input type="text" id="PSpace-LongitudY" name="LongitudDecimalInput" placeholder="Longitud...">
+                </div>
+                <!-- Campos adicionales para Grados, Minutos, Segundos -->
+                <div id="DMSLatitud" style="display:none;">
+                    <label for="LatitudDMSInput">Latitud:</label>
+                    <input type="text" id="LatitudGrados" name="LatitudDMSInput" placeholder="Grados">
+                    <input type="text" id="LatitudMinutos" name="LatitudDMSInput" placeholder="Minutos">
+                    <input type="text" id="LatitudSegundos" name="LatitudDMSInput" placeholder="Segundos">
+                </div>
+                <div id="DMSLongitud" style="display:none;">
+                    <label for="LongitudDMSInput">Longitud:</label>
+                    <input type="text" id="LongitudGrados" name="LongitudDMSInput" placeholder="Grados">
+                    <input type="text" id="LongitudMinutos" name="LongitudDMSInput" placeholder="Minutos">
+                    <input type="text" id="LongitudSegundos" name="LongitudDMSInput" placeholder="Segundos">
+                </div>
+                <button type="button" id="toggleFormat">Cambiar a Grados, Minutos, Segundos</button>
+            </div>
 
             <!--BOTONES DE CONTROL-->
             <div class="form-group" id ="control-buttons">
@@ -129,5 +157,32 @@
     <!-- Para cargar los datos en la base -->
     <script src="./../assets/js/addPSpace.js"></script>
     <script src="../assets/js/loadPostalInfo.js"></script>
+    <script>
+        document.getElementById('toggleFormat').addEventListener('click', function() {
+        var latInput = document.getElementById('DecimalLatitud');
+        var longInput = document.getElementById('DecimalLongitud');
+        var dmsLatitud = document.getElementById('DMSLatitud');
+        var dmsLongitud = document.getElementById('DMSLongitud');
+        var button = document.getElementById('toggleFormat');
+
+        // Verificamos si estamos cambiando a formato DMS
+        if (button.textContent.includes('Decimal')) {
+            // Cambiar a formato decimal
+            latInput.style.display = 'block';
+            longInput.style.display = 'block';
+            dmsLatitud.style.display = 'none';
+            dmsLongitud.style.display = 'none';
+            button.textContent = 'Cambiar a Grados, Minutos, Segundos';
+        } else {
+            // Cambiar a formato grados, minutos, segundos
+            latInput.style.display = 'none';
+            longInput.style.display = 'none';
+            dmsLatitud.style.display = 'block';
+            dmsLongitud.style.display = 'block';
+            button.textContent = 'Cambiar a Decimal';
+        }
+    });
+
+    </script>
 </body>
 </html>
