@@ -2,7 +2,9 @@ import { createClient } from '@supabase/supabase-js';
 import { Loader } from "@googlemaps/js-api-loader";
 
 const urlParams = new URLSearchParams(window.location.search);
-const nombre = urlParams.get('nombre');
+const id = urlParams.get('id');
+
+
 
 // Crear un cliente Supabase
 const supabase = createClient(
@@ -15,7 +17,7 @@ async function obtenerInformacion() {
         const { data, error } = await supabase
             .from('espacios_publicos')
             .select('*')
-            .eq('nombre', nombre)
+            .eq('id', id)
             .single();
 
         if (error) {
@@ -23,10 +25,15 @@ async function obtenerInformacion() {
             return;
         }
 
+        
+
         mostrarInformacion(data);
+
+        console.log(data);
     } catch (error) {
         console.error('Error al obtener la información:', error.message);
     }
+
 }
 
 function mostrarInformacion(data) {
@@ -38,36 +45,34 @@ function mostrarInformacion(data) {
     } else {
         infoContainer.innerHTML = '<p>No se encontró información para mostrar</p>';
     }
+
+    initMap(data.latitud, data.longitud);
 }
 
 obtenerInformacion();
 
-var posX, posY;
-
 // Initialize and add the map
 let map;
 
-async function initMap() {
+async function initMap(_lat, _lng) {
   // The location of Uluru
-  const position = { lat: -25.344, lng: 131.031 };
+  const position = { lat: _lat, lng: _lng };
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   // The map, centered at Uluru
   map = new Map(document.getElementById("map"), {
-    zoom: 4,
+    zoom: 16,
     center: position,
     mapId: "DEMO_MAP_ID",
   });
 
   // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerView({
+  const marker = new AdvancedMarkerElement({
     map: map,
     position: position,
     title: "Uluru",
   });
 }
-
-initMap();
