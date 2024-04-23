@@ -58,10 +58,10 @@ inputBusqueda.addEventListener('input', async () => {
                 celda.id = `${header.toLowerCase()}-${rowIndex}`; // Asignar un ID único a la celda
 
                 // Añadir evento de click a las celdas de la columna "nombre"
-                if (header.toLowerCase() === 'nombre') {
+                if (header.toLowerCase() === 'id') {
                     celda.addEventListener('click', () => {
                         // Redirigir a la página "info.html" con el nombre como parámetro
-                        window.location.href = `./../../paginas/pSpaceInfo.html?nombre=${encodeURIComponent(row[header])}`;
+                        window.location.href = `./../../paginas/pSpaceInfo.html?id=${encodeURIComponent(row[header])}`;
                     });
                 }
 
