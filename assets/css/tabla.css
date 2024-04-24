@@ -105,7 +105,12 @@ table th {
     padding: 10px;
 }
 
-.nombre:hover {
+.id{
+    color: blue;
+    text-decoration: underline;
+}
+
+.id:hover {
 
     cursor: pointer;
 
