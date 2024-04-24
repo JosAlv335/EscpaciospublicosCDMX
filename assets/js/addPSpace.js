@@ -116,3 +116,84 @@ function convertirDMSToDecimal(grados, minutos, segundos) {
     */
     return decimal;
 }
+
+const submitButton = document.getElementById('submit-id-file');
+
+// Agrega un event listener al botón
+submitButton.addEventListener('click', async () => {
+  const archivo = document.getElementById('identification-file').files[0];
+
+
+  // Verificar si se seleccionó un archivo
+  if (!archivo) {
+    alert('Por favor selecciona un archivo');
+    return;
+  }
+
+  var filepath = "encargados/" + archivo.name;
+
+  try {
+    // Subir el archivo al storage de Supabase
+    const { data, error } = await supabase.storage
+    .from('identification_files')
+    .upload(filepath, archivo, {
+        cacheControl: '3600',
+        upsert: false
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    console.log('Archivo subido correctamente:', data);
+    alert('Archivo subido correctamente');
+    
+    // Desactivar el botón después de que se haya subido el archivo correctamente
+    submitButton.disabled = true;
+  } catch (error) {
+    console.error('Error al subir el archivo:', error.message);
+    alert('Error al subir el archivo');
+  }
+});
+
+async function subirArchivo(file, path) {
+    
+    const fileInput = document.getElementById('identificacion-file"');
+    const archivo = fileInput.files[0];
+    if(archivo === null){
+        console.log("Ningun archivo seleccionado");
+        return;
+    }
+    const submitButton = document.getElementById('submit-id-file');
+    
+
+    // Verificar si se seleccionó un archivo
+    if (!archivo) {
+        alert('Por favor selecciona un archivo');
+        return;
+    }
+
+    try {
+        // Subir el archivo al storage de Supabase
+        const { data, error } = await supabase.storage
+        .from('identification_files')
+        .upload(filepath, archivo, {
+            cacheControl: '3600',
+            upsert: false
+        });
+
+        if (error) {
+        throw error;
+        }
+
+        console.log('Archivo subido correctamente:', data);
+        alert('Archivo subido correctamente');
+        
+        // Desactivar el botón después de que se haya subido el archivo correctamente
+        submitButton.disabled = true;
+    } catch (error) {
+        console.error('Error al subir el archivo:', error.message);
+        alert('Error al subir el archivo');
+    }
+
+}
