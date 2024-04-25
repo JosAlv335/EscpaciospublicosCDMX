@@ -6,6 +6,10 @@
 }
 
 header {
+    width: 100%; /* Hace que el header ocupe todo el ancho disponible */
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco */
+    color: white; /* Cambia el color del texto a blanco */
+    margin-bottom: 20px; /* Agrega separación entre el header y el contenido FFEERR */
     text-align: center;
     padding: 20px 0;
 }
@@ -98,11 +102,12 @@ table tr:nth-child(even) {
 }
 
 .cancel-button {
-    background-color: rgb(71, 190, 240);
+    background-color: #5d67ff;
     color: white;
 }
 .cancel-button:hover {
-    background-color: rgb(7, 128, 180);
+    background-color: #BA4A00;
+    transform: scale(1.1); /*Aumenta el tamaño del boton -FER-*/
 }
 
 .contenedor-tabla {
@@ -173,7 +178,8 @@ table tr:nth-child(even) {
 
 /**************************BOTON ELIMINAR**************************/
 button[id=solicitar-Eliminacion]:hover{
-    background-color: #a11f1f;
+    background-color: red;
+    transform: scale(1.1); /*Hace el boton mas grande -FER-*/
 }
 
 
