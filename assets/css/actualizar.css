@@ -6,6 +6,10 @@
 }
 
 header {
+    width: 100%; /* Hace que el header ocupe todo el ancho disponible */
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco */
+    color: white; /* Cambia el color del texto a blanco */
+    margin-bottom: 20px; /* Agrega separación entre el header y el contenido FFEERR */
     text-align: center;
     padding: 20px 0;
 }
@@ -167,7 +171,7 @@ option:hover{
     border-radius: 5px;
     cursor: pointer;
     width: 200px;
-
+    margin-right: 10px; /*Aumenta el espacio entre los botones -FER-*/
 }
 
 .form-group button,.form-group input[id=codigoPostal]{
@@ -180,7 +184,8 @@ option:hover{
 }
 
 .form-group button:hover{
-    background-color:#444fee
+    background-color:#BA4A00;
+    transform: scale(1.1); /* Aumenta su tamaño al pasar por encima -FER-*/ 
 }
 
 .form-group[id=control-buttons] button{
