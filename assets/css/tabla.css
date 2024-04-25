@@ -5,11 +5,20 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+header {
+    width: 100%; /* Hace que el header ocupe todo el ancho disponible */
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco */
+    color: white; /* Cambia el color del texto a blanco */
+    margin-bottom: 20px; /* Agrega separación entre el header y el contenido FFEERR*/
+    text-align: center;
+    padding: 20px 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(../img/background.jpg);
+    /* Eliminacion de imagen de fondo FFEERR*/
     background-size: cover;
     margin: 0;
 }
@@ -17,6 +26,14 @@ body {
 header {
     text-align: center;
     padding: 20px 0;
+}
+
+.gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px; /* Ajusta la altura según sea necesario */
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco FFEERR*/
 }
 
 nav {
@@ -27,7 +44,7 @@ nav {
 }
 
 nav button {
-    background-color: #DC7633; /* Cambio a naranja */
+    background-color: #5d67ff; /* Cambio a azul FFEERR */
     outline: none;
     border: none; /* Quitamos el borde */
     border-radius: 20px;
@@ -40,6 +57,7 @@ nav button {
 nav button:hover {
     background-color: #BA4A00; /* Cambio de color al pasar el mouse */
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    transform: scale(1.1); /* FFEERR*/
 }
 
 main {
