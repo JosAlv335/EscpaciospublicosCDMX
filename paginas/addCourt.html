@@ -62,6 +62,15 @@
                         <!--HORARIOS-->
                         <div class="horarios-clases" id ="horarios-clase">
                             <div class="hor-clase-container" id="hor-clase-container-0">
+                                <!--HORARIO LUNES-->
+                                <label for="horarios-clase-lunes">Lunes:</label>
+                                <div class="horarios" id="horarios-clase-lunes">
+                                    <label for="clase-lunes-inicio">Hora de apertura:</label>
+                                    <input type="time" id="clase-lunes-inicio" name="clase-lunes-inicio">
+                                    <label for="clase-lunes-fin">Hora de cierre:</label>
+                                    <input type="time" id="clase-lunes-fin" name="clase-lunes-fin">
+                                </div>
+
                                 <!--HORARIO 0-->
                                 <label for="clase-dia-inicio-0">Desde:</label>
                                 <input type="text" id="clase-dia-inicio-0" name="clase-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
@@ -149,13 +158,25 @@
                 <input type="checkbox" name="TechoChkBox" id="TechoChkBox">
                 <div id="datos-techo" class = "campo-hidden">
                     <label for="techo">(Descripción breve del techo):</label>
-                    <input type="text" id="techo" name="techo" placeholder="Cerrado Total | No tiene | etc...">
+                    <select name="techo" id="techo">
+                        <option value="" selected disabled>Selecciona un tipo de techo</option>
+                        <option value="Totalmente cerrado">Totalmente cerrado</option>
+                        <option value="Parcialmente cerrado">Parcialmente cerrado</option>
+                        <option value="Techo retráctil cerrado">Techo retráctil cerrado</option>
+                        <option value="Techo retráctil abierto">Techo retráctil abierto</option>
+                        <option value="Techo en reparación">Techo en reparación</option>
+                        <option value="Techo dañado">Techo dañado</option>
+                        <option value="Techo en construcción">Techo en construcción</option>
+                        <option value="Techo abierto">Techo abierto</option>
+                        <option value="Techo cerrado">Techo cerrado</option>
+                    </select>
                     <label for="techo">Altura del techo:</label>
                     <input type="number" id="altura_techo" name="altura_techo">
                 </div>
                 <div class = "piso">
                     <label for="piso">Piso (Material):</label>
                     <select name="piso" id="piso">
+                        <option value="" selected disabled>Seleccione un material de piso...</option>
                         <option value="Césped natural">Césped natural</option>
                         <option value="Césped sintético">Césped sintético</option>
                         <option value="Tierra compactada">Tierra compactada</option>
@@ -176,13 +197,37 @@
                 <input type="checkbox" name="IlumChkBox" id="IlumChkBox">
                 <div id="datos-Ilum" class="campo-hidden">
                     <label for="iluminacion">Detalles:</label>
-                    <input type="text" id="iluminacion" name="iluminacion">
+                    <select name="iluminacion" id="iluminacion">
+                        <option value="" selected disabled>Seleccione un tipo de iluminación...</option>
+                        <option value="Iluminación completa">Iluminación completa</option>
+                        <option value="Iluminación parcial">Iluminación parcial</option>
+                        <option value="Luces LED">Luces LED</option>
+                        <option value="Luces halógenas">Luces halógenas</option>
+                        <option value="Luces de sodio">Luces de sodio</option>
+                        <option value="Luces de mercurio">Luces de mercurio</option>
+                        <option value="Luces fluorescentes">Luces fluorescentes</option>
+                        <option value="Luces solares">Luces solares</option>
+                        <option value="Luces en reparación">Luces en reparación</option>
+                        <option value="Luces dañadas">Luces dañadas</option>
+                        <option value="Luces en construcción">Luces en construcción</option>
+                    </select>
                 </div>
                 <label for="TribChkBox">Tribunas:</label>
                 <input type="checkbox" name="TribChkBox" id="TribChkBox">
                 <div id="datos-trib" class="campo-hidden">
                     <label for="tribunas">Detalles:</label>
-                    <input type="text" id="tribunas" name="tribunas">
+                    <select name="tribunas" id="tribunas">
+                        <option value="" selected disabled>Selecciona el estado de las tribunas...</option>
+                        <option value="Abiertas">Abiertas</option>
+                        <option value="Parcialmente cubiertas">Parcialmente cubiertas</option>
+                        <option value="Totalmente cubiertas">Totalmente cubiertas</option>
+                        <option value="En reparación">En reparación</option>
+                        <option value="Dañadas">Dañadas</option>
+                        <option value="En construcción">En construcción</option>
+                        <option value="Tribunas VIP">Tribunas VIP</option>
+                        <option value="Tribunas generales">Tribunas generales</option>
+                        <option value="Tribunas cerradas">Tribunas cerradas</option>
+                    </select>
                 </div>
                 
 
