@@ -230,3 +230,10 @@ option:hover{
     width: 50%;
     padding: 10px;
 }
+
+/*ESTILO DEL MAPA*/
+#coords-Map {
+    width: 600px;       /* Ancho del mapa */
+    height: 400px;      /* Altura del mapa */
+    border: 2px solid black; /* Borde del mapa */
+}
