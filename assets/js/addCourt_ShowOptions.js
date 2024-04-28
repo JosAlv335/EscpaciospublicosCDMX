@@ -2,6 +2,25 @@
 SCRIPT DISEÑADO PARA MOSTRAR Y OCULTAR LAS OPCIONES DE CADA CHECKBOX
 */
 /*********************************DECLARACIÓN DE LOS USOS EN EL SISTEMA***************************************/
+
+//MOSTRAR Y OCULTAR OPCIONES PARA ILUMINACIÓN
+var chkIlum = document.getElementById("IlumChkBox");
+chkIlum.onchange = function(){
+    showOptions(chkIlum,"datos-Ilum");
+}
+
+//MOSTRAR Y OCULTAR OPCIONES PARA TRIBUNAS
+var chkTrib = document.getElementById("TribChkBox");
+chkTrib.onchange = function(){
+    showOptions(chkTrib,"datos-trib");
+}
+
+//MOSTRAR Y OCULTAR OPCIONES PARA TECHO
+var chkTecho = document.getElementById("TechoChkBox");
+chkTecho.onchange = function(){
+    showOptions(chkTecho,"datos-techo");
+}
+
 //MOSTRAR Y OCULTAR OPCIONES PARA ACTIVIDAD-CLASE
 var chkClass = document.getElementById("act-clases");
 chkClass.onchange = function() {
