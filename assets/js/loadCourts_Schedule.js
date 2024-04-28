@@ -8,9 +8,31 @@ CON EL OBJETIVO DE EVITAR UN HTML MUY GRANDE
 */
 
 /********************************************************************************
-****************************    IMPLEMENTACIÓN***************************** 
-*/
+********************************IMPLEMENTACIÓN***********************************
+********************************************************************************/
+//HORARIOS DE CLASE
+generarHorarios('clase','horarios-clase');
 
+//HORARIOS DE ENTRENAMIENTO
+generarHorarios('train','horarios-train');
+
+//HORARIOS DE LIBRE
+generarHorarios('libre','horarios-libre');
+
+//HORARIOS DE VESTIDORES
+generarHorarios('vest', 'horarios-vest');
+
+//HORARIOS DE WC
+generarHorarios('wc','horarios-wc');
+
+//HORARIOS DE REGADERAS
+generarHorarios('showers','horarios-showers');
+
+//HORARIOS DE SAUNA
+generarHorarios('sauna','horarios-sauna');
+
+//HORARIOS DE HIDROMASAJE
+generarHorarios('hidmasaje','horarios-hidmasaje');
 
 /*FUNCIÓN "generarHorarios"
 RECIBE:
