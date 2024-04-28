@@ -288,13 +288,13 @@
             agregarTelefono('man-telefonos');
         }
         document.getElementById('man-rem-tel').onclick = function(){
-            agregarTelefono('man-telefonos');
+            eliminarUltimoTelefono('man-telefonos');
         }
         document.getElementById('man-add-email').onclick = function(){
             agregarTelefono('man-correos');
         }
         document.getElementById('man-rem-email').onclick = function(){
-            agregarTelefono('man-correos');
+            eliminarUltimoEmail('man-correos');
         }
 
         function agregarTelefono(containerID) {
