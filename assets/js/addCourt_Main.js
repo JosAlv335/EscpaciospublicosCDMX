@@ -8,7 +8,7 @@ const supabase = createClient(
 
 //Arreglo de nombres de atributos segun el formulario
 var names = [
-    "id",                       //public_space_id
+    "publicSpaceID",            //public_space_id
     "tipoInstalacion",          //tipo
     "deporte-principal",        //actividad_principal
     "dim-ancho",                //ancho
@@ -75,7 +75,7 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
             var coordenadas = `POINT(${longitud} ${latitud})`;
             datosMain[atributos[i]] = coordenadas;
         }else{
-            datosMain[atributos[i]] = document.getElementById(names[i]).value;latitudX
+            datosMain[atributos[i]] = document.getElementById(names[i]).value;
         }
 
     }
