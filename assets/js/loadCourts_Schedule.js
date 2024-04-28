@@ -44,36 +44,63 @@ function generarHorarios(prefijo, contenedorId) {
     var contenedor = document.getElementById(contenedorId);
 
     diasSemana.forEach(function(dia) {
+        var diaLower = dia.toLowerCase();  // Versión en minúsculas del día para IDs
+
+        var divDia = document.createElement('div');
+        divDia.classList.add('dia-horario');
+        contenedor.appendChild(divDia);
+
         var labelDia = document.createElement('label');
-        labelDia.setAttribute('for', 'horarios-' + prefijo + '-' + dia.toLowerCase());
         labelDia.textContent = dia + ':';
-        contenedor.appendChild(labelDia);
+        divDia.appendChild(labelDia);
+
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = prefijo + '-' + diaLower + '-abierto';
+        checkbox.name = prefijo + '-' + diaLower + '-abierto';
+        checkbox.checked = true;  // Por defecto, marcamos los checkboxes como activos
+
+        var labelCheckbox = document.createElement('label');
+        labelCheckbox.setAttribute('for', checkbox.id);
+        labelCheckbox.textContent = ' Abierto';
+
+        divDia.appendChild(checkbox);
+        divDia.appendChild(labelCheckbox);
 
         var divHorario = document.createElement('div');
         divHorario.classList.add('horarios');
-        divHorario.id = 'horarios-' + prefijo + '-' + dia.toLowerCase();
-        contenedor.appendChild(divHorario);
+        divHorario.id = 'horarios-' + prefijo + '-' + diaLower;
+        divDia.appendChild(divHorario);
 
         var labelInicio = document.createElement('label');
-        labelInicio.setAttribute('for', prefijo + '-' + dia.toLowerCase() + '-inicio');
+        labelInicio.setAttribute('for', prefijo + '-' + diaLower + '-inicio');
         labelInicio.textContent = 'Hora de apertura:';
         divHorario.appendChild(labelInicio);
 
         var inputInicio = document.createElement('input');
         inputInicio.setAttribute('type', 'time');
-        inputInicio.id = prefijo + '-' + dia.toLowerCase() + '-inicio';
-        inputInicio.name = prefijo + '-' + dia.toLowerCase() + '-inicio';
+        inputInicio.id = prefijo + '-' + diaLower + '-inicio';
+        inputInicio.name = prefijo + '-' + diaLower + '-inicio';
         divHorario.appendChild(inputInicio);
 
         var labelFin = document.createElement('label');
-        labelFin.setAttribute('for', prefijo + '-' + dia.toLowerCase() + '-fin');
+        labelFin.setAttribute('for', prefijo + '-' + diaLower + '-fin');
         labelFin.textContent = 'Hora de cierre:';
         divHorario.appendChild(labelFin);
 
         var inputFin = document.createElement('input');
         inputFin.setAttribute('type', 'time');
-        inputFin.id = prefijo + '-' + dia.toLowerCase() + '-fin';
-        inputFin.name = prefijo + '-' + dia.toLowerCase() + '-fin';
+        inputFin.id = prefijo + '-' + diaLower + '-fin';
+        inputFin.name = prefijo + '-' + diaLower + '-fin';
         divHorario.appendChild(inputFin);
+
+        // Función para manejar la visibilidad de los horarios
+        checkbox.addEventListener('change', function() {
+            divHorario.style.display = checkbox.checked ? 'block' : 'none';
+        });
+
+        // Inicialmente establece la visibilidad según el estado del checkbox
+        divHorario.style.display = checkbox.checked ? 'block' : 'none';
     });
 }
+
