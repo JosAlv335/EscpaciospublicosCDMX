@@ -17,11 +17,16 @@
         <form id="courtForm">
             <div class="form-group">
                 <label for="id" name="id">ID del espacio público al cual añadirle la cancha:</label>
-                <input type="text" id="id" name="id" placeholder="ID..." required>
+                <select id="publicSpaceID" name="publicSpaceID"  required>
+                    <option value="" selected disabled>Seleccione un ID de espacio público...</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <!--COORDENADAS DE LA CANCHA-->
                 <label for="coordsCourt">Coordenadas:</label>
                 <input type="text" id="latitudX" name="coordsCourt" placeholder="Latitud...">
                 <input type="text" id="longitudY" name="coordsCourt" placeholder="Longitud...">
+                <div id="coords-Map"></div>
             </div>
             <!--SECCIÓN PARA EL TIPO DE INSTALACIÓN Y EL DEPORTE PRINCIPAL-->
             <div class="form-group" id="Tipo-ActividadPrincipal">
@@ -140,28 +145,43 @@
             </div>
             <!--SECCIÓN DE TECHO Y PISO-->
             <div class="form-group" id = "techo-piso">
-                
-                <div class = "techo">
-                    <label for="techo">Techo (Descripción breve del techo):</label>
+                <label for="TechoChkBox">Techo:</label>
+                <input type="checkbox" name="TechoChkBox" id="TechoChkBox">
+                <div id="datos-techo" class = "campo-hidden">
+                    <label for="techo">(Descripción breve del techo):</label>
                     <input type="text" id="techo" name="techo" placeholder="Cerrado Total | No tiene | etc...">
                     <label for="techo">Altura del techo:</label>
                     <input type="number" id="altura_techo" name="altura_techo">
                 </div>
                 <div class = "piso">
                     <label for="piso">Piso (Material):</label>
-                    <input type="text" id="piso" name="piso" placeholder="Concreto | Pasto Sintético | etc...">
+                    <select name="piso" id="piso">
+                        <option value="Césped natural">Césped natural</option>
+                        <option value="Césped sintético">Césped sintético</option>
+                        <option value="Tierra compactada">Tierra compactada</option>
+                        <option value="Cemento">Cemento</option>
+                        <option value="Madera">Madera</option>
+                        <option value="Polipropileno">Polipropileno</option>
+                        <option value="Asfalto">Asfalto</option>
+                        <option value="Hormigón poroso">Hormigón poroso</option>
+                        <option value="Resina acrílica">Resina acrílica</option>
+                        <option value="Goma">Goma</option>
+                    </select>
                 </div>
 
             </div>
             <!--SECCIÓN ILUMINACIÓN, TRIBUNAS Y VESTIDORES-->
             <div class="form-group" id = "ilum-trib-vest">
-
-                <div class="iluminacion">
-                    <label for="iluminacion">Iluminación:</label>
+                <label for="IlumChkBox">Iluminación:</label>
+                <input type="checkbox" name="IlumChkBox" id="IlumChkBox">
+                <div id="datos-Ilum" class="campo-hidden">
+                    <label for="iluminacion">Detalles:</label>
                     <input type="text" id="iluminacion" name="iluminacion">
                 </div>
-                <div class="tribunas">
-                    <label for="tribunas">Tribunas:</label>
+                <label for="TribChkBox">Tribunas:</label>
+                <input type="checkbox" name="TribChkBox" id="TribChkBox">
+                <div id="datos-trib" class="campo-hidden">
+                    <label for="tribunas">Detalles:</label>
                     <input type="text" id="tribunas" name="tribunas">
                 </div>
                 
@@ -340,7 +360,18 @@
                 <div class="status-container">
                     <div class="status-text">
                         <label for="cancha-status">Estado de la cancha:</label>
-                        <input type="text" id="cancha-status" name="cancha-status" placeholder="Activa | En Reparación | etc..."></textarea>
+                        <select name="cancha-status" id="cancha-status">
+                                <option value="Activa">Activa</option>
+                                <option value="En reparación">En reparación</option>
+                                <option value="Dañada">Dañada</option>
+                                <option value="Cerrada temporalmente">Cerrada temporalmente</option>
+                                <option value="En mantenimiento">En mantenimiento</option>
+                                <option value="Abandonada">Abandonada</option>
+                                <option value="En construcción">En construcción</option>
+                                <option value="Lista para uso">Lista para uso</option>
+                                <option value="Bajo observación">Bajo observación</option>
+                                <option value="En espera de aprobación">En espera de aprobación</option>
+                        </select>
                     </div>
                 </div>
 
@@ -371,6 +402,7 @@
             window.location.href = "tabla.html"; // Redirigir a tabla.html
         });
     </script>
+    <script src="./../assets/js/loadPublicSpacesIDs.js"></script>
     <!--ENVIAR DATOS A LA BASE-->
     <script src="./../assets/js/addCourt_Main.js"></script>
     <!--OCULTAR Y MOSTRAR LOS CAMPOS ADICIONALES DE LAS CHECKBOXES-->
