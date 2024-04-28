@@ -6,6 +6,13 @@
     <title>Agregar elemento</title>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
     <link rel="stylesheet" href="../assets/css/addCourt.css">
+    <script>
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+          key: "AIzaSyAtbwOfTeq0WL_5_WXD5pkSlJSYab5JYm4",
+          // Add other bootstrap parameters as needed, using camel case.
+          // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -21,12 +28,13 @@
                     <option value="" selected disabled>Seleccione un ID de espacio público...</option>
                 </select>
             </div>
+            <div id="coords-Map"></div>
             <div class="form-group">
                 <!--COORDENADAS DE LA CANCHA-->
+                
                 <label for="coordsCourt">Coordenadas:</label>
                 <input type="text" id="latitudX" name="coordsCourt" placeholder="Latitud...">
                 <input type="text" id="longitudY" name="coordsCourt" placeholder="Longitud...">
-                <div id="coords-Map"></div>
             </div>
             <!--SECCIÓN PARA EL TIPO DE INSTALACIÓN Y EL DEPORTE PRINCIPAL-->
             <div class="form-group" id="Tipo-ActividadPrincipal">
@@ -62,28 +70,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-clases" id ="horarios-clase">
                             <div class="hor-clase-container" id="hor-clase-container-0">
-                                <!--HORARIO LUNES-->
-                                <label for="horarios-clase-lunes">Lunes:</label>
-                                <div class="horarios" id="horarios-clase-lunes">
-                                    <label for="clase-lunes-inicio">Hora de apertura:</label>
-                                    <input type="time" id="clase-lunes-inicio" name="clase-lunes-inicio">
-                                    <label for="clase-lunes-fin">Hora de cierre:</label>
-                                    <input type="time" id="clase-lunes-fin" name="clase-lunes-fin">
-                                </div>
-
-                                <!--HORARIO 0-->
-                                <label for="clase-dia-inicio-0">Desde:</label>
-                                <input type="text" id="clase-dia-inicio-0" name="clase-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="clase-dia-fin-0">Hasta:</label>
-                                <input type="text" id="clase-dia-fin-0" name="clase-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="clase-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="clase-hor-inicio-0" name="clases-hor-inicio-0">
-                                <label for="clase-hor-fin-0">Termina:</label>
-                                <input type="time" id="clase-hor-fin-0" name="clases-hor-fin-0">
+                                
                             </div>
                         </div>
-                        <button type="button" id="clase-add-horario" class="clase-add-horario">+</button>
-                        <button type="button" id="clase-rem-horario" class="clase-rem-horario">-</button>
                     </div>
                 </div>
                 <!--ACTIVIDAD: ENTRENAMIENTO-->
@@ -98,20 +87,8 @@
 
                         <!--HORARIOS-->
                         <div class="horarios-train" id ="horarios-train">
-                            <div class="hor-train-container" id="hor-train-container-0">
-                                <!--HORARIO 0-->
-                                <label for="train-dia-inicio-0">Desde:</label>
-                                <input type="text" id="train-dia-inicio-0" name="train-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="train-dia-fin-0">Hasta:</label>
-                                <input type="text" id="train-dia-fin-0" name="train-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="train-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="train-hor-inicio-0" name="train-hor-inicio-0">
-                                <label for="train-hor-fin-0">Termina:</label>
-                                <input type="time" id="train-hor-fin-0" name="train-hor-fin-0">
-                            </div>
+                            
                         </div>
-                        <button type="button" id="train-add-horario" class="train-add-horario">+</button>
-                        <button type="button" id="train-rem-horario" class="train-rem-horario">-</button>
                     </div>
                 </div>
                 <!--ACTIVIDAD: LIBRE-->
@@ -127,19 +104,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-libre" id ="horarios-libre">
                             <div class="hor-libre-container" id="hor-libre-container-0">
-                                <!--HORARIO 0-->
-                                <label for="libre-dia-inicio-0">Desde:</label>
-                                <input type="text" id="libre-dia-inicio-0" name="libre-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="libre-dia-fin-0">Hasta:</label>
-                                <input type="text" id="libre-dia-fin-0" name="libre-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="libre-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="libre-hor-inicio-0" name="libre-hor-inicio-0">
-                                <label for="libre-hor-fin-0">Termina:</label>
-                                <input type="time" id="libre-hor-fin-0" name="libre-hor-fin-0">
+                                
                             </div>
                         </div>
-                        <button type="button" id="libre-add-horario" class="libre-add-horario">+</button>
-                        <button type="button" id="libre-rem-horario" class="libre-rem-horario">-</button>
                     </div>
                 </div>
             </div>
@@ -254,19 +221,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-vest" id ="horarios-vest">
                             <div class="hor-vest-container" id="hor-vest-container-0">
-                                <!--HORARIO 0-->
-                                <label for="vest-dia-inicio-0">Desde:</label>
-                                <input type="text" id="vest-dia-inicio-0" name="vest-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="vest-dia-fin-0">Hasta:</label>
-                                <input type="text" id="vest-dia-fin-0" name="vest-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="vest-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="vest-hor-inicio-0" name="vest-hor-inicio-0">
-                                <label for="vest-hor-fin-0">Termina:</label>
-                                <input type="time" id="vest-hor-fin-0" name="vest-hor-fin-0">
+
                             </div>
                         </div>
-                        <button type="button" id="vest-add-horario" class="vest-add-horario">+</button>
-                        <button type="button" id="vest-rem-horario" class="vest-rem-horario">-</button>
                     </div>
                     
                 </div>
@@ -287,19 +244,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-wc" id ="horarios-wc">
                             <div class="hor-wc-container" id="hor-vwc-container-0">
-                                <!--HORARIO 0-->
-                                <label for="wc-dia-inicio-0">Desde:</label>
-                                <input type="text" id="wc-dia-inicio-0" name="wc-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="wc-dia-fin-0">Hasta:</label>
-                                <input type="text" id="wc-dia-fin-0" name="wc-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="wc-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="wc-hor-inicio-0" name="wc-hor-inicio-0">
-                                <label for="wc-hor-fin-0">Termina:</label>
-                                <input type="time" id="wc-hor-fin-0" name="wc-hor-fin-0">
+                                
                             </div>
                         </div>
-                        <button type="button" id="wc-add-horario" class="wc-add-horario">+</button>
-                        <button type="button" id="wc-rem-horario" class="wc-rem-horario">-</button>
                     </div>
 
                 </div>
@@ -320,19 +267,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-showers" id ="horarios-showers">
                             <div class="hor-showers-container" id="hor-showers-container-0">
-                                <!--HORARIO 0-->
-                                <label for="showers-dia-inicio-0">Desde:</label>
-                                <input type="text" id="showers-dia-inicio-0" name="showers-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="showers-dia-fin-0">Hasta:</label>
-                                <input type="text" id="showers-dia-fin-0" name="showers-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="showers-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="showers-hor-inicio-0" name="showers-hor-inicio-0">
-                                <label for="showers-hor-fin-0">Termina:</label>
-                                <input type="time" id="showers-hor-fin-0" name="showers-hor-fin-0">
+                                
                             </div>
                         </div>
-                        <button type="button" id="showers-add-horario" class="showers-add-horario">+</button>
-                        <button type="button" id="showers-rem-horario" class="showers-rem-horario">-</button>
                     </div>
                     
                 </div>
@@ -353,19 +290,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-sauna" id ="horarios-sauna">
                             <div class="hor-sauna-container" id="hor-sauna-container-0">
-                                <!--HORARIO 0-->
-                                <label for="sauna-dia-inicio-0">Desde:</label>
-                                <input type="text" id="sauna-dia-inicio-0" name="sauna-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="sauna-dia-fin-0">Hasta:</label>
-                                <input type="text" id="sauna-dia-fin-0" name="sauna-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="sauna-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="sauna-hor-inicio-0" name="sauna-hor-inicio-0">
-                                <label for="sauna-hor-fin-0">Termina:</label>
-                                <input type="time" id="sauna-hor-fin-0" name="sauna-hor-fin-0">
+                                
                             </div>
                         </div>
-                        <button type="button" id="sauna-add-horario" class="sauna-add-horario">+</button>
-                        <button type="button" id="sauna-rem-horario" class="sauna-rem-horario">-</button>
                     </div>
                     
                 </div>
@@ -386,19 +313,9 @@
                         <!--HORARIOS-->
                         <div class="horarios-hidmasaje" id ="horarios-hidmasaje">
                             <div class="hor-hidmasaje-container" id="hor-hidmasaje-container-0">
-                                <!--HORARIO 0-->
-                                <label for="hidmasaje-dia-inicio-0">Desde:</label>
-                                <input type="text" id="hidmasaje-dia-inicio-0" name="hidmasaje-dia-inicio-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="hidmasaje-dia-fin-0">Hasta:</label>
-                                <input type="text" id="hidmasaje-dia-fin-0" name="hidmasaje-dia-fin-0" placeholder="Lunes | Martes | Miercoles |...">
-                                <label for="hidmasaje-hor-inicio-0">Inicia:</label>
-                                <input type="time" id="hidmasaje-hor-inicio-0" name="hidmasaje-hor-inicio-0">
-                                <label for="hidmasaje-hor-fin-0">Termina:</label>
-                                <input type="time" id="hidmasaje-hor-fin-0" name="hidmasaje-hor-fin-0">
+                                
                             </div>
                         </div>
-                        <button type="button" id="hidmasaje-add-horario" class="hidmasaje-add-horario">+</button>
-                        <button type="button" id="hidmasaje-rem-horario" class="hidmasaje-rem-horario">-</button>
                     </div>
                 </div>
                 <!--CAMPO DE STATUS-->
@@ -452,9 +369,11 @@
     <script src="./../assets/js/addCourt_Main.js"></script>
     <!--OCULTAR Y MOSTRAR LOS CAMPOS ADICIONALES DE LAS CHECKBOXES-->
     <script src="../assets/js/addCourt_ShowOptions.js"></script>
-    <!--AÑADIR Y ELIMINAR INSTANCIAS DE HORARIOS-->
-    <script src="../assets/js/addCourt_addSchedule.js"></script>
-    <script src="../assets/js/courtsData.js"></script>
+    <!--CARGAR LOS DATOS DE LOS DEPORTES Y TIPOS DE CANCHAS-->
     <script src="../assets/js/loadCourtsData.js"></script>
+    <!--CARGAR LAS ENTRADAS DE HORARIOS-->
+    <script src="../assets/js/loadCourts_Schedule.js"></script>
+    <!--CARGA EL MAPA DE LA PÁGINA-->
+    <script src="../assets/js/addCourtMap.js"></script>
 </body>
 </html>
