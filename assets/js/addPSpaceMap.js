@@ -12,7 +12,6 @@ async function initMap() {
 
     // Inicializar mapa
     map = new Map(document.getElementById("map"), {
-        mapID: "ca90f74a89a75fc",
         center: { lat: 19.435142396751985, lng: -99.1855168896331 },
         zoom: 15,
         mapId: "ca90f74a89a75fc",
