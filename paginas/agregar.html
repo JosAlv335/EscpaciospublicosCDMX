@@ -205,8 +205,8 @@
                         </select>
 
                     </div>
-                    <button type="button" id="man-add-tel" class="man-add-tel" onclick="agregarTelefono('man-telefonos')">+</button>
-                    <button type="button" id="man-rem-tel" class="man-rem-tel" onclick="eliminarUltimoTelefono('man-telefonos')">-</button>
+                    <button type="button" id="man-add-tel" class="man-add-tel">+</button>
+                    <button type="button" id="man-rem-tel" class="man-rem-tel">-</button>
                     <div>
 
                     </div>
@@ -283,6 +283,12 @@
     <!--Script para los numeros de telefono y correos-->
     <script>
         // Función para añadir un nuevo número de teléfono
+
+        document.getElementById('man-add-tel').addEventListener('click',agregarTelefono('man-telefonos'));
+        document.getElementById('man-rem-tel').addEventListener('click',eliminarUltimoTelefono('man-telefonos'));
+        document.getElementById('man-add-email').addEventListener('click',agregarTelefono('man-correos'));
+        document.getElementById('man-rem-email').addEventListener('click',eliminarUltimoTelefono('man-correos'));
+
         function agregarTelefono(containerID) {
             const container = document.getElementById(containerID);
             const numTelefonos = container.children.length - 3; // Contar elementos existentes
