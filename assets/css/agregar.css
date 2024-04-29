@@ -269,8 +269,6 @@ option:hover{
 /***************************ESTILO PARA EL BOTON DE BUSQUEDA************************/
 .form-group button{
 
-    
-    padding: 10px 20px;
     padding-top: -2px;
     background-color: #5d67ff;
     color: white;
@@ -278,7 +276,11 @@ option:hover{
     border-radius: 5px;
     cursor: pointer;
     width: 200px;
-
+    padding: 10px; /* Mantener el relleno */
+    min-width: 120px; /* Establecer un ancho mínimo para evitar que se reduzcan demasiado */
+    height: auto; /* Mantener una altura automática para adaptarse al contenido */
+    display: inline-block; /* Asegurarse de que los botones se comporten como elementos en línea */
+    margin-right: 10px; /* Agregar un margen derecho para separar los botones */
 }
 
 .form-group button,.form-group input[id=codigoPostal]{
@@ -291,7 +293,9 @@ option:hover{
 }
 
 .form-group button:hover{
-    background-color:#444fee
+    background-color: #BA4A00; /* Cambio de color al pasar el mouse */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    transform: scale(1.1);
 }
 
 .form-group[id=control-buttons] button{
