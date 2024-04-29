@@ -6,6 +6,10 @@
 }
 
 header {
+    width: 100%; /* Hace que el header ocupe todo el ancho disponible */
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco */
+    color: white; /* Cambia el color del texto a blanco */
+    margin-bottom: 20px; /* Agrega separación entre el header y el contenido */
     text-align: center;
     padding: 20px 0;
 }
@@ -53,6 +57,113 @@ main {
     cursor: pointer;
 }
 
+/* Estilo para el input del número de empleado */
+.form-group label[for=man-Number],
+.form-group label[for=man-inicio-actividades] {
+    display: block; /* Convertir las etiquetas en bloques para ocupar toda la línea */
+    margin-bottom: 5px; /* Agregar un pequeño espacio entre la etiqueta y el input */
+}
+
+.form-group input[name=man-Number],
+.form-group input[name=man-inicio-actividades] {
+    width: calc(100% - 10px); /* Restar el ancho del padding para mantener el ancho total */
+    padding: 10px; /* Ajustar el padding para mantener el aspecto consistente */
+}
+
+/* Estilo para el botón "Cambiar a Grados, Minutos, Segundos" */
+#toggleFormat {
+    margin-top: 10px; /* Agregar margen superior para separar del input */
+}
+
+/* Estilo para el contenedor de datos personales */
+#datos-personales {
+    margin-top: 20px; /* Agregar margen superior de 20px */
+}
+
+/* Estilo para la etiqueta "Primer nombre" */
+#man-nombre1 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Segundo nombre" */
+#man-nombre2 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Primer apellido" */
+#man-apellido1 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Segundo apellido" */
+#man-apellido2 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Sexo" */
+#Sexo {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Número de empleado" */
+#num-Empleado {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "RFC" */
+#RFC-Empleado {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "CURP" */
+#CURP-Empleado {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Cargo" */
+#charge-select {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para la etiqueta "Fecha que inició actividades" */
+#man-inicio-actividades {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para el cuadro de carga de archivos de identificación */
+#identificacion-file {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para el botón "Subir archivo" */
+#submit-id-file {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para los campos de selección "Fijo" o "Móvil" */
+#tipo-tel-1 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para el segundo campo de selección "Fijo" o "Móvil" */
+#tipo-tel-2 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para los botones de añadir teléfono y correo electrónico */
+.man-add-tel,
+.man-rem-tel,
+.man-add-email,
+.man-rem-email {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+/* Estilo para el campo de correo electrónico "E-mail 1" */
+#email-1 {
+    margin-bottom: 10px; /* Agregar margen inferior de 10px */
+}
+
+
 
 /*Estilo para el input de CP*/
 .form-group input[id=codigoPostal]{
@@ -84,7 +195,7 @@ main {
 
 .asentamiento, .calle{
 
-    width: 50%;
+    width: 40%;
 
 }
 
@@ -160,7 +271,7 @@ option:hover{
 
     
     padding: 10px 20px;
-    padding-top: 0px;
+    padding-top: -2px;
     background-color: #5d67ff;
     color: white;
     border: none;
