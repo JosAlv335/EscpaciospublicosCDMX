@@ -104,3 +104,85 @@ function generarHorarios(prefijo, contenedorId) {
     });
 }
 
+/* 
+ * ******************************COMPORTAMIENTO DE LOS HORARIOS***********************
+ *
+
+FUNCIONAMIENTO:
+Se asegura de que en cada sección de checkbox ("clase","train","libre",etc.) siempre
+haya al menos un horario activo ("lunes","martes",etc.)
+
+*/
+
+/**
+ * Implementación de las funciones de verificación
+ */
+
+//CONFIGURAR PARA clase
+document.getElementById('act-clases').addEventListener('change',function(){
+    configurarValidacionCheckbox('clase','act-clases','horarios-clase-lunes');
+})
+
+document.getElementById('act-entrenamiento').addEventListener('change',function(){
+    configurarValidacionCheckbox('train','act-entrenamiento','horarios-train-lunes');
+})
+
+document.getElementById('act-libre').addEventListener('change',function(){
+    configurarValidacionCheckbox('libre','act-libre','horarios-libre-lunes');
+})
+
+document.getElementById('vestidores').addEventListener('change',function(){
+    configurarValidacionCheckbox('vest','vestidores','horarios-vest-lunes');
+})
+
+document.getElementById('wc').addEventListener('change',function(){
+    configurarValidacionCheckbox('wc','wc','horarios-wc-lunes');
+})
+
+document.getElementById('regaderas').addEventListener('change',function(){
+    configurarValidacionCheckbox('showers','regaderas','horarios-showers-lunes');
+})
+
+document.getElementById('sauna').addEventListener('change',function(){
+    configurarValidacionCheckbox('sauna','sauna','horarios-sauna-lunes');
+})
+
+document.getElementById('hidromasaje').addEventListener('change',function(){
+    configurarValidacionCheckbox('hidmasaje','hidromasaje','horarios-hidmasaje-lunes');
+})
+
+
+/**
+ * Verifica que haya al menos un checkbox de horario "Abierto" activo cuando el checkbox
+ * cuyo ID es "checkboxPrincipalID" esté activo, de querer desactivar todos los checkboxes
+ * "Abierto", se emitirá una alerta
+ * 
+ * @param {string} prefijo - Prefijo de la sección de horarios
+ * @param {string} checkboxPrincipalId - ID del checkbox que despliega la sección
+ */
+function configurarValidacionCheckbox(prefijo, checkboxPrincipalId, hiddenID) {
+    console.log("IDPrincipal: " + checkboxPrincipalId);
+    var checkboxPrincipal = document.getElementById(checkboxPrincipalId);
+    var checkboxesDias = document.querySelectorAll(`input[id^="${prefijo}-"][id$="-abierto"]`); // Selecciona todos los checkboxes de "Abierto" según el prefijo
+
+    // Función que verifica si al menos uno de los checkboxes de "Abierto" está seleccionado
+    function validarCheckboxesDias() {
+        if (checkboxPrincipal.checked) {
+            const algunoActivo = Array.from(checkboxesDias).some(checkbox => checkbox.checked);
+            if (!algunoActivo) {
+                alert('Debe haber al menos un día abierto si las clases están activas.');
+                // Podrías deshabilitar el checkbox principal o forzar la activación de un checkbox de "Abierto", por ejemplo:
+                checkboxesDias[0].checked = true; // Activa el primer checkbox de día como fallback
+                document.getElementById(hiddenID).style.display = "block";
+            }
+        }
+    }
+
+    // Evento para cuando se cambia el estado del checkbox principal
+    checkboxPrincipal.onchange = validarCheckboxesDias;
+
+    // Eventos para cada checkbox de día para revalidar cuando estos cambian
+    checkboxesDias.forEach(checkbox => {
+        checkbox.onchange = validarCheckboxesDias;
+    });
+}
