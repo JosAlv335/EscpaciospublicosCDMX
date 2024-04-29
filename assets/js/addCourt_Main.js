@@ -270,6 +270,18 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     console.log(servicesIDs);
 
     //ALMACENA TODOS LOS HORARIOS DE TODAS LAS ACTIVIDADES QUE INVOLUCRAN HORARIOS 
+    var dias = [
+        "lunes",
+        "martes",
+        "miercoles",
+        "jueves",
+        "viernes",
+        "sabado",
+        "domingo"
+    ];
+    /**
+     * El ID de los checkboxes es <prefijo>-<dia>-abierto
+     */
     var datosHorarios = {}
 
     for(let j = 0;j < 8;j++){
@@ -316,6 +328,8 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
         }
 
     }
+
+    
 
     //******************INSERCIÓN EN LA TABLA "horarios_activities"**********************/
 
