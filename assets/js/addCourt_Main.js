@@ -21,7 +21,7 @@ var names = [
     "tribunas",                 //tribunas
     "cancha-status",            //status
     "latitudX",
-    "latitudY"
+    "longitudY"
 ];
 
 //Arreglo de nombres de atributos segun la tabla de la BD
@@ -38,7 +38,8 @@ var atributos = [
     "piso",
     "tribunas",
     "status",
-    "location"
+    "latitud",
+    "longitud"
 ];
 
 var checkboxes = [
@@ -65,19 +66,7 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     
     /**RECOGER DATOS DE CADA ELEMENTO DEL FORMULARIO PARA LA TABLA PRINCIPAL**/
     for(let i = 0; i < atributos.length;i++){
-
-        if (atributos[i] == "location"){
-            // Capturar las coordenadas desde el formulario
-            var latitud = parseFloat(document.getElementById('latitudX').value);
-            var longitud = parseFloat(document.getElementById('longitudY').value);
-
-            // Construir el objeto geography(Point)
-            var coordenadas = `POINT(${longitud} ${latitud})`;
-            datosMain[atributos[i]] = coordenadas;
-        }else{
-            datosMain[atributos[i]] = document.getElementById(names[i]).value;
-        }
-
+        datosMain[atributos[i]] = document.getElementById(names[i]).value;
     }
 
     /**RECOGE LOS DATOS DE LAS CHECKBOX NECESARIAS PARA LA TABLA MAIN**/
@@ -129,7 +118,8 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     //AHORA SE HARÁN INSERCIONES INDIVIDUALES A CADA TABLA
 
     //INSERCIÓN A "courts"
-
+    console.log("datosMain: ");
+    console.log(datosMain);
     var { data, error } = await supabase
         .from('courts')
         .insert(datosMain)
@@ -281,6 +271,7 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
     ];
     /**
      * El ID de los checkboxes es <prefijo>-<dia>-abierto
+     * EL ID de los inputs son <prefijo>-<dia>-<inicio/fin>
      */
     var datosHorarios = {}
 
@@ -293,37 +284,40 @@ document.getElementById('courtForm').addEventListener('submit', async(event) => 
             datosHorarios[prefijo] = [];
         }
 
+        //Itera sobre cada checkbox de "día"
+        for(let i = 0;i < 7;i++){
 
-        for(let i = 0;(document.getElementById(prefijo + "-dia-inicio-" + i) !== null) && document.getElementById(allCheckboxes[j]).checked ;i++){
-            
-            
-            let newActivitiesInsert ={};
-            if(j < 3){
-                console.log("activity_id : " + activitiesIDs[j]);
-                newActivitiesInsert['activity_id'] = activitiesIDs[j];
-            }else{
-                newActivitiesInsert['service_id'] = servicesIDs[j-3]
+            let idCheckboxDia = prefijo + "-" + dias[i] + "-abierto" 
+
+            if(document.getElementById(idCheckboxDia).checked && document.getElementById(allCheckboxes[j]).checked){
+
+                let newActivitiesInsert ={};
+                if(j < 3){
+                    console.log("activity_id : " + activitiesIDs[j]);
+                    newActivitiesInsert['activity_id'] = activitiesIDs[j];
+                }else{
+                    newActivitiesInsert['service_id'] = servicesIDs[j-3]
+                }
+                
+                /**
+                 * Campos a recoger:
+                 *      Dia                 -   dia             - dias[i]
+                 *      Hora de apertura    -   hora_apertura   - <prefijo>-<dias[i]>-<inicio>
+                 *      Hora de cierre      -   hora_cierre     - <prefijo>-<dias[i]>-<fin>
+                 */
+                newActivitiesInsert['dia'] = dias[i];
+                let IDhoraApertura = prefijo + '-' + dias[i] + '-inicio';
+                let insertHoraApertura = document.getElementById(IDhoraApertura).value.trim();
+                newActivitiesInsert['hora_apertura'] = ( insertHoraApertura !== null ) ? insertHoraApertura : null;
+                let IDhoraCierre = prefijo + '-' + dias[i] + '-fin';
+                let insertHoracierre = document.getElementById(IDhoraCierre).value.trim();
+                newActivitiesInsert['hora_cierre'] = ( insertHoracierre !== null ) ? insertHoracierre : null;
+                console.log(newActivitiesInsert);
+                
+                // Agregar el nuevo objeto al arreglo correspondiente en datosHorarios[prefijo]
+                datosHorarios[prefijo].push(newActivitiesInsert);
+
             }
-            
-            
-            let diaDesde = prefijo + '-dia-inicio-'+i;
-            console.log(diaDesde);
-            let insertDiaDesde = document.getElementById(diaDesde).value.trim();
-            newActivitiesInsert['dia_desde'] = ( insertDiaDesde !== null) ? insertDiaDesde : null;
-            let diaHasta = prefijo + '-dia-fin-'+i;
-            let insertDiaHasta = document.getElementById(diaHasta).value.trim();
-            newActivitiesInsert['dia_hasta'] = ( insertDiaHasta !== null ) ? insertDiaHasta : null;
-            let horaApertura = prefijo + '-hor-inicio-'+i;
-            let insertHoraApertura = document.getElementById(horaApertura).value.trim();
-            newActivitiesInsert['hora_apertura'] = ( insertHoraApertura !== null ) ? insertHoraApertura : null;
-            let horaCierre = prefijo + '-hor-fin-'+i;
-            let insertHoracierre = document.getElementById(horaCierre).value.trim();
-            newActivitiesInsert['hora_cierre'] = ( insertHoracierre !== null ) ? insertHoracierre : null;
-            console.log(newActivitiesInsert);
-            
-            // Agregar el nuevo objeto al arreglo correspondiente en datosHorarios[prefijo]
-            datosHorarios[prefijo].push(newActivitiesInsert);
-            
             
         }
 
