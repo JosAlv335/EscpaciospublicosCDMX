@@ -121,29 +121,6 @@ main {
     bottom: 20px;
 }
 
-/* Estilo para el contenedor que agrupa los campos Hidromasaje y Estado de la cancha */
-#baños {
-    display: flex; /* Utiliza flexbox para organizar los elementos */
-    flex-direction: column; /* Alinea los elementos en una columna */
-}
-
-/* Estilo para el contenedor de Estado de la cancha */
-.status-container {
-    margin-top: 20px; /* Agrega un espacio entre Hidromasaje y Estado de la cancha */
-}
-
-/* Estilo para los últimos checkboxes de Vestidores hasta Hidromasajes */
-#baños .vestidores input[type="checkbox"],
-#baños .WC input[type="checkbox"],
-#baños .regaderas input[type="checkbox"],
-#baños .sauna input[type="checkbox"],
-#baños .hidromasaje input[type="checkbox"] {
-    transform: scale(1.5);
-    margin-left: -46px;
-}
-
-
-
 /*************************ESTILOS GENERALES PARA CADA GRUPO DE CAMPOS*************************/
 
 .form-group{
