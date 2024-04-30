@@ -23,7 +23,7 @@
 
         <form id="courtForm">
             <div class="form-group">
-                <label for="id" name="id">ID del espacio público al cual añadirle la cancha:</label>
+                <label for="publicSpaceID" name="id">ID del espacio público al cual añadirle la cancha:</label>
                 <select id="publicSpaceID" name="publicSpaceID"  required>
                     <option value="" selected disabled>Seleccione un ID de espacio público...</option>
                 </select>
@@ -137,10 +137,10 @@
                         <option value="Techo abierto">Techo abierto</option>
                         <option value="Techo cerrado">Techo cerrado</option>
                     </select>
-                    <label for="techo">Altura del techo:</label>
+                    <label for="techo">Altura del techo (m):</label>
                     <input type="number" id="altura_techo" name="altura_techo">
                 </div>
-                <div class = "piso">
+                <div class = "datos-piso">
                     <label for="piso">Piso (Material):</label>
                     <select name="piso" id="piso">
                         <option value="" selected disabled>Seleccione un material de piso...</option>
