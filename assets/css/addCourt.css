@@ -6,6 +6,10 @@
 }
 
 header {
+    width: 100%; /* Hace que el header ocupe todo el ancho disponible */
+    background: linear-gradient(to right, #87CEEB, #5d67ff); /* Gradiente azul claro y blanco */
+    color: white; /* Cambia el color del texto a blanco */
+    margin-bottom: 20px; /* Agrega separación entre el header y el contenido */
     text-align: center;
     padding: 20px 0;
 }
@@ -62,6 +66,84 @@ main {
 
 }
 
+#coords-Map {
+    width: 600px;       /* Ancho del mapa */
+    height: 400px;      /* Altura del mapa */
+    border: 2px solid black; /* Borde del mapa */
+    margin-bottom: 20px; /* Agrega un espacio de 20px debajo del mapa */
+}
+
+.form-group label[for="coordsCourt"] {
+    margin-right: 10px; /* Agrega un espacio de 10px debajo del texto de coordenadas */
+}
+
+.form-group input#latitudX {
+    margin-right: 10px; /* Añade un margen derecho de 10px al input de Latitud */
+}
+
+#dimensiones label[for="dim-ancho"] {
+    margin-right: 10px; /* Añade un margen derecho de 10px al texto "Ancho" */
+}
+
+#dimensiones label[for="dim-largo"] {
+    margin-right: 10px; /* Añade un margen derecho de 10px al texto "Largo" */
+}
+
+#dimensiones label[for="dim-profundidad"] {
+    margin-right: 10px; /* Añade un margen derecho de 10px al texto "Profundidad" */
+}
+
+
+#ilum-trib-vest {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección de los elementos a columna */
+}
+
+#techo-piso {
+    margin-bottom: 20px; /* Agrega un espacio entre Piso y Techo */
+}
+
+#techo-piso {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección de los elementos a columna */
+}
+
+#piso-container {
+    margin-top: 20px; /* Espacio entre Techo y Piso */
+}
+
+
+#techo-piso input,
+#ilum-trib-vest input[type="checkbox"] {
+    transform: scale(1.5); /* Ajusta el tamaño del checkbox */
+    margin-left: -430px; /* Ajusta la posición del checkbox hacia la izquierda */
+    position: relative;
+    bottom: 20px;
+}
+
+/* Estilo para el contenedor que agrupa los campos Hidromasaje y Estado de la cancha */
+#baños {
+    display: flex; /* Utiliza flexbox para organizar los elementos */
+    flex-direction: column; /* Alinea los elementos en una columna */
+}
+
+/* Estilo para el contenedor de Estado de la cancha */
+.status-container {
+    margin-top: 20px; /* Agrega un espacio entre Hidromasaje y Estado de la cancha */
+}
+
+/* Estilo para los últimos checkboxes de Vestidores hasta Hidromasajes */
+#baños .vestidores input[type="checkbox"],
+#baños .WC input[type="checkbox"],
+#baños .regaderas input[type="checkbox"],
+#baños .sauna input[type="checkbox"],
+#baños .hidromasaje input[type="checkbox"] {
+    transform: scale(1.5);
+    margin-left: -46px;
+}
+
+
+
 /*************************ESTILOS GENERALES PARA CADA GRUPO DE CAMPOS*************************/
 
 .form-group{
@@ -76,6 +158,7 @@ main {
     margin-bottom: 5px;
     margin-top: 15px;
     padding-left: 10px;
+
 }
 
 .form-group input {
@@ -158,6 +241,7 @@ option:hover{
     border-radius: 5px;
     cursor: pointer;
     width: 200px;
+    margin-right: 15px;
 
 }
 
@@ -171,7 +255,8 @@ option:hover{
 }
 
 .form-group button:hover{
-    background-color:#444fee
+    background-color:#BA4A00;
+    transform: scale(1.1); /* Aumenta su tamaño al pasar por encima -FER-*/ 
 }
 
 .form-group[id=control-buttons] button{
