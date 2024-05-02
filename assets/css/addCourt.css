@@ -112,8 +112,19 @@ main {
     margin-top: 20px; /* Espacio entre Techo y Piso */
 }
 
+#techo-piso input#altura_techo {
+    display: block; /* Hace que el input se muestre como un bloque */
+    margin-top: 10px; /* Agrega un margen superior de 10px */
+}
 
 #techo-piso input,
+#ilum-trib-vest input[type="checkbox"] {
+    position: relative;
+    bottom: 20px;
+}
+
+
+#techo-piso input[type="checkbox"],
 #ilum-trib-vest input[type="checkbox"] {
     transform: scale(1.5); /* Ajusta el tamaño del checkbox */
     margin-left: -430px; /* Ajusta la posición del checkbox hacia la izquierda */
@@ -121,14 +132,12 @@ main {
     bottom: 20px;
 }
 
-/* Estilos CSS */
-#datos-techo label:nth-of-type(2) {
-    margin-top: 10px; /* Ajusta el espacio entre la etiqueta y el campo de entrada */
+#altura_techo {
+    width: 80px;
+    position: relative;
+    top: 1px;
 }
 
-#datos-techo label:nth-of-type(2) + input {
-    margin-top: 10px; /* Ajusta el espacio entre la etiqueta y el campo de entrada */
-}
 
 
 /*************************ESTILOS GENERALES PARA CADA GRUPO DE CAMPOS*************************/
