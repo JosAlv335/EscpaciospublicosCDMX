@@ -121,4 +121,3 @@ function mostrarCanchas(canchas) {
 
 // Llama a la función para obtener y mostrar las canchas al cargar la página
 obtenerCanchas();
-
