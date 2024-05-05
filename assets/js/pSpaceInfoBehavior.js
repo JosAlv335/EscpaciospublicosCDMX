@@ -78,24 +78,32 @@ async function initMap(_lat, _lng) {
 }
 
 // FEERR
-function mostrarCanchas(canchas) {
+async function mostrarCanchas(canchas) {
     const canchasContainer = document.createElement('div');
     canchasContainer.id = 'canchas-container';
 
     if (canchas && canchas.length > 0) {
-        let canchasHTML = '';
-        canchas.forEach((cancha, index) => {
-            canchasHTML += '<div class="cancha">';
+        for (const cancha of canchas) {
+            const canchaContainer = document.createElement('div');
+            canchaContainer.classList.add('cancha');
+
+            // Agregar información de la cancha
             for (const key in cancha) {
-                canchasHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
+                const p = document.createElement('p');
+                p.innerHTML = `<strong>${key}:</strong> ${cancha[key]}`;
+                canchaContainer.appendChild(p);
             }
-            canchasHTML += '</div>';
-            // Agrega el margen inferior solo si no es la última cancha
-            if (index !== canchas.length - 1) {
-                canchasHTML += '<div style="margin-bottom: 20px;"></div>';
-            }
-        });
-        canchasContainer.innerHTML = canchasHTML;
+
+            // Agregar mapa
+            const mapContainer = document.createElement('div');
+            mapContainer.classList.add('map');
+            canchaContainer.appendChild(mapContainer);
+
+            // Inicializar y agregar el mapa
+            await initMap(cancha.latitud, cancha.longitud, mapContainer);
+
+            canchasContainer.appendChild(canchaContainer);
+        }
     } else {
         canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
     }
@@ -105,5 +113,31 @@ function mostrarCanchas(canchas) {
     mapContainer.insertAdjacentElement('afterend', canchasContainer);
 }
 
+// Initialize and add the map
+async function initMap(_lat, _lng, mapContainer) {
+    // The location of the cancha
+    const position = { lat: _lat, lng: _lng };
+
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    // The map, centered at the cancha
+    const map = new Map(mapContainer, {
+        zoom: 16,
+        center: position,
+        mapId: "DEMO_MAP_ID",
+    });
+
+    // The marker, positioned at the cancha
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Cancha",
+    });
+}
+
 // Llama a la función para obtener y mostrar las canchas al cargar la página
 obtenerCanchas();
+
