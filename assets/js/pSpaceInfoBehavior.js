@@ -78,37 +78,23 @@ async function initMap(_lat, _lng) {
 }
 
 // FEERR
-async function obtenerCanchas() {
-    try {
-        const { data: canchas, error } = await supabase
-            .from('courts')
-            .select('*')
-            .eq('public_space_id', id);
-
-        if (error) {
-            console.error('Error al obtener las canchas:', error.message);
-            return;
-        }
-
-        mostrarCanchas(canchas);
-    } catch (error) {
-        console.error('Error al obtener las canchas:', error.message);
-    }
-}
-
 function mostrarCanchas(canchas) {
     const canchasContainer = document.createElement('div');
     canchasContainer.id = 'canchas-container';
 
     if (canchas && canchas.length > 0) {
-        const canchasHTML = canchas.map(cancha => {
-            let canchaHTML = '<div class="cancha" style="margin-bottom: 20px;>';
+        let canchasHTML = '';
+        canchas.forEach((cancha, index) => {
+            canchasHTML += '<div class="cancha">';
             for (const key in cancha) {
-                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
+                canchasHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
             }
-            canchaHTML += '</div>';
-            return canchaHTML;
-        }).join('');
+            canchasHTML += '</div>';
+            // Agrega el margen inferior solo si no es la última cancha
+            if (index !== canchas.length - 1) {
+                canchasHTML += '<div style="margin-bottom: 20px;"></div>';
+            }
+        });
         canchasContainer.innerHTML = canchasHTML;
     } else {
         canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
