@@ -102,7 +102,7 @@ function mostrarCanchas(canchas) {
 
     if (canchas && canchas.length > 0) {
         const canchasHTML = canchas.map(cancha => {
-            let canchaHTML = '<div class="cancha">';
+            let canchaHTML = '<div class="cancha" style="margin-bottom: 20px;>';
             for (const key in cancha) {
                 canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
             }
