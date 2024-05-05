@@ -104,7 +104,7 @@ function mostrarCanchas(canchas) {
         const canchasHTML = canchas.map(cancha => {
             let canchaHTML = '<div class="cancha">';
             for (const key in cancha) {
-                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p> <br>`;
+                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
             }
             canchaHTML += '</div>';
             return canchaHTML;
