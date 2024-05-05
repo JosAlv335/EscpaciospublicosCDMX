@@ -76,3 +76,51 @@ async function initMap(_lat, _lng) {
     title: "Uluru",
   });
 }
+
+// FEERR
+async function obtenerCanchas() {
+    try {
+        const { data: canchas, error } = await supabase
+            .from('canchas')
+            .select('*')
+            .eq('public_space_id', id);
+
+        if (error) {
+            console.error('Error al obtener las canchas:', error.message);
+            return;
+        }
+
+        mostrarCanchas(canchas);
+    } catch (error) {
+        console.error('Error al obtener las canchas:', error.message);
+    }
+}
+
+function mostrarCanchas(canchas) {
+    const canchasContainer = document.createElement('div');
+    canchasContainer.id = 'canchas-container';
+
+    if (canchas && canchas.length > 0) {
+        const canchasHTML = canchas.map(cancha => {
+            return `
+                <div class="cancha">
+                    <h3>${cancha.nombre}</h3>
+                    <p><strong>Deporte:</strong> ${cancha.deporte}</p>
+                    <p><strong>Descripción:</strong> ${cancha.descripcion}</p>
+                    <!-- Agrega aquí más detalles de la cancha si lo deseas -->
+                </div>
+            `;
+        }).join('');
+        canchasContainer.innerHTML = canchasHTML;
+    } else {
+        canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
+    }
+
+    // Agrega el contenedor de las canchas debajo del mapa
+    const mapContainer = document.getElementById('map');
+    mapContainer.insertAdjacentElement('afterend', canchasContainer);
+}
+
+// Llama a la función para obtener y mostrar las canchas al cargar la página
+obtenerCanchas();
+
