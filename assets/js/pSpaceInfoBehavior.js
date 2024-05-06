@@ -97,27 +97,46 @@ async function obtenerCanchas() {
 }
 
 function mostrarCanchas(canchas) {
-    const canchasContainer = document.createElement('div');
-    canchasContainer.id = 'canchas-container';
+    const mapContainer = document.getElementById('map');
+    const mapOptions = {
+        zoom: 10,
+        center: { lat: canchas[0].latitud, lng: canchas[0].longitud } // Centra el mapa en la primera cancha
+    };
+    const map = new google.maps.Map(mapContainer, mapOptions);
+
+    canchas.forEach(cancha => {
+        const position = { lat: cancha.latitud, lng: cancha.longitud };
+        const marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: cancha.nombre // Puedes cambiar esto al campo que contiene el nombre de la cancha en tu tabla
+        });
+    });
+
+    // Crea el contenedor para las especificaciones de cada cancha debajo del mapa
+    const specificationsContainer = document.createElement('div');
+    specificationsContainer.id = 'specifications-container';
 
     if (canchas && canchas.length > 0) {
-        const canchasHTML = canchas.map(cancha => {
-            let canchaHTML = '<div class="cancha">';
-            for (const key in cancha) {
-                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
-            }
-            canchaHTML += '</div>';
-            return canchaHTML;
-        }).join('');
-        canchasContainer.innerHTML = canchasHTML;
+        canchas.forEach(cancha => {
+            const canchaHTML = `
+                <div class="cancha">
+                    <h3>${cancha.nombre}</h3>
+                    <p><strong>Deporte:</strong> ${cancha.deporte}</p>
+                    <p><strong>Descripción:</strong> ${cancha.descripcion}</p>
+                    <!-- Agrega aquí más detalles de la cancha si lo deseas -->
+                </div>
+            `;
+            specificationsContainer.innerHTML += canchaHTML;
+        });
     } else {
-        canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
+        specificationsContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
     }
 
-    // Agrega el contenedor de las canchas debajo del mapa
-    const mapContainer = document.getElementById('map');
-    mapContainer.insertAdjacentElement('afterend', canchasContainer);
+    // Agrega el contenedor de las especificaciones debajo del mapa
+    mapContainer.insertAdjacentElement('afterend', specificationsContainer);
 }
+
 
 // Llama a la función para obtener y mostrar las canchas al cargar la página
 obtenerCanchas();
