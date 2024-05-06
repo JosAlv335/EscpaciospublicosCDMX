@@ -80,8 +80,8 @@ async function initMap(_lat, _lng) {
 // FEERR
 async function obtenerCanchas() {
     try {
-        const { data: canchas, error } = await supabase
-            .from('canchas')
+        const { data: courts, error } = await supabase
+            .from('courts')
             .select('*')
             .eq('public_space_id', id);
 
@@ -90,26 +90,38 @@ async function obtenerCanchas() {
             return;
         }
 
-        mostrarCanchas(canchas);
+        mostrarCanchas(courts);
     } catch (error) {
         console.error('Error al obtener las canchas:', error.message);
     }
 }
 
-function mostrarCanchas(canchas) {
+async function mostrarCanchas(courts) {
     const canchasContainer = document.createElement('div');
     canchasContainer.id = 'canchas-container';
 
-    if (canchas && canchas.length > 0) {
-        const canchasHTML = canchas.map(cancha => {
-            let canchaHTML = '<div class="cancha">';
-            for (const key in cancha) {
-                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
+    if (courts && courts.length > 0) {
+        for (const court of courts) {
+            const canchaContainer = document.createElement('div');
+            canchaContainer.classList.add('cancha');
+
+            // Agregar información del court
+            for (const key in court) {
+                const p = document.createElement('p');
+                p.innerHTML = `<strong>${key}:</strong> ${court[key]}`;
+                canchaContainer.appendChild(p);
             }
-            canchaHTML += '</div>';
-            return canchaHTML;
-        }).join('');
-        canchasContainer.innerHTML = canchasHTML;
+
+            // Agregar mapa
+            const mapContainer = document.createElement('div');
+            mapContainer.classList.add('map');
+            canchaContainer.appendChild(mapContainer);
+
+            // Inicializar y agregar el mapa
+            await initMap(court.latitud, court.longitud, mapContainer);
+
+            canchasContainer.appendChild(canchaContainer);
+        }
     } else {
         canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
     }
@@ -119,5 +131,31 @@ function mostrarCanchas(canchas) {
     mapContainer.insertAdjacentElement('afterend', canchasContainer);
 }
 
+// Initialize and add the map
+async function initMap(_lat, _lng, mapContainer) {
+    // The location of the court
+    const position = { lat: _lat, lng: _lng };
+
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    // The map, centered at the court
+    const map = new Map(mapContainer, {
+        zoom: 16,
+        center: position,
+        mapId: "DEMO_MAP_ID",
+    });
+
+    // The marker, positioned at the court
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Cancha",
+    });
+}
+
 // Llama a la función para obtener y mostrar las canchas al cargar la página
 obtenerCanchas();
+
