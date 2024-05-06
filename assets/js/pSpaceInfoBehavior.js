@@ -120,6 +120,40 @@ function mostrarCanchas(canchas) {
                     map: map,
                     title: cancha.nombre,
                 });    
+            }function mostrarCanchas(canchas) {
+    const canchasContainer = document.createElement('div');
+    canchasContainer.id = 'canchas-container';
+
+    if (canchas && canchas.length > 0) {
+        const canchasHTML = canchas.map(cancha => {
+            let canchaHTML = '<div class="cancha">';
+            for (const key in cancha) {
+                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
+                // Initialize and add the map
+                let map;
+
+                async function initMap(_lat, _lng) {
+                // The location of Uluru
+                const position = { lat: _lat, lng: _lng };
+                // Request needed libraries.
+                //@ts-ignore
+                const { Map } = await google.maps.importLibrary("maps");
+                const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+                // The map, centered at Uluru
+                map = new Map(document.getElementById("map"), {
+                    zoom: 16,
+                    center: position,
+                    mapId: "DEMO_MAP_ID",
+                });
+
+                // The marker, positioned at Uluru
+                const marker = new AdvancedMarkerElement({
+                    map: map,
+                    position: position,
+                    title: "Uluru",
+                });
+                }
             }
             canchaHTML += '</div>';
             return canchaHTML;
