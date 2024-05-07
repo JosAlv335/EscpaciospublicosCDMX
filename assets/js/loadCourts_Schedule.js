@@ -36,9 +36,14 @@ generarHorarios('hidmasaje','horarios-hidmasaje');
 
 /*FUNCIÓN "generarHorarios"
 RECIBE:
-prefijo             -       Palabra clave para generar los horarios diferentes
-contenedorID        -       ID del Div contenedor de los horarios
+prefijo             -       
+contenedorID        -       
 */
+/**
+ * 
+ * @param {*} prefijo       - Palabra clave para generar los horarios diferentes
+ * @param {*} contenedorId  - ID del Div contenedor de los horarios
+ */
 function generarHorarios(prefijo, contenedorId) {
     var diasSemana = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
     var contenedor = document.getElementById(contenedorId);
