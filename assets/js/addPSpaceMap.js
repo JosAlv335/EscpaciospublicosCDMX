@@ -1,4 +1,5 @@
 import { Loader } from "@googlemaps/js-api-loader"
+import yoyoImage from './../img/yoyo.png';
 
 let map;
 let geocoder;
@@ -21,6 +22,13 @@ async function initMap() {
     console.log("Instanciado el geocoder");
     
     await geocodeAddress(geocoder, map);
+
+    // Oyente para evento clic en el mapa
+    map.addListener('click', function(e) {
+        placeMarkerAndPanTo(e.latLng, map);
+    });
+
+    
     
 }
 
@@ -46,4 +54,53 @@ async function geocodeAddress(geocoder, resultMap) {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
+}
+
+let marker = null;
+
+async function placeMarkerAndPanTo(latLng, map) {
+    if(marker !== null) {
+        marker.setMap(null);
+    }
+    
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    let icon = document.createElement('img');
+    icon.src = yoyoImage; // URL del ícono personalizado
+    icon.style.width = '40px'; // Ancho del ícono
+    icon.style.height = '40px'; // Alto del ícono
+    
+    marker = new AdvancedMarkerElement({
+        position: latLng,
+        map: map,
+        gmpDraggable: true, // Hacer que el marcador sea arrastrable
+        content: icon,
+    });
+    map.panTo(latLng);
+
+    document.getElementById('PSpace-LatitudX').value = marker.position.lat;
+    document.getElementById('PSpace-LongitudY').value = marker.position.lng;
+
+
+    // Evento dragend para obtener las coordenadas finales después de arrastrar el marcador
+    marker.addListener('drag', function(event) {
+        const newPosition = marker.position;
+        const lat = newPosition.lat;
+        const lng = newPosition.lng;
+
+        // Aquí puedes enviar las coordenadas a tus campos "latitud" y "longitud"
+        document.getElementById('PSpace-LatitudX').value = lat;
+        document.getElementById('PSpace-LongitudY').value = lng;
+    });
+
+    // Evento dragend para obtener las coordenadas finales después de arrastrar el marcador
+    marker.addListener('dragend', function(event) {
+        const newPosition = marker.position;
+        const lat = newPosition.lat;
+        const lng = newPosition.lng;
+
+        // Aquí puedes enviar las coordenadas a tus campos "latitud" y "longitud"
+        document.getElementById('PSpace-LatitudX').value = lat;
+        document.getElementById('PSpace-LongitudY').value = lng;
+    });
+
 }
