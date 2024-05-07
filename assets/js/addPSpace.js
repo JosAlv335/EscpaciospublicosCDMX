@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import yoyoImage from './../img/yoyo.png';
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(
@@ -116,3 +117,100 @@ function convertirDMSToDecimal(grados, minutos, segundos) {
     */
     return decimal;
 }
+
+//Añadir los campos de horarios a la página
+function generarHorarios(prefijo, contenedorId) {
+    var diasSemana = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+    var contenedor = document.getElementById(contenedorId);
+
+    diasSemana.forEach(function(dia) {
+        var diaLower = dia.toLowerCase();  // Versión en minúsculas del día para IDs
+
+        var divDia = document.createElement('div');
+        divDia.classList.add('dia-horario');
+        contenedor.appendChild(divDia);
+
+        var labelDia = document.createElement('label');
+        labelDia.textContent = dia + ':';
+        divDia.appendChild(labelDia);
+
+        var divHorario = document.createElement('div');
+        divHorario.classList.add('horarios');
+        divHorario.id = 'horarios-' + prefijo + '-' + diaLower;
+        divDia.appendChild(divHorario);
+
+        var labelInicio = document.createElement('label');
+        labelInicio.setAttribute('for', prefijo + '-' + diaLower + '-inicio');
+        labelInicio.textContent = 'Hora de apertura:';
+        divHorario.appendChild(labelInicio);
+
+        var inputInicio = document.createElement('input');
+        inputInicio.setAttribute('type', 'time');
+        inputInicio.id = prefijo + '-' + diaLower + '-inicio';
+        inputInicio.name = prefijo + '-' + diaLower + '-inicio';
+        divHorario.appendChild(inputInicio);
+
+        var labelFin = document.createElement('label');
+        labelFin.setAttribute('for', prefijo + '-' + diaLower + '-fin');
+        labelFin.textContent = 'Hora de cierre:';
+        divHorario.appendChild(labelFin);
+
+        var inputFin = document.createElement('input');
+        inputFin.setAttribute('type', 'time');
+        inputFin.id = prefijo + '-' + diaLower + '-fin';
+        inputFin.name = prefijo + '-' + diaLower + '-fin';
+        divHorario.appendChild(inputFin);
+
+    });
+}
+
+generarHorarios("espacio-publico","horarios");
+
+
+//Generación del mapa de la página
+// Initialize and add the map
+let map;
+
+//initMap(19.432600481483338,-99.13324356079103);
+
+async function initMap(_lat, _lng) {
+    // The location of Uluru
+    const position = { lat: _lat, lng: _lng }; console.log("Position: " + position);
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    //Mapa centrado en la posición del parque
+    map = new Map(document.getElementById("map"), {
+        zoom: 13,
+        center: position,
+        mapId: "ca90f74a89a75fc",
+    });
+
+    //Marcador centrado en el mapa
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Parque",
+    });
+
+    // Oyente para evento clic en el mapa
+    map.addListener('click', function(e) {
+        placeMarkerAndPanTo(e.latLng, map);
+    });
+
+    // Create an info window to share between markers.
+    const infoWindow = new google.maps.InfoWindow();
+
+    // Add a click listener for each marker, and set up the info window.
+    marker.addListener("click", ({ domEvent, latLng }) => {
+        const { target } = domEvent;
+
+        infoWindow.close();
+        infoWindow.setContent(marker.title);
+        infoWindow.open(marker.map, marker);
+    });
+
+}
+
