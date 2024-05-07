@@ -78,96 +78,46 @@ async function initMap(_lat, _lng) {
 }
 
 // FEERR
-async function obtenerCanchas() {
-    try {
-        const { data: canchas, error } = await supabase
-            .from('courts')
-            .select('*')
-            .eq('public_space_id', id);
+// async function obtenerCanchas() {
+//     try {
+//         const { data: canchas, error } = await supabase
+//             .from('courts')
+//             .select('*')
+//             .eq('public_space_id', id);
 
-        if (error) {
-            console.error('Error al obtener las canchas:', error.message);
-            return;
-        }
+//         if (error) {
+//             console.error('Error al obtener las canchas:', error.message);
+//             return;
+//         }
 
-        mostrarCanchas(canchas);
-    } catch (error) {
-        console.error('Error al obtener las canchas:', error.message);
-    }
-}
+//         mostrarCanchas(canchas);
+//     } catch (error) {
+//         console.error('Error al obtener las canchas:', error.message);
+//     }
+// }
 
-function mostrarCanchas(canchas) {
-    const canchasContainer = document.createElement('div');
-    canchasContainer.id = 'canchas-container';
+// function mostrarCanchas(canchas) {
+//     const canchasContainer = document.createElement('div');
+//     canchasContainer.id = 'canchas-container';
 
-    if (canchas && canchas.length > 0) {
-        const canchasHTML = canchas.map(cancha => {
-            let canchaHTML = '<div class="cancha">';
-            for (const key in cancha) {
-                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
-                // Crea el mapa para esta cancha
-                const mapContainer = document.createElement('div');
-                mapContainer.className = 'cancha-map';
-                canchaContainer.appendChild(mapContainer);
+//     if (canchas && canchas.length > 0) {
+//         const canchasHTML = canchas.map(cancha => {
+//             let canchaHTML = '<div class="cancha">';
+//             for (const key in cancha) {
+//                 canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
+//             }
+//             canchaHTML += '</div>';
+//             return canchaHTML;
+//         }).join('');
+//         canchasContainer.innerHTML = canchasHTML;
+//     } else {
+//         canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
+//     }
 
-                const mapOptions = {
-                    zoom: 16,
-                    center: { lat: cancha.latitud, lng: cancha.longitud },
-                };
-                const map = new google.maps.Map(mapContainer, mapOptions);
-                new google.maps.Marker({
-                    position: { lat: cancha.latitud, lng: cancha.longitud },
-                    map: map,
-                    title: cancha.nombre,
-                });    
-            }function mostrarCanchas(canchas) {
-    const canchasContainer = document.createElement('div');
-    canchasContainer.id = 'canchas-container';
+//     // Agrega el contenedor de las canchas debajo del mapa
+//     const mapContainer = document.getElementById('map');
+//     mapContainer.insertAdjacentElement('afterend', canchasContainer);
+// }
 
-    if (canchas && canchas.length > 0) {
-        const canchasHTML = canchas.map(cancha => {
-            let canchaHTML = '<div class="cancha">';
-            for (const key in cancha) {
-                canchaHTML += `<p><strong>${key}:</strong> ${cancha[key]}</p>`;
-                // Initialize and add the map
-                let map;
-
-                async function initMap(_lat, _lng) {
-                // The location of Uluru
-                const position = { lat: _lat, lng: _lng };
-                // Request needed libraries.
-                //@ts-ignore
-                const { Map } = await google.maps.importLibrary("maps");
-                const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-                // The map, centered at Uluru
-                map = new Map(document.getElementById("map"), {
-                    zoom: 16,
-                    center: position,
-                    mapId: "DEMO_MAP_ID",
-                });
-
-                // The marker, positioned at Uluru
-                const marker = new AdvancedMarkerElement({
-                    map: map,
-                    position: position,
-                    title: "Uluru",
-                });
-                }
-            }
-            canchaHTML += '</div>';
-            return canchaHTML;
-        }).join('');
-        canchasContainer.innerHTML = canchasHTML;
-    } else {
-        canchasContainer.innerHTML = '<p>No se encontraron canchas asociadas a este espacio.</p>';
-    }
-
-    // Agrega el contenedor de las canchas debajo del mapa
-    const mapContainer = document.getElementById('map');
-    mapContainer.insertAdjacentElement('afterend', canchasContainer);
-}
-
-
-// Llama a la función para obtener y mostrar las canchas al cargar la página
-obtenerCanchas();
+// // Llama a la función para obtener y mostrar las canchas al cargar la página
+// obtenerCanchas();
