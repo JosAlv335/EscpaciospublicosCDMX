@@ -70,7 +70,7 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
         "cargo",
         "inicio_actividades"
     ]
-    var datosEncargado = [];
+    var datosEncargado = {};
 
     for (let index = 0; index < IdsEncargado.length; index++) {
         let element = document.getElementById(IdsEncargado[index]).value.trim();
@@ -91,7 +91,20 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     //AQUI VA LA INSERCIÓN DE LOS DATOS PRINCIPALES DEL ENCARGADO
     var { error } = await supabase
         .from('encargados_espacios_publicos')
-        .insert(datosEncargado)
+        .insert([{
+            "nombre_1" : document.getElementById('man-nombre1').value.trim(),
+            "nombre_2" : document.getElementById('man-nombre2').value.trim(),
+            "apellido_1" : document.getElementById('man-apellido1').value.trim(),
+            "apellido_2" : document.getElementById('man-apellido2').value.trim(),
+            "sexo" : document.getElementById('sex-select').value.trim(),
+            "num_empleado" : document.getElementById('num-Empleado').value.trim(),
+            "RFC" : document.getElementById('RFC-Empleado').value.trim(),
+            "CURP" : document.getElementById('CURP-Empleado').value.trim(),
+            "cargo" : document.getElementById('charge-select').value.trim(),
+            "inicio_actividades" : document.getElementById('man-inicio-actividades').value.trim(),
+            "status" : document.getElementById('encargado-status-select') .value.trim(),
+            "password" : userPassword
+        }])
         .select();
 
         if(error){
@@ -121,14 +134,14 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     //AQUÍ SE RECOPILAN LOS DATOS DE LOS TELEFONOS INTRODUCIDOS
     var datosTelefonos = [];
 
-    for(let i = 0; (document.getElementById('man-telefonos-' + i) !== null) && (document.getElementById('tel-' + 0).value.trim() !== null ); i++){
-        let newTelefonosToInsert = [];
+    for(let i = 0; (document.getElementById('man-telefonos-' + i) !== null) && (document.getElementById('tel-' + i).value.trim() !== null ); i++){
+        let newTelefonosToInsert = {};
         
         //Inserta el id del encargado
-        newTelefonosToInsert["manager_id"] = manager_id;
+        newTelefonosToInsert["id_encargado"] = manager_id;
 
         //Inserta el número de teléfono
-        newTelefonosToInsert["phone_number"] = document.getElementById("tel-" + i).value.trim();
+        newTelefonosToInsert["numero_telefono"] = document.getElementById("tel-" + i).value.trim();
 
         //Inserta el tipo de teléfono
         newTelefonosToInsert["phone_type"] = document.getElementById("tipo-tel-" + i).value.trim();
@@ -137,30 +150,36 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
 
     }
 
-    let { data: dataTEL, error: errorTEL } = await supabase
-        .from('encargados_phone_numbers')
-        .insert(datosTelefonos)
-        .select();
+    console.log("Intentando insertar telefonos...");
+        console.log(datosTelefonos);
+        try {
+            // Iterar sobre cada objeto dentro del array 'clase'
+            for (var dato of datosTelefonos) {
+                console.log(dato);
+                // Realizar la inserción del dato en la base de datos
+                let { data, error } = await supabase
+                    .from('encargados_phone_numbers')
+                    .insert(dato)
+                    .select()
 
-        if(errorTEL){
-            console.error("No se logró insertar los datos del teléfono del encargado. Abortando");
-            console.error(errorTEL);
-            return;
-        }
+                if (error) {
+                    throw error;
+                }
 
-        if (dataTEL && dataTEL.length > 0){
-            responseMessage.innerHTML = "Insertado exitosamente!";
-            console.log('Inserción completada...');
-        }
+                console.log('Dato insertado con éxito:', data);
+            }
+        } catch (error) {
+            console.log('Error al insertar telefonos:', error);
+        };
 
     //AQUI SE RECOPILAN LOS DATOS DE LOS CORREOS INTRODUCIDOS
     var datosCorreos = [];
 
     for(let i = 0; (document.getElementById('man-correos-' + i) !== null) && (document.getElementById('email-' + 0).value.trim() !== null ); i++){
-        let newCorreosToInsert = [];
+        let newCorreosToInsert = {};
         
         //Inserta el id del encargado
-        newCorreosToInsert["manager_id"] = manager_id;
+        newCorreosToInsert["id_encargado"] = manager_id;
 
         //Inserta el correo
         newCorreosToInsert["email"] = document.getElementById("email-" + i).value.trim();
@@ -169,21 +188,27 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
 
     }
 
-    let { data: dataMAIL, error: errorMAIL } = await supabase
-        .from('encargados_phone_numbers')
-        .insert(datosCorreos)
-        .select();
+    console.log("Intentando insertar correos...");
+        console.log(datosCorreos);
+        try {
+            // Iterar sobre cada objeto dentro del array 'clase'
+            for (var dato of datosCorreos) {
+                console.log(dato);
+            // Realizar la inserción del dato en la base de datos
+            let { data, error } = await supabase
+                .from('encargados_email')
+                .insert(dato)
+                .select()
 
-        if(errorMAIL){
-            console.error("No se logró insertar los datos del teléfono del encargado. Abortando");
-            console.error(errorMAIL);
-            return;
-        }
+            if (error) {
+                throw error;
+            }
 
-        if (dataMAIL && dataMAIL.length > 0){
-            responseMessage.innerHTML = "Insertado exitosamente!";
-            console.log('Inserción completada...');
-        }
+            console.log('Dato insertado con éxito:', data);
+            }
+        } catch (error) {
+            console.log('Error al insertar telefonos:', error);
+        };
     
 
     const formulario = document.getElementById('addForm');
