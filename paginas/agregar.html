@@ -82,11 +82,11 @@
                 </div>
                 <div class="numExt">
                     <label for="numExt">Num. Ext.:</label>
-                    <input type="text" id="numExt" name="numExt">
+                    <input type="text" id="numExt" name="numExt" value="0">
                 </div>
                 <div class="numInt">
                     <label for="numInt">Num Int.:</label>
-                    <input type="text" id="numInt" name="numInt">
+                    <input type="text" id="numInt" name="numInt" value="0">
                 </div>
 
             </diV>
@@ -106,7 +106,10 @@
                 </div>
             </div>
 
-            
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
             <h3>Ingrese los horarios del espacio público (De estar cerrado deje el campo vacío)</h3>
             <div class="form-group" id="horarios">
                 
@@ -115,10 +118,7 @@
             </div>
 
 
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
+            
             
 
             <!--SECCIÓN DE REGISTRO DEL ENCAARGADO-->
@@ -174,32 +174,36 @@
 
                 <!--SECCIÓN DE DATOS DE CONTACTO-->
                 <div id="datos-contacto" name="datos-contacto">
+                    <div class="man-telefonos" id="telefonos">
+                        <div class="man-telefonos" id="man-telefonos-0">
 
-                    <div class="man-telefonos" id="man-telefonos">
-
-                        <label for="telefono">Teléfono 1:</label>
-                        <input type="text" name="telefono" id="tel-1">
-                        <label for="tipo-tel"></label>
-                        <select name="tipo-tel" id="tipo-tel-1">
-                            <option value="Fijo">Fijo</option>
-                            <option value="Movil">Móvil</option>
-                        </select>
-
+                            <label for="telefono">Teléfono 1:</label>
+                            <input type="text" name="telefono" id="tel-0">
+                            <label for="tipo-tel">Tipo</label>
+                            <select name="tipo-tel" id="tipo-tel-0">
+                                <option value="Fijo">Fijo</option>
+                                <option value="Movil">Móvil</option>
+                            </select>
+    
+                        </div>
                     </div>
+                    
                     <button type="button" id="man-add-tel" class="man-add-tel">+</button>
                     <button type="button" id="man-rem-tel" class="man-rem-tel">-</button>
                     <div>
 
                     </div>
+                    <div class="man-correos" id="correos">
+                        <div class="man-correos" id="man-correos-0">
 
-                    <div class="man-correos" id="man-correos">
-
-                        <label for="correo">E-mail 1</label>
-                        <input type="email" name="correo" id="email-1">
-
+                            <label for="correo">E-mail 1</label>
+                            <input type="email" name="correo" id="email-0">
+    
+                        </div>
                     </div>
-                    <button type="button" id="man-add-email" class="man-add-email" onclick="agregarEmail('man-correos')">+</button>
-                    <button type="button" id="man-rem-email" class="man-rem-email" onclick="eliminarUltimoEmail('man-correos')">-</button>
+                    
+                    <button type="button" id="man-add-email" class="man-add-email">+</button>
+                    <button type="button" id="man-rem-email" class="man-rem-email">-</button>
 
                     <div class="form-group" id="encargado-status">
                         <label for="encargado-status-select">Status del encargado:</label>
@@ -253,21 +257,21 @@
         // Función para añadir un nuevo número de teléfono
 
         document.getElementById('man-add-tel').onclick = function(){
-            agregarTelefono('man-telefonos');
+            agregarTelefono('telefonos');
         }
         document.getElementById('man-rem-tel').onclick = function(){
-            eliminarUltimoTelefono('man-telefonos');
+            eliminarUltimoTelefono('telefonos');
         }
         document.getElementById('man-add-email').onclick = function(){
-            agregarTelefono('man-correos');
+            agregarEmail('correos');
         }
         document.getElementById('man-rem-email').onclick = function(){
-            eliminarUltimoEmail('man-correos');
+            eliminarUltimoEmail('correos');
         }
 
         function agregarTelefono(containerID) {
             const container = document.getElementById(containerID);
-            const numTelefonos = container.children.length - 3; // Contar elementos existentes
+            const numTelefonos = container.children.length; // Contar elementos existentes
 
             const nuevoTelefonoDiv = document.createElement('div');
             nuevoTelefonoDiv.className = "man-telefonos";
@@ -289,7 +293,7 @@
         // Función para eliminar el último teléfono
         function eliminarUltimoTelefono(containerID) {
             const container = document.getElementById(containerID);
-            if (container.children.length > 2) { // Aseguramos que siempre haya al menos un elemento
+            if (container.children.length > 1) { // Aseguramos que siempre haya al menos un elemento
                 container.removeChild(container.lastChild);
             }
         }
@@ -297,7 +301,7 @@
         // Función para añadir un nuevo correo electrónico
         function agregarEmail(containerID) {
             const container = document.getElementById(containerID);
-            const numEmails = container.children.length - 1; // Contar elementos existentes
+            const numEmails = container.children.length; // Contar elementos existentes
 
             const nuevoEmailDiv = document.createElement('div');
             nuevoEmailDiv.className = "man-correos";
@@ -314,7 +318,7 @@
         // Función para eliminar el último correo
         function eliminarUltimoEmail(containerID) {
             const container = document.getElementById(containerID);
-            if (container.children.length > 2) { // Aseguramos que siempre haya al menos un elemento
+            if (container.children.length > 1) { // Aseguramos que siempre haya al menos un elemento
                 container.removeChild(container.lastChild);
             }
         }
