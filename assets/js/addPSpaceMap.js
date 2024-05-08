@@ -35,11 +35,16 @@ async function initMap() {
 async function geocodeAddress(geocoder, resultMap) {
 
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-    let estado = document.getElementById('estado').value.trim();
-    let municipio = document.getElementById('ciudad_municipio').value.trim();
+    let numExt = document.getElementById('numExt').value.trim();
     let calle = document.getElementById('calle').value.trim();
-    let direccion = `${calle}, ${municipio}, ${estado}`;
+    let ent1 = document.getElementById('entCalles1').value.trim();
+    let ent2 = document.getElementById('entCalles2').value.trim();
+    let asentamiento = document.getElementById('asentamiento').value.trim();
+    let municipio = document.getElementById('ciudad_municipio').value.trim();
+    let estado = document.getElementById('estado').value.trim();
+    let codigoPostal = document.getElementById('codigoPostal').value.trim();
+    
+    let direccion = `${numExt},${calle}, Entre ${ent1} y ${ent2}, ${asentamiento}, ${municipio}, ${estado}, ${codigoPostal}, México`;
     console.log(direccion);
 
     geocoder.geocode({ 'address': direccion }, function(results, status) {
