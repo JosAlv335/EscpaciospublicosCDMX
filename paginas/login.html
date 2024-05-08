@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+    <main>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="numeroEmpleado">Número de Empleado:</label>
+                <input type="text" id="numeroEmpleado" name="numeroEmpleado">
+            </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena">
+                <!-- Elemento para mostrar mensaje de error -->
+                <div id="errorMessage" style="color: red; display: none;">El número de empleado o la contraseña son incorrectos.</div>
+            </div>
+            <div class="button-group">
+                <button type="button" id="loginButton" class="add-button">Iniciar Sesión</button>
+                <button type="button" class="cancel-button">Cancelar</button>
+            </div>
+        </form>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../assets/js/newLogin.js"></script>
+</body>
+</html>
