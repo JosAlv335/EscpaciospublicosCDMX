@@ -89,7 +89,7 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     console.log(datosEncargado);
 
     //AQUI VA LA INSERCIÓN DE LOS DATOS PRINCIPALES DEL ENCARGADO
-    var { error } = await supabase
+    var { data, error } = await supabase
         .from('encargados_espacios_publicos')
         .insert([{
             "nombre_1" : document.getElementById('man-nombre1').value.trim(),
@@ -112,25 +112,13 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
             console.error(error);
             return;
         }
-
-    var { data, error } = await supabase
-        .from("encargados_espacios_publicos")
-        .select("id_encargado")
-        .eq('CURP',curp)
-
-        if(error){
-            console.error("No se logró recuperar el id del encargado. Abortando");
-            console.error(error);
-            return;
-        }
-
-        if (data && data.length > 0){
+        const id_encargado = data[0].id_encargado;
+        if(data !== null){
             
-            console.log('Inserción completada...');
+            console.log("id_encargado: " );
+            console.log('id_encargado :>> ', id_encargado);
         }
-        console.log(data);
-        const manager_id = data[0].id_encargado;
-
+        
     //AQUÍ SE RECOPILAN LOS DATOS DE LOS TELEFONOS INTRODUCIDOS
     var datosTelefonos = [];
 
@@ -138,7 +126,7 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
         let newTelefonosToInsert = {};
         
         //Inserta el id del encargado
-        newTelefonosToInsert["id_encargado"] = manager_id;
+        newTelefonosToInsert["id_encargado"] = id_encargado;
 
         //Inserta el número de teléfono
         newTelefonosToInsert["numero_telefono"] = document.getElementById("tel-" + i).value.trim();
@@ -179,7 +167,7 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
         let newCorreosToInsert = {};
         
         //Inserta el id del encargado
-        newCorreosToInsert["id_encargado"] = manager_id;
+        newCorreosToInsert["id_encargado"] = id_encargado;
 
         //Inserta el correo
         newCorreosToInsert["email"] = document.getElementById("email-" + i).value.trim();
@@ -214,7 +202,7 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
     const formulario = document.getElementById('addForm');
     const responseMessage =  document.getElementById('mensaje');
 
-    let datos = {};
+    let datos = [];
     var latitud;
     var longitud;
 
@@ -234,22 +222,40 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
         }
 
     }
+    
 
-    var { data: dataMAIN, error: errorMAIN } = await supabase
-        .from('espacios_publicos')
-        .insert(datos)
-        .select();
+    datos['id_encargado'] = id_encargado;
+    console.log("Datos: ",datos);
+    try {
+        var { data, error } = await supabase
+            .from('espacios_publicos')
+            .insert([{
+                "nombre" : document.getElementById('nombre').value.trim(),
+                "estado": document.getElementById('estado').value.trim(),
+                "municipio_delegacion" : document.getElementById('ciudad_municipio').value.trim(),
+                "asentamiento" : document.getElementById('asentamiento').value.trim(),
+                "calle" : document.getElementById('calle').value.trim(),
+                "entre_calles1" : document.getElementById('entCalles1').value.trim(),
+                "entre_calles2" : document.getElementById('entCalles2').value.trim(),
+                "num_ext" : document.getElementById('numExt').value.trim(),
+                "num_int" : document.getElementById('numInt').value.trim(),
+                "codigo_postal" : document.getElementById('codigoPostal').value.trim(),
+                "tipo_espacio" : document.getElementById('tipo-espacio').value.trim(),
+                "latitud" : latitud,
+                "longitud" : longitud,
+                "id_encargado" : id_encargado
+            }])
+            .select();
 
-    if(errorMAIN){
+        if (error) {
+            throw error;
+        }
+
+        console.log('Datos del parque insertado con éxito:', data);
         
-        console.log('Error al insertar: ' + dataMAIN.message);
-        return;
-    }
-
-    if (dataMAIN && dataMAIN.length > 0){
-        
-        console.log('Inserción completada...');
-    }
+    } catch (error) {
+        console.log('Error al insertar los datos del espacio público:', error);
+    };
 
     
 

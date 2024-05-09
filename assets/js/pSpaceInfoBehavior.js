@@ -14,7 +14,7 @@ const supabase = createClient(
 
 async function obtenerInformacion() {
     try {
-        const { data, error } = await supabase
+        var { data, error } = await supabase
             .from('espacios_publicos')
             .select('*')
             .eq('id', id)
@@ -25,13 +25,32 @@ async function obtenerInformacion() {
             return;
         }
 
-        
+        mostrarInformacion(data);
+
+        const id_encargado = data.id_encargado;
+        console.log(id_encargado);
+        console.log(data);
+    } catch (error) {
+        console.error('Error al obtener la información:', error.message);
+    }
+
+    try {
+        var { data, error } = await supabase
+            .from('encargados_espacios_publicos')
+            .select('*')
+            .eq('id_encargado', id_encargado)
+            .single();
+
+        if (error) {
+            console.error('Error al obtener la información:', error.message);
+            return;
+        }
 
         mostrarInformacion(data);
 
         console.log(data);
     } catch (error) {
-        console.error('Error al obtener la información:', error.message);
+        
     }
 
 }
