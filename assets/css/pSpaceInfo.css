@@ -67,3 +67,15 @@ h1, h2 {
     height: 100%;
     border: 0;
 }
+
+.text-container {
+    margin-top: 20px; /* Ajusta el valor según sea necesario */
+}
+
+.divider-line {
+    width: 70%;
+    border-top: 1px solid #ccc; /* Estilo y color de la línea */
+    margin: 20px auto; /* Margen superior e inferior para espaciado */
+}
+
+
