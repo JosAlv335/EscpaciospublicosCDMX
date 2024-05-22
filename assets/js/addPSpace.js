@@ -40,6 +40,26 @@ var atributos = [
     "longitud"
 ];
 
+//Arreglo de días según como aparecen en el formulario
+var diasForm = [
+    "lunes",
+    "martes",
+    "miercoles",
+    "jueves",
+    "viernes",
+    "sabado",
+    "domingo"
+]
+var diasBD = [
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+    "Domingo"
+]
+
 document.getElementById('addForm').addEventListener('submit', async (event) => {
     
     // Previene el comportamiento predeterminado del formulario (envío/recarga de la página)
@@ -223,6 +243,7 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
 
     }
     
+    var public_space_id;
 
     datos['id_encargado'] = id_encargado;
     console.log("Datos: ",datos);
@@ -252,12 +273,56 @@ document.getElementById('addForm').addEventListener('submit', async (event) => {
         }
 
         console.log('Datos del parque insertado con éxito:', data);
+        public_space_id = data[0].id;
+        if(data !== null){
+            
+            console.log("public_space_id: " );
+            console.log('public_space_id :>> ', public_space_id);
+        }
         
     } catch (error) {
         console.log('Error al insertar los datos del espacio público:', error);
-    };
+    }
 
+    if(public_space_id !== null){
+        var datosHorarios = [];
+        for(let i = 0; i < 5; i++){
+
+            let id_hor_inicio = "espacio-publico-" + diasForm[i] + "-inicio";
+            let id_hor_fin = "espacio-publico-" + diasForm[i] + "-fin";
+            if(document.getElementById(id_hor_inicio).value !== ""){
+                datosHorarios[i] = {
+                    public_space_id : public_space_id,
+                    day : diasBD[i],
+                    hora_inicio : document.getElementById(id_hor_inicio).value,
+                    hora_fin : document.getElementById(id_hor_fin).value
+                }
+            }
+
+            console.log("Guardada la entrada de horario: ", datosHorarios[i]);
+
+        }
+
+        console.log("Guardados datos de horarios: ",datosHorarios);
+
+        try {
+            var { data, error } = await supabase
+                .from('espacios_publicos_horarios')
+                .insert(
+                    datosHorarios
+                )
+                .select();
     
+            if (error) {
+                throw error;
+            }
+    
+            console.log('Horarios registrados exitosamente: ', data);
+            
+        } catch (error) {
+            console.log('Error al insertar los datos de los horarios:', error);
+        };
+    }
 
 })
 
