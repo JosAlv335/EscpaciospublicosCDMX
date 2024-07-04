@@ -1,0 +1,42 @@
+.menu-btn {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 15px;
+    background-color: transparent;
+    color: #fff;
+    position:fixed;
+    top: 0;
+    left: 0;
+    vertical-align:middle;
+}
+
+.side-menu {
+
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: 0.3s;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+.side-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.side-menu a:hover {
+    background-color: #575757;
+}

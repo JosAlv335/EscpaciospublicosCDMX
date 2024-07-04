@@ -13,11 +13,33 @@
     </script>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
     <link rel="stylesheet" href="../assets/css/agregar.css">
+    <!--link rel="stylesheet" href="../assets/css/side-menu.css">-->
+    <!--link href='https://unpkg.com/css.gg@2.0.0/icons/css/menu.css' rel='stylesheet'>-->
 </head>
 <body>
     <header>
         <h1>Agregar Registro</h1>
+        <!--Menu lateral
+    <div class="menu-btn" id="menu-btn">
+        <i class="gg-menu"></i>
+    </div>
+    <div class="side-menu" id="side-menu">
+        <a href="" class="sidemenu-item">
+            <div>Menu Principal</div>
+        </a>
+        <a href="" class="sidemenu-item">
+            <div>Agregar</div>
+        </a>
+        <a href="" class="sidemenu-item">
+            <div>Eliminar</div>
+        </a>
+        <a href="" class="sidemenu-item">
+            <div>Cerrar Sesión</div>
+        </a>
+    </div>
+-->
     </header>
+    
     <main>
         <div id="mensaje"></div> <!-- Para mostrar mensajes de éxito o error -->
 
@@ -26,7 +48,7 @@
                 <div class="_CP">
                     <label for="codigoPostal">Código Postal:</label>
                     <input type="text" id="codigoPostal" name="codigoPostal" maxlength="5" required>
-                    <button type="srchCP" id="srchCP" name="srchCP"><i class="gg-search"></i>Buscar código postal</button>
+                    <button type="button" id="srchCP" name="srchCP"><i class="gg-search"></i>Buscar código postal</button>
                 </div>
                 <div class="tipo-espacio">
                     <label for="tipo-espacio">Tipo de espacio:</label>
@@ -137,7 +159,7 @@
                     <input type="text" name="man-apellido1" id="man-apellido1" placeholder="Primer Apellido...">
                     <label for="man-apellido2">Segundo Apellido:</label>
                     <input type="text" name="man-apellido2" id="man-apellido2" placeholder="Segundo Apellido...">
-                    <label for="man-sexo">Sexo:</label>
+                    <label for="sex-select">Sexo:</label>
                     <select name="man-sexo" id="sex-select" required>
                         <option value="" selected disabled>Selecciona un tipo de espacio...</option>
                         <option value="Masculino">Masculino</option>
@@ -154,7 +176,7 @@
                     <label for="man-CURP">CURP:</label>
                     <input type="text" name="man-CURP" id="CURP-Empleado" placeholder="CURP...">
 
-                    <label for="man-cargo">Cargo:</label>
+                    <label for="charge-select">Cargo:</label>
                     <select name="man-cargo" id="charge-select">
                         <option value="" selected disabled>Selecciona un tipo de espacio...</option>
                         <option value="Director">Director</option>
@@ -165,7 +187,7 @@
                     </select>
                     <label for="man-inicio-actividades">Fecha en que inició actividades:</label>
                     <input type="date" name="man-inicio-actividades" id="man-inicio-actividades">
-                    <label for="man-identificacion">Identificación: (Formato PDF, Word, JPG, PNG)</label>
+                    <label for="identificacion-file">Identificación: (Formato PDF, Word, JPG, PNG)</label>
                     <input type="file" id="identificacion-file" name="id-file">
                     <button type="button" id="submit-id-file">Subir archivo</button>
 
@@ -177,9 +199,9 @@
                     <div class="man-telefonos" id="telefonos">
                         <div class="man-telefonos" id="man-telefonos-0">
 
-                            <label for="telefono">Teléfono 1:</label>
+                            <label for="tel-0">Teléfono 1:</label>
                             <input type="text" name="telefono" id="tel-0" maxlength="10">
-                            <label for="tipo-tel">Tipo</label>
+                            <label for="tipo-tel-0">Tipo</label>
                             <select name="tipo-tel" id="tipo-tel-0">
                                 <option value="Fijo">Fijo</option>
                                 <option value="Movil">Móvil</option>
@@ -196,7 +218,7 @@
                     <div class="man-correos" id="correos">
                         <div class="man-correos" id="man-correos-0">
 
-                            <label for="correo">E-mail 1</label>
+                            <label for="email-0">E-mail 1</label>
                             <input type="email" name="correo" id="email-0">
     
                         </div>
@@ -325,6 +347,7 @@
 
     </script>
     <script src="./../assets/js/addPSpaceMap.js"></script>
+    <script src="./../assets/js/side_menu.js"></script>
 
 </body>
 </html>

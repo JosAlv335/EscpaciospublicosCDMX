@@ -16,17 +16,25 @@ document.getElementById('sign-in-form').addEventListener('submit',function(event
     // Aquí puedes agregar tu lógica para iniciar sesión, por ejemplo, usando Supabase, Firebase, etc.
     console.log('Iniciando sesión con:', email, password);
 
-    supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-    }).then(response => {
-        if (response.error) {
-            console.error('Error en inicio de sesión:', response.error.message);
-        } else {
-            console.log('Sesión iniciada:', response.user);
-            // Redireccionar al usuario o hacer algo tras el inicio de sesión exitoso
-            window.location.href = './../../paginas/tabla.html';
-        }
-    });
+    signIn(email,password);
 
 })
+
+async function signIn(email, password) {
+    const { user, session, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+    })
+
+    if (error) {
+        console.error('Error signing in:', error)
+        return
+    }
+
+    // Guardar la sesión en LocalStorage
+    localStorage.setItem('supabaseSession', JSON.stringify(session))
+
+    console.log('User signed in:', user);
+    // Redireccionar al usuario o hacer algo tras el inicio de sesión exitoso
+    window.location.href = './../../paginas/tabla.html';
+}
